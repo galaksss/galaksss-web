@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>galaksss — animated websites &amp; motion design</title>
+  <meta name="description" content="Websites that move, and the products behind them. Landing pages, web apps and motion design by galaksss.">
+  <meta property="og:title" content="galaksss — animated websites &amp; motion design">
+  <meta property="og:description" content="Websites that move, and the products behind them.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="glow"></div>
+<div class="grain"></div>
+
+<aside class="rail" aria-label="Section navigation">
+  <div class="rail__track"></div>
+  <!-- Маркеры привязаны к реальным секциям: позиция считается
+       из их положения на странице, а не задана вручную. Первый указывает
+       на героя, то есть на самый верх — его offsetTop равен нулю, поэтому
+       засечка встаёт в начало трека сама, без отдельного случая в коде. -->
+  <button class="rail__mark" data-target="#top"          data-label="Top"></button>
+  <button class="rail__mark" data-target="#work"         data-label="Work"></button>
+  <button class="rail__mark" data-target="#capabilities" data-label="Capabilities"></button>
+  <button class="rail__mark" data-target="#about"        data-label="About"></button>
+  <button class="rail__mark" data-target="#contact"      data-label="Contact"></button>
+  <div class="rail__head"></div>
+  <div class="rail__tc mono" id="tc">00:00:00:00</div>
+</aside>
+
+<header class="top">
+  <span class="mono">galaksss — motion &amp; web</span>
+  <a class="top__status mono" href="mailto:galaksss@proton.me" aria-label="Email me"><span class="dot"></span>Open for work</a>
+</header>
+
+<main class="page">
+
+  <section class="hero" id="top">
+    <div class="hero__eyebrow mono">Animated websites · Motion design · Remote</div>
+    <div class="hero__type">
+      <span class="mask"><span>Every frame</span></span>
+      <span class="mask"><span>on purpose.</span></span>
+    </div>
+    <div class="hero__foot">
+      <div class="hero__name">galaksss</div>
+      <p class="hero__desc">Websites that move, and the products behind them. Designed in motion, built in code.</p>
+    </div>
+
+    <!-- Кадры в пространстве вокруг слогана. Шесть штук — столько же слотов
+         в композиции (см. --x/--y/--z у .sheet__cell в стилях).
+         Ближние слоты (3, 4) и средний (6) заняты настоящими работами —
+         их видно первыми. В дальних пока стоят абстрактные стайлфреймы. -->
+    <div class="sheet">
+      <div class="sheet__grid">
+        <div class="sheet__cell">
+          <img src="/frames/frame-01.webp" alt="" width="1600" height="900" loading="eager" decoding="async">
+        </div>
+        <div class="sheet__cell">
+          <img src="/frames/frame-02.webp" alt="" width="1600" height="900" loading="eager" decoding="async">
+        </div>
+        <div class="sheet__cell">
+          <img src="/work/oneday-app.webp" alt="OneDay, goals screen" width="1600" height="900" loading="eager" decoding="async">
+        </div>
+        <div class="sheet__cell">
+          <img src="/work/oneday-focus.webp" alt="OneDay, focus mode" width="1600" height="900" loading="eager" decoding="async">
+        </div>
+        <div class="sheet__cell">
+          <img src="/frames/frame-05.webp" alt="" width="1600" height="900" loading="lazy" decoding="async">
+        </div>
+        <div class="sheet__cell">
+          <img src="/work/oneday-landing.webp" alt="OneDay landing page" width="1440" height="810" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--solid" id="work">
+    <div class="sec__label mono"><span>Mark 01 — Selected work</span><span>2026</span></div>
+
+    <!-- Строка со ссылкой — это <a>, без ссылки — <article> с tabindex,
+         чтобы превью раскрывалось и с клавиатуры. -->
+    <div class="work">
+      <a class="work__row rise" href="https://myoneday.vercel.app/en" target="_blank" rel="noopener">
+        <span class="mono">001</span>
+        <div>
+          <h3 class="work__title">OneDay</h3>
+          <div class="work__meta mono"><span>Web app</span><span>Product · Design · Code</span><span>Next.js · Supabase</span></div>
+          <p class="work__note">A time tracker for personal goals, built solo in three weeks. Works offline and syncs across devices, encrypts goal names on the device, covered by 472 tests.</p>
+        </div>
+        <span class="work__year mono">2026 <span aria-hidden="true">↗</span></span>
+        <div class="work__frame"><div class="frame__inner"><img src="/work/oneday-app.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></div></div>
+      </a>
+
+      <a class="work__row rise" href="https://myoneday.vercel.app/en/about" target="_blank" rel="noopener">
+        <span class="mono">002</span>
+        <div>
+          <h3 class="work__title">OneDay — landing</h3>
+          <div class="work__meta mono"><span>Landing page</span><span>Copy · Design · Motion</span><span>English · Russian</span></div>
+          <p class="work__note">Live previews of the real app instead of screenshots: the focus timer and the day card on the page are working components.</p>
+        </div>
+        <span class="work__year mono">2026 <span aria-hidden="true">↗</span></span>
+        <div class="work__frame"><div class="frame__inner"><img src="/work/oneday-landing.webp" alt="" width="1440" height="810" loading="lazy" decoding="async"></div></div>
+      </a>
+
+      <article class="work__row rise" tabindex="0">
+        <span class="mono">003</span>
+        <div>
+          <h3 class="work__title">This site</h3>
+          <div class="work__meta mono"><span>Portfolio</span><span>Design · Animation · Code</span><span>Vite · GSAP</span></div>
+          <p class="work__note">A timeline rail with a live timecode, borrowed from After Effects, and frames hanging in 3D space around the headline.</p>
+        </div>
+        <span class="work__year mono">2026</span>
+        <div class="work__frame"><div class="frame__inner"><img src="/frames/frame-03.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></div></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec sec--solid" id="capabilities">
+    <div class="sec__label mono"><span>Mark 02 — Capabilities</span><span>What I do</span></div>
+    <div class="caps">
+      <div class="cap rise">
+        <span class="mono">01</span>
+        <h3 class="cap__h">Websites that move</h3>
+        <ul class="cap__list"><li>Landing pages for products and launches</li><li>Scroll-driven storytelling</li><li>Interaction and micro-motion</li><li>Fast, responsive, accessible</li></ul>
+      </div>
+      <div class="cap rise">
+        <span class="mono">02</span>
+        <h3 class="cap__h">Products &amp; MVPs</h3>
+        <ul class="cap__list"><li>From idea to a working product</li><li>Next.js · React · TypeScript</li><li>Accounts, database, sync</li><li>Tested, documented code</li></ul>
+      </div>
+      <div class="cap rise">
+        <span class="mono">03</span>
+        <h3 class="cap__h">Motion &amp; video</h3>
+        <ul class="cap__list"><li>Launch films and product spots</li><li>Titles and transitions</li><li>Styleframes, storyboards</li><li>Editing and finishing</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--solid" id="about">
+    <div class="sec__label mono"><span>Mark 03 — About</span><span>Short version</span></div>
+    <div class="about">
+      <div class="rise">
+        <p>I started in fast, dense editing — anime edits, where every frame is fought over. That taught me rhythm.</p>
+        <p>Now I put it into websites: few elements, exact timing, motion that explains instead of decorating.</p>
+        <p>I build with AI tools. That is how one person ships a production app in three weeks. The taste and the decisions are mine.</p>
+      </div>
+      <div class="about__side rise">
+        <p><span class="mono">Tools</span><br>After Effects · Blender · DaVinci Resolve · GSAP · Next.js · React · TypeScript · Supabase</p>
+        <p><span class="mono">Working</span><br>Remote, English or Russian. Landing pages usually take one to two weeks.</p>
+        <p><span class="mono">Start small</span><br>I can rebuild one section of your site first, so you see the work before you commit.</p>
+        <p><span class="mono">Studios</span><br>Happy to build your designs under your name.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--solid contact" id="contact">
+    <div class="sec__label mono"><span>Mark 04 — Contact</span><span>Say hello</span></div>
+    <!-- Крупным кеглем — не адрес, а состояние: адрес ломался по «собаке»
+         и в строку не влезал. Сам адрес ушёл вниз, в ряд ссылок. -->
+    <div class="mail rise">Available.</div>
+    <!-- Ссылки равнозначны, ни одна не выделена. Список будет пополняться. -->
+    <div class="links mono rise">
+      <a href="mailto:galaksss@proton.me">galaksss@proton.me</a>
+      <a href="https://t.me/galaksss" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </section>
+
+  <footer class="foot mono">
+    <span>© 2026 galaksss</span>
+  </footer>
+</main>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
