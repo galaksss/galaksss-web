@@ -22,11 +22,14 @@
 - **Hour** — концепт-лендинг (продукта нет, так и подписан: «Concept»), первым
   и во всю ширину в блоке «More work»: это ровно то, что продаётся, —
   лендинг со скролл-историей. `vibecode/hour`.
+- **Orrin** (продуктовая страница с реймарчингом, `vibecode/orrin`) и **Noctiv**
+  (сайт VFX-студии с частицами, `vibecode/noctiv`) — тоже концепты, «Concept».
 - **Beatgrid**, **Feedcheck** и **Hookline** — личные проекты, подписаны честно:
   «Personal project». `vibecode/beatgrid`, `vibecode/feedcheck`, `vibecode/cue`
   (Hookline сначала звался Cue, папка осталась со старым именем).
 
-Ритм блока: широкая (Hour) — две обычные — широкая (Hookline), класс `.proj--wide`.
+Ритм блока: широкая (Hour) — пара концептов (Orrin, Noctiv) — пара инструментов
+(Beatgrid, Feedcheck) — широкая (Hookline), класс `.proj--wide`.
 Кадры для карточек — скриншоты самих проектов в `public/work/`, при наведении
 сменяются вторым кадром (`.proj__alt`).
 
@@ -96,7 +99,7 @@
 
 ## Что дальше
 
-- [ ] Задеплоить сайт, Hour, Beatgrid, Feedcheck и Hookline (пять проектов Vercel)
+- [ ] Задеплоить сайт и шесть проектов: Hour, Orrin, Noctiv, Beatgrid, Feedcheck, Hookline
 - [ ] После деплоя: ссылки «Open ↗» в карточках More work, og:image 1200×630
       с абсолютным URL
 - [ ] Завести X и добавить в контакты
