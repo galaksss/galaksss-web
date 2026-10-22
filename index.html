@@ -4,177 +4,329 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>galaksss — animated websites &amp; motion design</title>
-  <meta name="description" content="Websites that move, and the products behind them. Landing pages, web apps and motion design by galaksss.">
-  <meta property="og:title" content="galaksss — animated websites &amp; motion design">
-  <meta property="og:description" content="Websites that move, and the products behind them.">
+  <title>galaksss — websites &amp; web apps</title>
+  <meta name="description" content="Landing pages and web apps for founders and studios. Designed and built by one person, from the first screen to production.">
+  <meta property="og:title" content="galaksss — websites that move, products that ship">
+  <meta property="og:description" content="Landing pages and web apps for founders and studios. Designed and built by one person.">
   <meta property="og:type" content="website">
+  <meta name="theme-color" content="#07061A">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="glow"></div>
-<div class="grain"></div>
+<a class="skip" href="#work">Skip to work</a>
 
-<aside class="rail" aria-label="Section navigation">
-  <div class="rail__track"></div>
-  <!-- Маркеры привязаны к реальным секциям: позиция считается
-       из их положения на странице, а не задана вручную. Первый указывает
-       на героя, то есть на самый верх — его offsetTop равен нулю, поэтому
-       засечка встаёт в начало трека сама, без отдельного случая в коде. -->
-  <button class="rail__mark" data-target="#top"          data-label="Top"></button>
-  <button class="rail__mark" data-target="#work"         data-label="Work"></button>
-  <button class="rail__mark" data-target="#capabilities" data-label="Capabilities"></button>
-  <button class="rail__mark" data-target="#about"        data-label="About"></button>
-  <button class="rail__mark" data-target="#contact"      data-label="Contact"></button>
-  <div class="rail__head"></div>
-  <div class="rail__tc mono" id="tc">00:00:00:00</div>
-</aside>
-
-<header class="top">
-  <span class="mono">galaksss — motion &amp; web</span>
-  <a class="top__status mono" href="mailto:galaksss@proton.me" aria-label="Email me"><span class="dot"></span>Open for work</a>
+<!-- ШАПКА: прозрачная над героем, стеклянная после первого скролла -->
+<header class="nav" data-nav>
+  <div class="nav__in wrap">
+    <a class="logo" href="#top" aria-label="galaksss, back to top"><span class="logo__mark" aria-hidden="true"></span>galaksss</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="pill" href="mailto:galaksss@proton.me"><span class="pulse" aria-hidden="true"></span><span class="pill__long">Available for new projects</span><span class="pill__short">Available</span></a>
+  </div>
 </header>
 
-<main class="page">
+<main>
 
-  <section class="hero" id="top">
-    <div class="hero__eyebrow mono">Animated websites · Motion design · Remote</div>
-    <div class="hero__type">
-      <span class="mask"><span>Every frame</span></span>
-      <span class="mask"><span>on purpose.</span></span>
-    </div>
-    <div class="hero__foot">
-      <div class="hero__name">galaksss</div>
-      <p class="hero__desc">Websites that move, and the products behind them. Designed in motion, built in code.</p>
+  <!-- ГЕРОЙ ============================================================ -->
+  <section class="hero" id="top" data-hero>
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__grid"></div>
+      <div class="hero__orb hero__orb--a"></div>
+      <div class="hero__orb hero__orb--b"></div>
     </div>
 
-    <!-- Кадры в пространстве вокруг слогана. Шесть штук — столько же слотов
-         в композиции (см. --x/--y/--z у .sheet__cell в стилях).
-         Ближние слоты (3, 4) и средний (6) заняты настоящими работами —
-         их видно первыми. В дальних пока стоят абстрактные стайлфреймы. -->
-    <div class="sheet">
-      <div class="sheet__grid">
-        <div class="sheet__cell">
-          <img src="/frames/frame-01.webp" alt="" width="1600" height="900" loading="eager" decoding="async">
+    <div class="hero__in wrap">
+      <!-- Заголовок на всю ширину, по фразе на строку; ниже — текст слева и окно справа -->
+      <div class="hero__head">
+        <p class="tag" data-intro><span class="tag__dot"></span>Landing pages · Web apps · MVPs</p>
+        <h1 class="hero__title"><span class="hero__line" data-split>Websites that <em>move</em>.</span> <span class="hero__line" data-split>Products that <em>ship</em>.</span></h1>
+      </div>
+      <div class="hero__copy">
+        <p class="hero__lead" data-intro>I design and build landing pages and web apps for founders and studios — from the first screen to production, in weeks, not months.</p>
+        <div class="hero__cta" data-intro>
+          <a class="btn btn--primary" href="mailto:galaksss@proton.me" data-magnet>Start a project <span aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="#work">See the work</a>
         </div>
-        <div class="sheet__cell">
-          <img src="/frames/frame-02.webp" alt="" width="1600" height="900" loading="eager" decoding="async">
+        <a class="hero__proof" href="#work" data-intro>
+          <span class="hero__proof-k">Latest</span>
+          <span>OneDay — a production web app, built solo in three weeks</span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <!-- Окно «промпт → продукт». Сценарий крутит src/prompt.js:
+           печатается задача, бежит код, окно «собирается» в живой интерфейс.
+           Без JS и при reduced motion видно готовое состояние первой сцены. -->
+      <div class="win" data-prompt aria-label="A prompt turning into a working interface" role="img">
+        <div class="win__bar">
+          <span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="win__title">~/oneday</span>
+          <span class="win__state" data-state>ready</span>
         </div>
-        <div class="sheet__cell">
-          <img src="/work/oneday-app.webp" alt="OneDay, goals screen" width="1600" height="900" loading="eager" decoding="async">
-        </div>
-        <div class="sheet__cell">
-          <img src="/work/oneday-focus.webp" alt="OneDay, focus mode" width="1600" height="900" loading="eager" decoding="async">
-        </div>
-        <div class="sheet__cell">
-          <img src="/frames/frame-05.webp" alt="" width="1600" height="900" loading="lazy" decoding="async">
-        </div>
-        <div class="sheet__cell">
-          <img src="/work/oneday-landing.webp" alt="OneDay landing page" width="1440" height="810" loading="lazy" decoding="async">
+        <div class="win__body">
+          <div class="win__code" data-code>
+            <p class="win__prompt"><span class="win__caret">›</span> <span data-typed></span><span class="win__cursor" aria-hidden="true"></span></p>
+            <pre data-lines></pre>
+          </div>
+
+          <!-- Сцена 1: фокус-режим -->
+          <div class="win__ui ui-focus is-shown" data-scene="0">
+            <div class="ui-focus__top"><span><i class="dot dot--blue"></i>Coding</span><span>Day 61</span></div>
+            <div class="ui-focus__time" data-clock>00:42:17</div>
+            <div class="ui-focus__bot"><span>12 m in focus</span><span><i class="ring"></i>Daily goal met · 1 h 30 m</span></div>
+          </div>
+
+          <!-- Сцена 2: карточка дня -->
+          <div class="win__ui ui-card" data-scene="1">
+            <div class="ui-card__head"><span>Day 61 · October 14</span><span class="ui-card__badge">New record</span></div>
+            <div class="ui-card__total">7<small>h</small> 15<small>m</small></div>
+            <p class="ui-card__sub">+2 h 57 m over average · 9 days in a row</p>
+            <div class="ui-card__bar"><i style="--w:55%;--c:var(--g-blue)"></i><i style="--w:28%;--c:var(--g-violet)"></i><i style="--w:17%;--c:var(--g-teal)"></i></div>
+            <ul class="ui-card__rows">
+              <li><span><i class="dot dot--blue"></i>Coding</span><span>3 h 59 m</span></li>
+              <li><span><i class="dot dot--violet"></i>Spanish</span><span>2 h 2 m</span></li>
+              <li><span><i class="dot dot--teal"></i>Training</span><span>1 h 14 m</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="sec sec--solid" id="work">
-    <div class="sec__label mono"><span>Mark 01 — Selected work</span><span>2026</span></div>
+  <!-- БЕГУЩАЯ СТРОКА: что делаю, крупным курсивом -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Landing pages</span><b>✦</b><span>Web apps</span><b>✦</b><span>MVPs</span><b>✦</b><span>Motion for the web</span><b>✦</b><span>Design to code</span><b>✦</b>
+      <span>Landing pages</span><b>✦</b><span>Web apps</span><b>✦</b><span>MVPs</span><b>✦</b><span>Motion for the web</span><b>✦</b><span>Design to code</span><b>✦</b>
+    </div>
+  </div>
 
-    <!-- Строка со ссылкой — это <a>, без ссылки — <article> с tabindex,
-         чтобы превью раскрывалось и с клавиатуры. -->
-    <div class="work">
-      <a class="work__row rise" href="https://myoneday.vercel.app/en" target="_blank" rel="noopener">
-        <span class="mono">001</span>
-        <div>
-          <h3 class="work__title">OneDay</h3>
-          <div class="work__meta mono"><span>Web app</span><span>Product · Design · Code</span><span>Next.js · Supabase</span></div>
-          <p class="work__note">A time tracker for personal goals, built solo in three weeks. Works offline and syncs across devices, encrypts goal names on the device, covered by 472 tests.</p>
+  <!-- КЕЙС ============================================================= -->
+  <section class="sec" id="work">
+    <div class="wrap">
+      <header class="sec__head reveal">
+        <p class="label"><span class="label__dot"></span>Case study</p>
+        <h2 class="sec__title">OneDay</h2>
+        <p class="sec__lead">A web app that shows how much you really worked on your goals. Product, design, code and the landing page — one person, three weeks.</p>
+        <div class="sec__links">
+          <a class="link" href="https://myoneday.vercel.app/en" target="_blank" rel="noopener">Open the app <span aria-hidden="true">↗</span></a>
+          <a class="link" href="https://myoneday.vercel.app/en/about" target="_blank" rel="noopener">See the landing <span aria-hidden="true">↗</span></a>
         </div>
-        <span class="work__year mono">2026 <span aria-hidden="true">↗</span></span>
-        <div class="work__frame"><div class="frame__inner"><img src="/work/oneday-app.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></div></div>
-      </a>
+      </header>
 
-      <a class="work__row rise" href="https://myoneday.vercel.app/en/about" target="_blank" rel="noopener">
-        <span class="mono">002</span>
-        <div>
-          <h3 class="work__title">OneDay — landing</h3>
-          <div class="work__meta mono"><span>Landing page</span><span>Copy · Design · Motion</span><span>English · Russian</span></div>
-          <p class="work__note">Live previews of the real app instead of screenshots: the focus timer and the day card on the page are working components.</p>
+      <!-- История в стиле Apple: слева шаги, справа липкое окно браузера,
+           экран в нём меняется, когда шаг доходит до середины экрана.
+           На телефоне окна нет — у каждого шага своя картинка. -->
+      <div class="story" data-story>
+        <div class="story__steps">
+          <article class="step" data-step="0">
+            <span class="step__n">01</span>
+            <h3 class="step__t">Every goal counts its days</h3>
+            <p class="step__p">By time, by amount, with check-ins or as days without a slip. Each goal counts from day one, and the week fits on one screen.</p>
+            <figure class="step__img"><img src="/work/oneday-app.webp" alt="OneDay goals screen" width="1600" height="900" loading="lazy" decoding="async"></figure>
+          </article>
+          <article class="step" data-step="1">
+            <span class="step__n">02</span>
+            <h3 class="step__t">A focus mode made to be filmed</h3>
+            <p class="step__p">A full-screen stopwatch with a chime at the daily goal. It pauses on space, dims when you look away and protects OLED screens.</p>
+            <figure class="step__img"><img src="/work/oneday-focus.webp" alt="OneDay focus mode" width="1600" height="900" loading="lazy" decoding="async"></figure>
+          </article>
+          <article class="step" data-step="2">
+            <span class="step__n">03</span>
+            <h3 class="step__t">A day you want to share</h3>
+            <p class="step__p">The evening wrap-up becomes a card for stories or the feed. Every shared card is an ad for the product, built into the product.</p>
+            <figure class="step__img"><img src="/work/oneday-cards.webp" alt="OneDay day-in-review cards" width="1440" height="810" loading="lazy" decoding="async"></figure>
+          </article>
+          <article class="step" data-step="3">
+            <span class="step__n">04</span>
+            <h3 class="step__t">A landing that shows instead of tells</h3>
+            <p class="step__p">Live previews of the real app instead of screenshots: the timer and the day card on the page are working components. English and Russian.</p>
+            <figure class="step__img"><img src="/work/oneday-landing.webp" alt="OneDay landing page" width="1440" height="810" loading="lazy" decoding="async"></figure>
+          </article>
         </div>
-        <span class="work__year mono">2026 <span aria-hidden="true">↗</span></span>
-        <div class="work__frame"><div class="frame__inner"><img src="/work/oneday-landing.webp" alt="" width="1440" height="810" loading="lazy" decoding="async"></div></div>
-      </a>
 
-      <article class="work__row rise" tabindex="0">
-        <span class="mono">003</span>
-        <div>
-          <h3 class="work__title">This site</h3>
-          <div class="work__meta mono"><span>Portfolio</span><span>Design · Animation · Code</span><span>Vite · GSAP</span></div>
-          <p class="work__note">A timeline rail with a live timecode, borrowed from After Effects, and frames hanging in 3D space around the headline.</p>
+        <div class="story__stage" aria-hidden="true">
+          <div class="frame">
+            <div class="frame__bar"><span class="win__dots"><i></i><i></i><i></i></span><span class="frame__url">myoneday.vercel.app</span></div>
+            <div class="frame__screen">
+              <img class="is-on" src="/work/oneday-app.webp" alt="" width="1600" height="900" decoding="async">
+              <img src="/work/oneday-focus.webp" alt="" width="1600" height="900" loading="lazy" decoding="async">
+              <img src="/work/oneday-cards.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+              <img src="/work/oneday-landing.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+            </div>
+            <div class="frame__progress"><i></i><i></i><i></i><i></i></div>
+          </div>
         </div>
-        <span class="work__year mono">2026</span>
-        <div class="work__frame"><div class="frame__inner"><img src="/frames/frame-03.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></div></div>
-      </article>
+      </div>
+
+      <!-- Цифры проверены: строки — src/**/*.ts(x) OneDay, тесты — vitest run -->
+      <dl class="stats">
+        <div class="stat reveal"><dt>weeks, solo</dt><dd><span data-count="3">3</span></dd></div>
+        <div class="stat reveal"><dt>lines of TypeScript</dt><dd><span data-count="24">24</span>k</dd></div>
+        <div class="stat reveal"><dt>tests passing</dt><dd><span data-count="496">496</span></dd></div>
+        <div class="stat reveal"><dt>languages, English &amp; Russian</dt><dd><span data-count="2">2</span></dd></div>
+      </dl>
+
+      <!-- Личные проекты. Честно подписаны как личные: это инструменты для
+           того, чем владелец занимается сам, — монтажа и видеоконтента.
+           При наведении кадр сменяется вторым экраном того же проекта. -->
+      <div class="more" id="more">
+        <header class="more__head reveal">
+          <p class="label"><span class="label__dot"></span>More work</p>
+          <p class="more__note">Personal projects — tools for the things I do besides client work: editing and video content.</p>
+        </header>
+        <div class="projects">
+          <article class="proj reveal" data-glow>
+            <div class="proj__media">
+              <img src="/work/beatgrid-hero.webp" alt="Beatgrid landing page" width="1440" height="810" loading="lazy" decoding="async">
+              <img class="proj__alt" src="/work/beatgrid-app.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+            </div>
+            <div class="proj__body">
+              <p class="proj__tags"><span>Personal project</span><span>Web app</span></p>
+              <h3 class="proj__t">Beatgrid</h3>
+              <p class="proj__p">Frame-exact beat markers for editors. Tap the tempo or drop a track: it estimates the BPM, draws the waveform and shows on which frame every beat lands.</p>
+              <p class="proj__stack">Web Audio · Canvas · Vite</p>
+            </div>
+          </article>
+          <article class="proj reveal" data-glow>
+            <div class="proj__media proj__media--light">
+              <img src="/work/feedcheck-hero.webp" alt="Feedcheck app" width="1440" height="810" loading="lazy" decoding="async">
+              <img class="proj__alt" src="/work/feedcheck-phone.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+            </div>
+            <div class="proj__body">
+              <p class="proj__tags"><span>Personal project</span><span>Web app</span></p>
+              <h3 class="proj__t">Feedcheck</h3>
+              <p class="proj__p">See a video in the feed before you post it. Two thumbnails and titles, three layouts, and the exact word where each title gets cut.</p>
+              <p class="proj__stack">Canvas · Vite · no backend</p>
+            </div>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="sec sec--solid" id="capabilities">
-    <div class="sec__label mono"><span>Mark 02 — Capabilities</span><span>What I do</span></div>
-    <div class="caps">
-      <div class="cap rise">
-        <span class="mono">01</span>
-        <h3 class="cap__h">Websites that move</h3>
-        <ul class="cap__list"><li>Landing pages for products and launches</li><li>Scroll-driven storytelling</li><li>Interaction and micro-motion</li><li>Fast, responsive, accessible</li></ul>
-      </div>
-      <div class="cap rise">
-        <span class="mono">02</span>
-        <h3 class="cap__h">Products &amp; MVPs</h3>
-        <ul class="cap__list"><li>From idea to a working product</li><li>Next.js · React · TypeScript</li><li>Accounts, database, sync</li><li>Tested, documented code</li></ul>
-      </div>
-      <div class="cap rise">
-        <span class="mono">03</span>
-        <h3 class="cap__h">Motion &amp; video</h3>
-        <ul class="cap__list"><li>Launch films and product spots</li><li>Titles and transitions</li><li>Styleframes, storyboards</li><li>Editing and finishing</li></ul>
+  <!-- УСЛУГИ =========================================================== -->
+  <section class="sec" id="services">
+    <div class="wrap">
+      <header class="sec__head reveal">
+        <p class="label"><span class="label__dot"></span>Services</p>
+        <h2 class="sec__title">What I build</h2>
+      </header>
+
+      <div class="bento">
+        <article class="card reveal" data-glow>
+          <div class="card__viz viz-page" aria-hidden="true">
+            <div class="viz-page__bar"></div>
+            <div class="viz-page__h"></div><div class="viz-page__h viz-page__h--short"></div>
+            <div class="viz-page__btn"></div>
+            <div class="viz-page__img"></div>
+          </div>
+          <h3 class="card__t">Landing pages</h3>
+          <p class="card__p">For launches, products and founders. Copy, design and code in one pair of hands, live in one to two weeks.</p>
+        </article>
+
+        <article class="card reveal" data-glow>
+          <div class="card__viz viz-term" aria-hidden="true">
+            <p><span class="viz-term__p">$</span> npm test</p>
+            <p class="ok">✓ 23 files</p>
+            <p class="ok">✓ 496 tests passed</p>
+            <p><span class="viz-term__p">$</span> npm run build</p>
+            <p class="ok">✓ built in 0.3s</p>
+          </div>
+          <h3 class="card__t">Web apps &amp; MVPs</h3>
+          <p class="card__p">From an idea to a working product: accounts, database, sync, tests. Code you can hand to a team later.</p>
+        </article>
+
+        <article class="card reveal" data-glow>
+          <!-- Кивок моушен-дизайнерам: график скорости, как в After Effects,
+               только это обычная CSS-кривая. Анимирует src/curve.js -->
+          <div class="card__viz viz-curve" aria-hidden="true" data-curve>
+            <svg viewBox="0 0 220 120" preserveAspectRatio="none">
+              <path class="viz-curve__grid" d="M0 30H220M0 60H220M0 90H220M55 0V120M110 0V120M165 0V120"/>
+              <path class="viz-curve__path" d="M0 120 C35.2 0 66 0 220 0"/>
+              <line class="viz-curve__head" x1="0" y1="0" x2="0" y2="120"/>
+              <circle class="viz-curve__dot" r="4" cx="0" cy="120"/>
+            </svg>
+            <div class="viz-curve__track"><i></i></div>
+            <code>cubic-bezier(.16, 1, .3, 1)</code>
+          </div>
+          <h3 class="card__t">Motion for the web</h3>
+          <p class="card__p">Scroll stories, transitions and micro-interactions with the right easing. Smooth on a phone, not only on a MacBook.</p>
+        </article>
+
+        <article class="card card--wide reveal" data-glow>
+          <div>
+            <h3 class="card__t">Studios &amp; agencies</h3>
+            <p class="card__p">Your design, built to move — under your name. I join for one page or for the whole build.</p>
+          </div>
+          <a class="link" href="mailto:galaksss@proton.me?subject=White-label">Talk about white-label <span aria-hidden="true">→</span></a>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="sec sec--solid" id="about">
-    <div class="sec__label mono"><span>Mark 03 — About</span><span>Short version</span></div>
-    <div class="about">
-      <div class="rise">
-        <p>I started in fast, dense editing — anime edits, where every frame is fought over. That taught me rhythm.</p>
-        <p>Now I put it into websites: few elements, exact timing, motion that explains instead of decorating.</p>
+  <!-- ПРОЦЕСС ========================================================== -->
+  <section class="sec" id="process">
+    <div class="wrap">
+      <header class="sec__head reveal">
+        <p class="label"><span class="label__dot"></span>Process</p>
+        <h2 class="sec__title">How it goes</h2>
+      </header>
+      <ol class="steps" data-steps>
+        <li class="reveal"><span class="steps__n">01</span><h3>Message</h3><p>Tell me what you are launching. A link and a few lines are enough to start.</p></li>
+        <li class="reveal"><span class="steps__n">02</span><h3>First screen</h3><p>I build the first screen early, so you see the direction before you commit to the rest.</p></li>
+        <li class="reveal"><span class="steps__n">03</span><h3>Build</h3><p>Work in progress lives on a live link. You watch it grow instead of waiting for a big reveal.</p></li>
+        <li class="reveal"><span class="steps__n">04</span><h3>Launch</h3><p>Domain, analytics, handover. The code and the accounts are yours.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- О СЕБЕ ============================================================ -->
+  <section class="sec" id="about">
+    <div class="wrap about">
+      <div class="reveal">
+        <p class="label"><span class="label__dot"></span>About</p>
+        <p class="about__quote">Before code, I made motion. Before motion — anime edits, where every frame is <em>fought over</em>.</p>
+      </div>
+      <div class="about__side reveal">
+        <p>That is where the rhythm in my sites comes from: few elements, exact timing, motion that explains instead of decorating.</p>
         <p>I build with AI tools. That is how one person ships a production app in three weeks. The taste and the decisions are mine.</p>
-      </div>
-      <div class="about__side rise">
-        <p><span class="mono">Tools</span><br>After Effects · Blender · DaVinci Resolve · GSAP · Next.js · React · TypeScript · Supabase</p>
-        <p><span class="mono">Working</span><br>Remote, English or Russian. Landing pages usually take one to two weeks.</p>
-        <p><span class="mono">Start small</span><br>I can rebuild one section of your site first, so you see the work before you commit.</p>
-        <p><span class="mono">Studios</span><br>Happy to build your designs under your name.</p>
+        <ul class="chips" aria-label="Tools">
+          <li>Next.js</li><li>React</li><li>TypeScript</li><li>Supabase</li><li>Tailwind</li><li>Vite</li><li>After Effects</li>
+        </ul>
+        <p class="about__meta">Remote · English &amp; Russian</p>
       </div>
     </div>
   </section>
 
-  <section class="sec sec--solid contact" id="contact">
-    <div class="sec__label mono"><span>Mark 04 — Contact</span><span>Say hello</span></div>
-    <!-- Крупным кеглем — не адрес, а состояние: адрес ломался по «собаке»
-         и в строку не влезал. Сам адрес ушёл вниз, в ряд ссылок. -->
-    <div class="mail rise">Available.</div>
-    <!-- Ссылки равнозначны, ни одна не выделена. Список будет пополняться. -->
-    <div class="links mono rise">
-      <a href="mailto:galaksss@proton.me">galaksss@proton.me</a>
-      <a href="https://t.me/galaksss" target="_blank" rel="noopener">Telegram</a>
+  <!-- КОНТАКТ ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="contact__glow" aria-hidden="true"></div>
+    <div class="wrap contact__in reveal">
+      <h2 class="contact__title">Have something to <em>ship</em>?</h2>
+      <p class="contact__lead">A landing page, a web app or an idea on a napkin. A few lines are enough.</p>
+      <div class="contact__cta">
+        <a class="btn btn--primary btn--lg" href="mailto:galaksss@proton.me" data-magnet data-copy="galaksss@proton.me"><span data-copy-label>galaksss@proton.me</span></a>
+        <a class="btn btn--ghost btn--lg" href="https://t.me/galaksss" target="_blank" rel="noopener">Telegram <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </section>
-
-  <footer class="foot mono">
-    <span>© 2026 galaksss</span>
-  </footer>
 </main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>© 2026 galaksss</span>
+    <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</footer>
 
 <script type="module" src="/src/main.js"></script>
 </body>
