@@ -275,14 +275,15 @@ ul,ol{list-style:none}
 .js .log__row.is-done .log__bar i{background:var(--ok)}
 
 /* ---------- о себе ---------- */
-.about{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,3fr);gap:var(--g);align-items:end}
-.about__quote{font-weight:700;font-size:clamp(28px,3vw,46px);line-height:1.06;letter-spacing:-.04em}
+.about{display:block}
+.about__quote{max-width:17em;font-weight:700;font-size:clamp(28px,3vw,46px);line-height:1.08;letter-spacing:-.04em}
 .about__quote span{color:var(--uv)}
+.about__side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px var(--g);max-width:54em;margin-top:clamp(28px,3.5vw,44px)}
 .about__side p{font-size:16px;line-height:1.65;color:var(--ink-2)}
-.about__side p + p{margin-top:14px}
-.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px}
+.about__side .tools,.about__side .about__meta{grid-column:1 / -1}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .tools li{padding:5px 10px;border:1px solid var(--line-2);border-radius:5px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
-.about__side .about__meta{margin-top:22px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.about__side .about__meta{margin-top:6px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
 
 /* ---------- контакт: свечение разгорается, пока секция въезжает ---------- */
 .contact{position:relative;isolation:isolate;margin-top:clamp(80px,10vw,140px);padding:22px var(--pad) clamp(72px,9vw,120px);border-top:1px solid var(--line);overflow:hidden}
@@ -326,7 +327,7 @@ ul,ol{list-style:none}
   .renders{grid-template-columns:1fr}
   .render--wide{grid-template-columns:1fr}
   .render--wide .render__body{margin-top:22px}
-  .about{grid-template-columns:1fr}
+  .about__side{grid-template-columns:1fr}
   .log__row{grid-template-columns:40px minmax(0,1fr);gap:8px 16px}
   .log__main{grid-template-columns:minmax(0,1fr) 70px;gap:8px 16px}
   .log__p{grid-column:1 / -1}
