@@ -288,13 +288,17 @@ export function createDemo(root, frame, reduced) {
     };
     const hideTip = () => { tip.classList.remove('is-on'); chart.classList.remove('has-hover'); cols.forEach(c => c.classList.remove('is-hover')); };
     hideTip();
-    chart.classList.remove('is-in');
-    if (reduced) { chart.classList.add('is-in'); hours.textContent = '30.1'; return; }
+    chart.classList.remove('is-in', 'is-wait');
+    if (reduced) { hours.textContent = '30.1'; return; }
+    // спрятать столбики, дать сцене проявиться и только тогда растить — с нуля
+    chart.classList.add('is-wait');
     chart.getBoundingClientRect();
-    at(80, () => chart.classList.add('is-in'));
-    const t0 = performance.now();
+    const GROW_AT = 250;
+    at(GROW_AT, () => { chart.classList.remove('is-wait'); chart.classList.add('is-in'); });
+    hours.textContent = '0.0';
+    const t0 = performance.now() + GROW_AT;
     every(30, () => {
-      const p = Math.min(1, (performance.now() - t0) / 1400);
+      const p = Math.max(0, Math.min(1, (performance.now() - t0) / 1400));
       hours.textContent = (30.1 * (1 - Math.pow(1 - p, 3))).toFixed(1);
     });
     place(s, { x: 600, y: 560 });

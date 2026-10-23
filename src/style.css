@@ -265,8 +265,12 @@ ul,ol{list-style:none}
 .od-hist__chart{position:relative;display:flex;align-items:flex-end;gap:14px;height:100%;padding-bottom:52px}
 .od-col{position:relative;flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end}
 .od-col__best{margin-bottom:8px;text-align:center;font-size:12px;color:var(--od-muted)}
-.od-col__stack{display:flex;flex-direction:column;gap:3px;transform-origin:bottom;transform:scaleY(0);opacity:0;transition:transform 900ms var(--ease) var(--d,0ms),opacity 600ms var(--ease) var(--d,0ms)}
-.od-hist__chart.is-in .od-col__stack{transform:none;opacity:1}
+/* рост столбиков — keyframes, а не переход: каждый показ сцены стартует с нуля,
+   соседи по очереди (--d). is-wait прячет их, пока сцена проявляется */
+.od-col__stack{display:flex;flex-direction:column;gap:3px;transform-origin:bottom}
+.od-hist__chart.is-wait .od-col__stack{opacity:0;transform:scaleY(0)}
+.od-hist__chart.is-in .od-col__stack{animation:od-grow 900ms var(--ease) var(--d,0ms) both}
+@keyframes od-grow{from{opacity:0;transform:scaleY(0)}}
 /* столбики в полном цвете; пока курсор на дне и открыта подсказка, остальные дни
    приглушаются, а день под курсором остаётся ярким (как в «Истории» OneDay) */
 .od-col__stack i{display:block;border-radius:2px;background:var(--c);transition:background-color 220ms var(--ease)}
@@ -498,6 +502,6 @@ ul,ol{list-style:none}
   /* живая копия OneDay: сцены сменяются простым затуханием, курсора и дыхания нет */
   .od-scene,.od-scene.is-out{transform:none;filter:none}
   .od-cursor{display:none}
-  .od-card.is-running{animation:none}
+  .od-card.is-running,.od-hist__chart.is-in .od-col__stack{animation:none}
   .case__dashes i::after{transition:none}
 }
