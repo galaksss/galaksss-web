@@ -114,17 +114,6 @@ ul,ol{list-style:none}
 .top__cta:hover{background:#fff}
 .top__cta:hover span{transform:translateX(2px)}
 
-/* ---------- окно (кейс OneDay) ---------- */
-.view{border:1px solid var(--line);background:var(--panel);border-radius:10px;overflow:hidden}
-.view__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:46px;padding:0 6px 0 14px;border-bottom:1px solid var(--line)}
-.view__title{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.view__title i{flex:none;width:6px;height:6px;border-radius:50%;background:var(--ok)}
-.view__frame{aspect-ratio:16/10}
-.view__frame > img{object-position:left top}
-.view__hud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;padding:12px 14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--mute)}
-.view__hud b{font-weight:500;color:var(--ink-2)}
-.view__live{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--ink-2)}
-
 /* ---------- герой ---------- */
 .hero{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;display:grid;grid-template-columns:minmax(0,5.4fr) minmax(0,6.6fr);grid-template-rows:1fr auto;gap:0 clamp(32px,4vw,64px);align-items:center;padding:calc(var(--top) + clamp(28px,5vh,64px)) var(--pad) 0}
 /* мягкое свечение за витриной: многоступенчатый градиент плюс шум */
@@ -167,19 +156,136 @@ ul,ol{list-style:none}
 .sec__lead{margin-top:22px;max-width:34em;font-size:clamp(16px,1.25vw,18.5px);line-height:1.55;color:var(--ink-2)}
 .sec__links{display:flex;flex-wrap:wrap;gap:28px;margin-top:28px}
 
-/* ---------- кейс: шаги и липкое окно ---------- */
-.case{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--g);margin-top:clamp(8px,2vw,24px)}
-.case__steps{padding-bottom:12vh}
-.step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;max-width:27em}
-.step__n{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--uv)}
-.step__t{margin-top:14px;font-weight:700;font-size:clamp(24px,2.2vw,32px);line-height:1.08;letter-spacing:-.03em}
-.step__p{margin-top:14px;font-size:16px;line-height:1.6;color:var(--ink-2)}
-.step__img{display:none;margin-top:24px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.js .step{opacity:.28;transition:opacity 600ms var(--ease)}
+/* ---------- кейс: один день с OneDay (как How it works на лендинге OneDay) ---------- */
+.case{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:0 clamp(40px,5vw,72px);margin-top:clamp(8px,2vw,24px)}
+.step{min-height:75vh;display:flex;flex-direction:column;justify-content:center}
+.js .step{opacity:.3;transition:opacity 500ms var(--ease)}
 .js .step.is-active{opacity:1}
-/* липкая сцена высотой в экран, окно — по её центру (поэтому align-self:start) */
-.case__stage{position:sticky;top:var(--top);height:calc(100vh - var(--top));display:flex;align-items:center;align-self:start}
-.view--case{width:100%}
+.step__n{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.step__n i{width:32px;height:1px;background:var(--line-2)}
+.step__t{margin-top:16px;font-weight:700;font-size:clamp(26px,2.4vw,34px);line-height:1.1;letter-spacing:-.03em}
+.step__p{margin-top:14px;max-width:44ch;font-size:17px;line-height:1.6;color:var(--ink-2)}
+.case__sticky{position:sticky;top:max(84px,calc(50vh - 270px));padding:24px 0}
+.appwin{border:1px solid var(--line);border-radius:16px;background:#000;overflow:hidden}
+.appwin__bar{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;height:36px;padding:0 16px;border-bottom:1px solid var(--line)}
+.appwin__dots{display:flex;gap:6px}
+.appwin__dots i{width:10px;height:10px;border-radius:50%;background:#26262B}
+.appwin__url{text-align:center;font-family:'Geist',var(--sans);font-size:11px;color:var(--mute)}
+.appwin__frame{position:relative;aspect-ratio:16/10;overflow:hidden}
+.case__dashes{display:flex;gap:8px;margin-top:20px}
+.case__dashes i{position:relative;flex:1;height:2px;border-radius:2px;background:var(--line);overflow:hidden}
+.case__dashes i::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.7);transform-origin:left;transform:scaleX(0);transition:transform 700ms var(--ease)}
+.case__dashes i.is-on::after{transform:none}
+
+/* ---------- живая копия OneDay: холст 960×600, ужатый до окна ---------- */
+.od{--od-subtle:#0B0B0D;--od-line:#232327;--od-line-2:#37373C;--od-text:#F5F5F6;--od-muted:#A1A1AA;--od-faint:#6E6E77;
+  position:absolute;left:0;top:0;width:960px;height:600px;transform-origin:0 0;font-family:'Geist',var(--sans);color:var(--od-text);letter-spacing:-.01em}
+.od-scene{position:absolute;inset:0;background:#000;opacity:0;transform:scale(.985);filter:blur(8px);transition:opacity 600ms var(--ease),transform 600ms var(--ease),filter 600ms var(--ease)}
+.od-scene.is-on{opacity:1;transform:none;filter:blur(0)}
+.od-scene.is-out{opacity:0;transform:scale(1.01);filter:blur(8px)}
+.od u{text-decoration:none;margin-left:.3em;margin-right:.45em;font-size:.4em;font-weight:400;letter-spacing:0;color:var(--od-muted)}
+.od u:last-child{margin-right:0}
+.od-num{font-size:32px;line-height:36px;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.od-num--40{font-size:40px;line-height:46px}
+.od-num--timer i,.od-focus__digits i{font-style:normal;color:var(--od-faint)}
+.od-label{font-size:13px;color:var(--od-muted)}
+.od-title{position:absolute;left:36px;font-size:15px;color:var(--od-muted)}
+.od-dot{display:inline-block;flex:none;width:6px;height:6px;border-radius:50%;background:var(--c)}
+.od-dayhead{position:absolute;top:32px;left:36px;width:350px;height:132px;display:flex;flex-direction:column;justify-content:center;padding:0 16px 0 18px;border:1px solid var(--od-line);border-radius:12px}
+.od-dayhead__row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0}
+.od-pill{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--od-line-2);font-size:13px}
+.od-days{position:absolute;top:58px;right:36px;display:grid;grid-template-columns:repeat(7,46px);gap:8px}
+.od-days span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:60px;border:1px solid var(--od-line);border-radius:14px}
+.od-days small{font-size:11px;color:var(--od-faint)}
+.od-days b{font-size:15px;font-weight:500}
+.od-days i{width:4px;height:4px;border-radius:50%}
+.od-days i.is-dot{background:var(--od-faint)}
+.od-days .is-on{background:var(--od-text);border-color:var(--od-text);color:#000}
+.od-days .is-on small{color:#000}
+.od-days .is-on i.is-dot{background:#000}
+.od-days .is-next{color:var(--od-muted)}
+
+.od-card{position:absolute;width:285px;height:200px;display:flex;flex-direction:column;padding:20px;border:1px solid var(--od-line);border-radius:12px;background:var(--od-subtle);transition:border-color 500ms var(--ease),background-color 500ms var(--ease)}
+.od-card.is-lit{border-color:var(--c)}
+.od-card.is-running{background:color-mix(in oklab,var(--c) 6%,var(--od-subtle));animation:od-breathe 3.2s ease-in-out infinite}
+@keyframes od-breathe{50%{box-shadow:0 0 44px -14px color-mix(in oklab,var(--c) 55%,transparent)}}
+.od-card__head{display:flex;align-items:center;gap:10px}
+.od-card__name{flex:1;font-size:15px}
+.od-card__day{font-size:13px;color:var(--od-faint);font-variant-numeric:tabular-nums}
+.od-card__value{margin-top:16px;height:36px;overflow:hidden}
+.od-card__quiet{display:flex;align-items:center;gap:10px;height:18px;margin-top:6px;font-size:13px;color:var(--od-faint)}
+.od-card__foot{display:flex;align-items:center;justify-content:space-between;height:40px;margin-top:auto}
+.od-card__actions{display:flex;gap:8px}
+.od-bar{width:96px;height:3px;border-radius:3px;background:var(--od-line);overflow:hidden}
+.od-bar i{display:block;height:100%;border-radius:3px;background:var(--c);transition:width 500ms var(--ease)}
+.od-week{display:flex;gap:4px}
+.od-week i{width:10px;height:10px;border-radius:3px;background:#1D1D21}
+.od-week .is-done{background:var(--c)}
+.od-week .is-off{background:transparent;box-shadow:inset 0 0 0 1px var(--od-line-2)}
+.od-week .is-pending{background:transparent;box-shadow:inset 0 0 0 1.5px var(--od-muted)}
+.od-btn{width:40px;height:40px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--od-line-2);color:var(--od-text)}
+.od-btn svg{width:16px;height:16px}
+.od-btn--sq{border-radius:12px}
+.od-btn--fill{background:var(--c);border-color:var(--c);color:#000}
+/* число выкатывается снизу, галочка выскакивает (num-roll и check-pop в OneDay) */
+.od-roll{display:inline-block;animation:od-roll 420ms var(--ease) both}
+@keyframes od-roll{from{opacity:0;transform:translateY(.6em);filter:blur(4px)}}
+.od-pop{display:grid;animation:od-pop 380ms var(--ease) both}
+@keyframes od-pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:none}}
+
+/* курсор: остриё в точке, нажатие — расходящееся кольцо */
+.od-cursor{position:absolute;z-index:20;left:520px;top:560px;transition:left 1000ms var(--ease),top 1000ms var(--ease);pointer-events:none}
+.od-cursor svg{position:relative;transform:translate(-3px,-2px)}
+.od-ripple{position:absolute;left:-20px;top:-20px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,245,246,.7);animation:od-ripple 650ms var(--ease) forwards}
+@keyframes od-ripple{from{transform:scale(.3);opacity:1}to{transform:scale(1.3);opacity:0}}
+
+/* фокус-режим */
+.od-glow{position:absolute;left:50%;top:50%;width:1440px;aspect-ratio:1;translate:-50% -50%;border-radius:50%;opacity:0;transition:opacity 1200ms var(--ease);
+  background:radial-gradient(circle closest-side,rgba(226,234,255,.09),rgba(226,234,255,.07) 12%,rgba(226,234,255,.05) 22%,rgba(226,234,255,.03) 32%,rgba(226,234,255,.015) 42%,transparent 56%)}
+.od-glow.is-lit{opacity:1}
+.od-focus{position:relative;height:100%;display:flex;flex-direction:column;padding:21px}
+.od-focus__top{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;font-size:15px}
+.od-focus__top b{font-size:16px;font-weight:600;letter-spacing:-.02em}
+.od-focus__top span{display:flex;align-items:center;gap:9px;color:var(--od-muted)}
+.od-focus__top small{justify-self:end;font-size:12px;color:var(--od-muted)}
+.od-focus__digits{flex:1;display:flex;align-items:center;justify-content:center;font-size:163px;font-weight:300;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.od-focus__bot{display:flex;justify-content:space-between;align-items:flex-end;font-size:12px;color:var(--od-muted)}
+.od-focus__bot span:last-child{display:flex;align-items:center;gap:8px;color:var(--od-text)}
+.od-ring{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--od-text)}
+
+/* итоги дня */
+.od-h{position:absolute;left:36px;font-size:30px;font-weight:600;letter-spacing:-.035em}
+.od-dc{position:absolute;top:110px;left:36px;width:420px;height:420px;display:flex;flex-direction:column;padding:28px;border:1px solid var(--od-line);border-radius:18px;overflow:hidden;background:#050506}
+.od-dc__head{position:relative;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--od-muted)}
+.od-dc__head em{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--od-line-2);color:var(--od-text);font-size:11px}
+.od-dc__glow{position:absolute;left:50%;top:40%;width:520px;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle closest-side,rgba(226,234,255,.07),transparent 70%)}
+.od-dc__total{position:relative;margin-top:auto;font-size:72px;line-height:1;font-weight:500;letter-spacing:-.04em}
+.od-dc__sub{position:relative;margin-top:10px;font-size:12px;color:var(--od-muted)}
+.od-dc__bar{position:relative;display:flex;gap:4px;margin-top:22px}
+.od-dc__bar i{height:6px;border-radius:3px;background:var(--c)}
+.od-dc__rows{position:relative;margin-top:14px;list-style:none}
+.od-dc__rows li{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--od-line);font-size:13px}
+.od-dc__rows li span:first-child{display:flex;align-items:center;gap:8px}
+.od-dc__rows li span:last-child{color:var(--od-muted);font-variant-numeric:tabular-nums}
+.od-dc__brand{position:relative;margin-top:16px;font-size:14px;font-weight:600}
+.od-dc__brand small{display:block;margin-top:2px;font-size:10px;font-weight:400;color:var(--od-faint)}
+/* карточка собирается: сама из дымки, потом части по очереди (card-reveal в OneDay) */
+.od-dc.is-reveal{animation:od-card-in 560ms var(--ease) both}
+.od-dc.is-reveal [data-r]{animation:od-part-in 620ms var(--ease) both;animation-delay:var(--d,0ms)}
+.od-dc.is-reveal [data-r=num]{animation:od-num-in 760ms var(--ease) 170ms both}
+.od-dc.is-reveal [data-r=glow]{animation:od-glow-in 1100ms var(--ease) 120ms both}
+.od-dc.is-reveal [data-r=bar]{transform-origin:left;animation:od-bar-in 700ms var(--ease) 360ms both}
+@keyframes od-card-in{from{opacity:0;transform:translateY(10px) scale(.98);filter:blur(8px)}}
+@keyframes od-part-in{from{opacity:0;transform:translateY(8px)}}
+@keyframes od-num-in{from{opacity:0;transform:translateY(14px) scale(.96);filter:blur(10px)}}
+@keyframes od-glow-in{from{opacity:0;transform:scale(.55)}}
+@keyframes od-bar-in{from{opacity:0;transform:scaleX(0)}}
+.od-side{position:absolute;top:110px;left:510px;width:300px}
+.od-seg{display:flex;margin-top:8px;padding:2px;border-radius:10px;background:var(--od-subtle)}
+.od-seg span{flex:1;display:grid;place-items:center;height:40px;border-radius:8px;font-size:14px;color:var(--od-muted)}
+.od-seg .is-on{background:var(--od-line);color:var(--od-text)}
+.od-dl{display:grid;place-items:center;height:40px;margin-top:24px;border-radius:999px;background:var(--od-text);color:#000;font-size:14px;font-weight:500;transition:background-color 200ms var(--ease)}
+.od-dl.is-busy{background:rgba(245,245,246,.8)}
 
 /* статистика */
 .specs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line);border-left:1px solid var(--line)}
@@ -197,7 +303,7 @@ ul,ol{list-style:none}
 .renders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(40px,5vw,72px) var(--g);margin-top:clamp(48px,6vw,80px)}
 .render--wide{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:var(--g);align-items:end}
 .render__view{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel);transition:translate 320ms var(--ease),border-color 320ms var(--ease)}
-.render:hover .render__view{translate:0 -2px;border-color:var(--line-2)}
+.render__view:hover{translate:0 -2px;border-color:var(--line-2)}
 .render__bar{display:flex;align-items:center;justify-content:space-between;gap:10px;height:42px;padding:0 5px 0 14px;border-bottom:1px solid var(--line)}
 .render__name{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .render__frame{aspect-ratio:16/9}
@@ -319,10 +425,11 @@ ul,ol{list-style:none}
   .reel__bar .seg{justify-self:end}
   .sec__head,.more__head{grid-template-columns:1fr}
   .case{grid-template-columns:1fr}
+  /* на телефоне, как в OneDay, у каждого шага своё окно со своей сценой */
   .case__stage{display:none}
-  .step{min-height:0;padding:36px 0;max-width:none}
+  .step{min-height:0;padding:32px 0}
   .js .step{opacity:1}
-  .step__img{display:block}
+  .step__win{margin-top:22px}
   .specs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .renders{grid-template-columns:1fr}
   .render--wide{grid-template-columns:1fr}
@@ -340,8 +447,6 @@ ul,ol{list-style:none}
   .reel__dots{display:none}
   .reel__bar{grid-template-columns:1fr;padding:0 6px}
   .reel__bar .seg{justify-self:stretch;justify-content:space-between}
-  .view__title{display:none}
-  .view__bar{justify-content:center}
   .contact__cta .btn{width:100%;justify-content:center}
 }
 
@@ -359,4 +464,9 @@ ul,ol{list-style:none}
   .reel__tilt{transform:none}
   .seg__pill,.menu__pill,.top__read{transition:none}
   .live-dot::after{animation:none}
+  /* живая копия OneDay: сцены сменяются простым затуханием, курсора и дыхания нет */
+  .od-scene,.od-scene.is-out{transform:none;filter:none}
+  .od-cursor{display:none}
+  .od-card.is-running{animation:none}
+  .case__dashes i::after{transition:none}
 }

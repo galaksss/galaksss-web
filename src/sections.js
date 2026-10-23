@@ -56,8 +56,10 @@ function initRenders(list) {
     const fade = createFade(f);
     const set = i => { fade.show(i); seg.set(i); };
     const seg = createSeg(segEl, set);
-    card.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') set(1); });
-    card.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(0); });
+    // второй кадр — только под курсором на самой картинке: у широкой карточки
+    // пустое поле рядом с текстом не должно переключать кадр
+    f.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') set(1); });
+    f.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(0); });
     f.addEventListener('click', e => { if (e.pointerType !== 'mouse') set(fade.index ? 0 : 1); });
   });
 }

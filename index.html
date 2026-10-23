@@ -13,7 +13,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -112,68 +112,42 @@
       </div>
     </header>
 
-    <!-- История со скроллом: слева шаги, справа липкое окно. Каждый шаг —
-         «проход» одного проекта; экраны сменяются кроссфейдом из дымки.
-         На телефоне окна нет — у каждого шага своя картинка. -->
+    <!-- «Один день с OneDay» — по мотивам секции How it works с лендинга OneDay:
+         слева шаги дня, справа липкое окно, а в нём не снимок, а живая копия
+         приложения (src/oneday-demo.js): курсор сам запускает секундомер,
+         отмечает бассейн, добирает видео, сохраняет карточку дня.
+         На телефоне окно прилипает сверху, шаги едут под ним. -->
     <div class="case" data-case>
-      <div class="case__steps">
-        <article class="step" data-step="0">
-          <p class="step__n">01 · Goals</p>
-          <h3 class="step__t">Every goal counts its days</h3>
-          <p class="step__p">Four kinds of goals: by time, by amount, check-ins and days without a slip. Each one counts from day one, the week fits on one screen, and a planned day off never breaks a streak.</p>
-          <figure class="step__img"><img src="/work/oneday-goals.webp" alt="OneDay goals screen" width="1800" height="1125" loading="lazy" decoding="async"></figure>
-        </article>
-        <article class="step" data-step="1">
-          <p class="step__n">02 · Focus</p>
-          <h3 class="step__t">A focus mode made to be filmed</h3>
-          <p class="step__p">A full-screen stopwatch for timelapses. The glow behind the digits grows with the hours you put in; Space or a click pauses it, and the screen dims when you look away.</p>
-          <figure class="step__img"><img src="/work/oneday-focus.webp" alt="OneDay focus mode" width="1800" height="1125" loading="lazy" decoding="async"></figure>
-        </article>
-        <article class="step" data-step="2">
-          <p class="step__n">03 · History</p>
-          <h3 class="step__t">Progress you read at a glance</h3>
-          <p class="step__p">A week or 30 days in one card: bars in your goals' colors, Day N, streak and best day. Hover a day for the breakdown, click it to open that day's review.</p>
-          <figure class="step__img"><img src="/work/oneday-history.webp" alt="OneDay history screen" width="1800" height="1125" loading="lazy" decoding="async"></figure>
-        </article>
-        <article class="step" data-step="3">
-          <p class="step__n">04 · Day card</p>
-          <h3 class="step__t">A day you want to share</h3>
-          <p class="step__p">The evening wrap-up becomes a card for stories or the feed. Every shared card is an ad for the product, built into the product.</p>
-          <figure class="step__img"><img src="/work/oneday-card.webp" alt="OneDay day in review card" width="1800" height="1125" loading="lazy" decoding="async"></figure>
-        </article>
-        <article class="step" data-step="4">
-          <p class="step__n">05 · Landing</p>
-          <h3 class="step__t">A landing that shows instead of tells</h3>
-          <p class="step__p">Built from live copies of the app's screens, not screenshots: a running stopwatch, goal cards that play by themselves, an encryption demo. English and Russian.</p>
-          <figure class="step__img"><img src="/work/oneday-landing.jpg" alt="OneDay landing page" width="1440" height="900" loading="lazy" decoding="async"></figure>
-        </article>
-      </div>
+      <ol class="case__steps">
+        <li class="step" data-step="0">
+          <p class="step__n"><span>9:30 AM</span><i></i><span>1/4</span></p>
+          <h3 class="step__t">Start the stopwatch</h3>
+          <p class="step__p">One tap on a goal card. Space pauses it, and reloading the page doesn't lose a second. Goals count by time, by amount, with check-ins or as days without a slip.</p>
+        </li>
+        <li class="step" data-step="1">
+          <p class="step__n"><span>11:00 AM</span><i></i><span>2/4</span></p>
+          <h3 class="step__t">Work in focus mode</h3>
+          <p class="step__p">A full-screen stopwatch made to be filmed as a timelapse. The glow behind the digits grows with the hours you put in.</p>
+        </li>
+        <li class="step" data-step="2">
+          <p class="step__n"><span>6:05 PM</span><i></i><span>3/4</span></p>
+          <h3 class="step__t">Check off the rest</h3>
+          <p class="step__p">Not everything is hours: one tap for a swim, videos counted in pieces. A planned rest day never breaks the streak.</p>
+        </li>
+        <li class="step" data-step="3">
+          <p class="step__n"><span>10:40 PM</span><i></i><span>4/4</span></p>
+          <h3 class="step__t">Wrap up the day</h3>
+          <p class="step__p">Hours and check-ins per goal, and a card for stories or the feed. Every shared card is an ad for the product, built into the product.</p>
+        </li>
+      </ol>
 
       <div class="case__stage">
-        <div class="view view--case spot" data-case-view>
-          <div class="view__bar">
-            <span class="view__title"><i></i>myoneday.vercel.app</span>
-            <div class="seg" aria-hidden="true" data-seg>
-              <i class="seg__pill"></i>
-              <button class="is-on" tabindex="-1">Goals</button>
-              <button tabindex="-1">Focus</button>
-              <button tabindex="-1">History</button>
-              <button tabindex="-1">Card</button>
-              <button tabindex="-1">Landing</button>
-            </div>
+        <div class="case__sticky">
+          <div class="appwin spot" role="img" aria-label="The OneDay app playing through one day: a timer starts, focus mode, check-ins, the day card">
+            <div class="appwin__bar" aria-hidden="true"><span class="appwin__dots"><i></i><i></i><i></i></span><span class="appwin__url">myoneday.vercel.app</span><span></span></div>
+            <div class="appwin__frame" data-od-frame><div class="od" data-od aria-hidden="true"></div></div>
           </div>
-          <div class="view__frame xfade" data-frame>
-            <img class="is-on" src="/work/oneday-goals.webp" alt="" width="1800" height="1125" decoding="async">
-            <img src="/work/oneday-focus.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
-            <img src="/work/oneday-history.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
-            <img src="/work/oneday-card.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
-            <img src="/work/oneday-landing.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async">
-          </div>
-          <div class="view__hud">
-            <span>Screen <b data-case-pass>01 / 05</b></span>
-            <span>Next.js 16 · React 19 · Supabase</span>
-            <span class="view__live"><i></i>Live</span>
-          </div>
+          <div class="case__dashes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         </div>
       </div>
     </div>
