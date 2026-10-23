@@ -32,8 +32,9 @@ function initCounts(reduced) {
 }
 
 /* Карточки работ: мини-окно с именем и двумя кадрами проекта. Наведение
-   (на телефоне — тап) или вкладка — второй кадр проявляется из дымки,
-   плашка вкладки переезжает. Полоску окна строим здесь, до initMotion,
+   или вкладка — второй кадр проявляется из дымки, плашка вкладки переезжает.
+   Сам кадр и заголовок — ссылки на сайт проекта (на телефоне кадры
+   переключают вкладки, тап по кадру открывает сайт). Полоску окна строим здесь, до initMotion,
    чтобы свет под курсором увидел и эти окна. */
 function buildRenders() {
   return [...document.querySelectorAll('[data-alt-frame]')].map(f => {
@@ -45,8 +46,9 @@ function buildRenders() {
     view.className = 'render__view spot';
     view.innerHTML = `<div class="render__bar"><span class="render__name">${num} · ${name.toLowerCase()}</span>
       <div class="seg" role="tablist" aria-label="${name} frames" data-seg><i class="seg__pill" aria-hidden="true"></i><button class="is-on" role="tab" aria-selected="true">${a}</button><button role="tab" aria-selected="false">${b}</button></div></div>`;
-    f.before(view);
-    view.append(f);
+    const link = f.closest('a') || f;      // кадр лежит в ссылке на сайт
+    link.before(view);
+    view.append(link);
     return { card, f, segEl: view.querySelector('[data-seg]') };
   });
 }
@@ -60,7 +62,6 @@ function initRenders(list) {
     // пустое поле рядом с текстом не должно переключать кадр
     f.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') set(1); });
     f.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(0); });
-    f.addEventListener('click', e => { if (e.pointerType !== 'mouse') set(fade.index ? 0 : 1); });
   });
 }
 

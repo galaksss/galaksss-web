@@ -166,7 +166,9 @@ ul,ol{list-style:none}
 .step__t{margin-top:16px;font-weight:700;font-size:clamp(26px,2.4vw,34px);line-height:1.1;letter-spacing:-.03em}
 .step__p{margin-top:14px;max-width:44ch;font-size:17px;line-height:1.6;color:var(--ink-2)}
 .case__sticky{position:sticky;top:max(84px,calc(50vh - 270px));padding:24px 0}
-.appwin{border:1px solid var(--line);border-radius:16px;background:#000;overflow:hidden}
+.appwin{display:block;border:1px solid var(--line);border-radius:16px;background:#000;overflow:hidden;transition:border-color 320ms var(--ease)}
+.appwin:hover{border-color:var(--line-2)}
+.appwin:hover .render__go,.appwin:focus-visible .render__go{opacity:1;translate:none}
 .appwin__bar{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;height:36px;padding:0 16px;border-bottom:1px solid var(--line)}
 .appwin__dots{display:flex;gap:6px}
 .appwin__dots i{width:10px;height:10px;border-radius:50%;background:#26262B}
@@ -342,6 +344,12 @@ ul,ol{list-style:none}
 .render__bar{display:flex;align-items:center;justify-content:space-between;gap:10px;height:42px;padding:0 5px 0 14px;border-bottom:1px solid var(--line)}
 .render__name{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .render__frame{aspect-ratio:16/9}
+.render__link{display:block}
+/* подпись «Open the site» проступает под курсором, как в витрине первого экрана */
+.render__go{position:absolute;z-index:3;right:14px;bottom:14px;display:inline-flex;gap:8px;padding:8px 12px;border-radius:6px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line-2);font-size:13px;font-weight:500;opacity:0;translate:0 4px;transition:opacity 300ms var(--ease),translate 300ms var(--ease)}
+.render__link:hover .render__go,.render__link:focus-visible .render__go{opacity:1;translate:none}
+.render__t a{transition:color 150ms var(--ease)}
+.render__t a:hover{color:#fff;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 .render__body{margin-top:22px}
 .render--wide .render__body{margin-top:0}
 .render__meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}

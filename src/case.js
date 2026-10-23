@@ -10,10 +10,10 @@ import { createDemo } from './oneday-demo.js';
   На телефоне, как в OneDay, у каждого шага своё окно со своей сценой:
   оно играет, когда доехало до экрана.
 */
-const WIN = `<div class="appwin" role="img" aria-label="The OneDay app">
+const WIN = `<a class="appwin" href="https://myoneday.vercel.app/en/about" target="_blank" rel="noopener" aria-label="Open OneDay">
   <div class="appwin__bar" aria-hidden="true"><span class="appwin__dots"><i></i><i></i><i></i></span><span class="appwin__url">myoneday.vercel.app</span><span></span></div>
-  <div class="appwin__frame" data-od-frame><div class="od" data-od aria-hidden="true"></div></div>
-</div>`;
+  <div class="appwin__frame" data-od-frame><div class="od" data-od aria-hidden="true"></div><span class="render__go" aria-hidden="true">Open OneDay <span>↗</span></span></div>
+</a>`;
 
 export function initCase() {
   const box = document.querySelector('[data-case]');
