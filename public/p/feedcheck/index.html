@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/p/feedcheck/favicon.svg" />
+  <title>Feedcheck — will they click?</title>
+  <meta name="description" content="Preview your next video in the feed before you post it. Compare two thumbnails and titles on a phone, a laptop and in the sidebar.">
+  <meta property="og:title" content="Feedcheck — will they click?">
+  <meta property="og:description" content="See your thumbnail and title in a real-looking feed before you post. Runs in the browser.">
+  <meta name="theme-color" content="#F6F5F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/p/feedcheck/assets/index-BaeVJVmP.js"></script>
+  <link rel="stylesheet" crossorigin href="/p/feedcheck/assets/index-BCIzfW_h.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="logo" href="#"><span class="logo__mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Feedcheck</a>
+    <span class="top__note">Nothing is uploaded — it all stays in your browser</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1 class="hero__title">Will they <span>click?</span></h1>
+    <p class="hero__lead">Drop a thumbnail, write a title and see your video next to everything else in the feed — on a phone, on a laptop and in the sidebar. Compare two versions before you post.</p>
+  </section>
+
+  <section class="work wrap">
+    <!-- РЕДАКТОР: два варианта, A и B, и общие поля -->
+    <form class="editor" data-editor onsubmit="return false">
+      <div class="tabs" role="tablist" aria-label="Variant">
+        <button type="button" role="tab" class="tab is-on" data-tab="a" aria-selected="true"><b>A</b> Variant A</button>
+        <button type="button" role="tab" class="tab" data-tab="b" aria-selected="false"><b>B</b> Variant B</button>
+      </div>
+
+      <label class="thumb-drop" data-drop>
+        <input type="file" accept="image/*" data-file hidden>
+        <img data-thumb-preview alt="Current thumbnail">
+        <span class="thumb-drop__cta"><span>Drop a thumbnail or <u>choose an image</u></span></span>
+      </label>
+      <p class="check" data-thumb-check></p>
+
+      <div class="field">
+        <div class="field__top"><label for="title">Title</label><span class="count" data-count>0 / 100</span></div>
+        <textarea id="title" name="title" rows="3" maxlength="100" data-title></textarea>
+        <div class="meter" aria-hidden="true"><i data-meter></i><span class="meter__mark" style="--at:50%"></span></div>
+        <p class="hint">Most feeds show about 50–60 characters. Put the hook first.</p>
+      </div>
+
+      <div class="field-row">
+        <div class="field"><label for="channel">Channel</label><input id="channel" name="channel" value="galaksss" maxlength="40"></div>
+        <div class="field"><label for="duration">Length</label><input id="duration" name="duration" value="12:48" maxlength="8"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="views">Views</label><input id="views" name="views" value="1.2K views" maxlength="20"></div>
+        <div class="field"><label for="age">Posted</label><input id="age" name="age" value="2 hours ago" maxlength="20"></div>
+      </div>
+    </form>
+
+    <!-- ПРЕВЬЮ -->
+    <div class="stage">
+      <div class="bar">
+        <div class="seg" role="radiogroup" aria-label="Layout">
+          <input type="radio" name="mode" id="m-home" value="home" checked><label for="m-home">Home</label>
+          <input type="radio" name="mode" id="m-phone" value="phone"><label for="m-phone">Phone</label>
+          <input type="radio" name="mode" id="m-next" value="next"><label for="m-next">Up next</label>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Show">
+          <input type="radio" name="show" id="v-a" value="a" checked><label for="v-a">A</label>
+          <input type="radio" name="show" id="v-b" value="b"><label for="v-b">B</label>
+          <input type="radio" name="show" id="v-ab" value="ab"><label for="v-ab">A + B</label>
+        </div>
+        <div class="toggles">
+          <label class="tg"><input type="checkbox" data-dark checked><span>Dark feed</span></label>
+          <label class="tg"><input type="checkbox" data-squint><span>Squint</span></label>
+          <label class="tg"><input type="checkbox" data-zone><span>Badge zone</span></label>
+        </div>
+      </div>
+
+      <div class="feed is-dark" data-feed></div>
+
+      <div class="insights">
+        <h2 class="insights__h">How the title reads</h2>
+        <ul data-insights></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="tips wrap">
+    <article><h3>Squint test</h3><p>Blur the feed the way it looks at a glance. If your thumbnail still reads, it will stop the scroll.</p></article>
+    <article><h3>Badge zone</h3><p>The length badge sits on the bottom-right corner. Keep faces and words out of it.</p></article>
+    <article><h3>A next to B</h3><p>Put both versions in the same feed. The one your eye lands on first is usually the one to post.</p></article>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>Feedcheck — a personal project by galaksss. Not affiliated with any video platform.</span>
+    <a href="https://t.me/galaksss" target="_blank" rel="noopener">Telegram ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>

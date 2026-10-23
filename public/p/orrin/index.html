@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/p/orrin/favicon.svg" />
+  <title>Orrin — a speaker that lights the room</title>
+  <meta name="description" content="A concept product page: a speaker drawn entirely by a ray-marching shader turns, opens up and changes finish as you scroll. Designed and built by galaksss.">
+  <meta property="og:title" content="Orrin — a speaker that lights the room">
+  <meta property="og:description" content="A concept product page by galaksss. No 3D model — the speaker is math in a shader.">
+  <meta name="theme-color" content="#05060A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/p/orrin/assets/index-C_WGLU88.js"></script>
+  <link rel="stylesheet" crossorigin href="/p/orrin/assets/index-B42MwQNl.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#">Orrin</a>
+  <nav class="top__nav" aria-label="Sections">
+    <a href="#product">Overview</a>
+    <a href="#made">How it's made</a>
+  </nav>
+  <span class="top__concept">Designed &amp; built by galaksss</span>
+</header>
+
+<main>
+  <!-- Сцена прилипает на весь экран, скролл ведёт колонку по главам -->
+  <section class="story" id="product" data-story>
+    <div class="stage">
+      <canvas class="stage__gl" data-gl aria-hidden="true"></canvas>
+
+      <div class="ch ch--hero" data-at="0">
+        <p class="kicker">Orrin · wireless speaker</p>
+        <h1 class="hero__t">Sound you<br>can <em>see.</em></h1>
+        <p class="lead">A single column of sound, crowned with a ring of light that follows the music.</p>
+      </div>
+
+      <article class="ch ch--left" data-at=".25">
+        <p class="kicker">01 · Sound</p>
+        <h2 class="ch__t">Three-sixty, from one column.</h2>
+        <p class="ch__p">A downward driver and a fabric shell spread sound evenly around the room — there is no front to face.</p>
+      </article>
+
+      <article class="ch ch--right" data-at=".5">
+        <p class="kicker">02 · Inside</p>
+        <h2 class="ch__t">Five parts.<br>Nothing extra.</h2>
+        <p class="ch__p">Glass cap, light ring, two shell halves around the driver, and a weighted base. That's the whole speaker.</p>
+      </article>
+
+      <article class="ch ch--left" data-at=".73">
+        <p class="kicker">03 · Light</p>
+        <h2 class="ch__t">Light that<br>listens.</h2>
+        <p class="ch__p">The ring breathes with the bass and shifts color with the track. Dim it, or let the music decide.</p>
+      </article>
+
+      <article class="ch ch--right" data-at=".94">
+        <p class="kicker">04 · Finish</p>
+        <h2 class="ch__t">Three finishes.<br>All of them quiet.</h2>
+        <div class="finishes" role="radiogroup" aria-label="Finish">
+          <button type="button" class="fin is-on" data-fin="0" role="radio" aria-checked="true"><i style="--c:#1C2436"></i>Midnight</button>
+          <button type="button" class="fin" data-fin="1" role="radio" aria-checked="false"><i style="--c:#C9D3E6"></i>Glacier</button>
+          <button type="button" class="fin" data-fin="2" role="radio" aria-checked="false"><i style="--c:#5A4BD0"></i>Iris</button>
+        </div>
+      </article>
+
+      <div class="scroll-hint" data-hint aria-hidden="true">Scroll</div>
+    </div>
+  </section>
+
+  <section class="made" id="made">
+    <p class="kicker">How it's made</p>
+    <h2 class="made__t">No 3D model.<br><span>Just math.</span></h2>
+    <div class="made__grid">
+      <article><span class="made__n">01</span><h3>Shapes from distances</h3><p>Every part is a signed distance function — a few lines that say how far any point is from the surface.</p></article>
+      <article><span class="made__n">02</span><h3>Ray marching</h3><p>For every pixel a ray steps toward the speaker until it touches it, up to 110 steps, many times per second.</p></article>
+      <article><span class="made__n">03</span><h3>Light without post</h3><p>The glow of the ring is measured on the way: the closer a ray passes the ring, the more light it picks up.</p></article>
+    </div>
+  </section>
+
+  <section class="outro">
+    <p class="kicker">About this page</p>
+    <h2 class="outro__t">Orrin isn't real.<br><span>The light is.</span></h2>
+    <p class="lead">Designed and built by galaksss — a study in Apple-style scroll storytelling, made without a single image. Orrin isn’t a real speaker. Launching something?</p>
+    <a class="btn" href="mailto:galaksss@proton.me?subject=A%20product%20page%20like%20Orrin">Talk about your launch <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Orrin is a fictional product. Design and code by galaksss.</span>
+  <a href="https://t.me/galaksss" target="_blank" rel="noopener">galaksss on Telegram ↗</a>
+</footer>
+
+</body>
+</html>

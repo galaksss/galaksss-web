@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/p/hookline/favicon.svg" />
+  <title>Hookline — every second, counted</title>
+  <meta name="description" content="Paste a narration script and see how long it reads, where the hook ends and how many visuals you need. Then read it on a built-in teleprompter.">
+  <meta property="og:title" content="Hookline — every second, counted">
+  <meta property="og:description" content="Script timing, hook check, shot list and a teleprompter for voice-over and faceless channels.">
+  <meta name="theme-color" content="#0A0D14">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/p/hookline/assets/index-GxKdQrgA.js"></script>
+  <link rel="stylesheet" crossorigin href="/p/hookline/assets/index-C03X62Nw.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="logo" href="#"><span class="rec" aria-hidden="true"></span>Hookline</a>
+    <span class="top__note">For voice-over, faceless channels and anyone reading to camera</span>
+  </div>
+</header>
+
+<main>
+  <!-- ГЕРОЙ: слева заголовок, справа маленький суфлёр крутит пример сценария -->
+  <section class="hero wrap">
+    <div class="hero__copy">
+      <h1 class="hero__title">Every second,<br><em>counted.</em></h1>
+      <p class="hero__lead">Paste a narration script. Hookline tells you how long it reads, where your hook ends and how many visuals you need — then turns into a teleprompter when it's time to record.</p>
+      <a class="btn" href="#app">Time your script <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="mini" aria-hidden="true">
+      <div class="mini__bar"><span class="mini__rec"><i></i>REC</span><span class="mini__clock" data-mini-clock>0:00.0</span><span class="mini__wpm">160 wpm</span></div>
+      <div class="pr pr--mini" data-mini><div class="pr__track" data-pr-track></div></div>
+    </div>
+  </section>
+
+  <!-- ПРИЛОЖЕНИЕ ===================================================== -->
+  <section class="app wrap" id="app">
+    <div class="sheet">
+      <div class="sheet__bar">
+        <span class="label">Script</span>
+        <span class="sheet__count" data-count>0 words</span>
+        <button type="button" class="link" data-sample>Sample</button>
+        <button type="button" class="link" data-clear>Clear</button>
+      </div>
+      <textarea class="sheet__text" data-script spellcheck="true" aria-label="Script"></textarea>
+    </div>
+
+    <div class="side">
+      <div class="panel">
+        <div class="ctl">
+          <div class="ctl__top"><label for="wpm">Pace</label><output data-wpm-out>160 wpm</output></div>
+          <input id="wpm" type="range" min="110" max="210" step="1" value="160" data-wpm>
+          <div class="chips" data-presets>
+            <button type="button" data-p="140">Calm narrator</button>
+            <button type="button" data-p="160" class="is-on">Typical voice-over</button>
+            <button type="button" data-p="185">Fast short</button>
+          </div>
+        </div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <div class="ctl__top"><label for="every">New visual every</label><output data-every-out>5 s</output></div>
+            <input id="every" type="range" min="2" max="12" step="0.5" value="5" data-every>
+          </div>
+          <div class="ctl">
+            <div class="ctl__top"><label for="hook">Hook</label><output data-hook-out>15 s</output></div>
+            <input id="hook" type="range" min="5" max="30" step="1" value="15" data-hook>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel result">
+        <p class="label">Reads in</p>
+        <p class="runtime" data-runtime>0:00</p>
+        <dl class="facts">
+          <div><dt>Words</dt><dd data-words>0</dd></div>
+          <div><dt>Paragraphs</dt><dd data-paras>0</dd></div>
+          <div><dt>Visuals</dt><dd data-visuals>0</dd></div>
+        </dl>
+        <!-- Полоса хронометража: абзацы пропорционально времени, хук подсвечен -->
+        <div class="bar" data-bar aria-hidden="true"></div>
+        <div class="bar__scale"><span>0:00</span><span data-bar-end>0:00</span></div>
+        <button type="button" class="btn btn--wide" data-open>Open teleprompter <kbd>P</kbd></button>
+      </div>
+
+      <div class="panel">
+        <p class="label">Hook · first <span data-hook-s>15</span> seconds</p>
+        <p class="hook" data-hook-text></p>
+        <p class="hint" data-hook-hint></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shots wrap">
+    <div class="shots__head">
+      <div>
+        <p class="label">Shot list</p>
+        <h2 class="shots__title"><span data-visuals-2>0</span> visuals, one every <span data-every-2>5</span> seconds</h2>
+      </div>
+      <div class="shots__btns">
+        <button type="button" class="btn btn--ghost" data-copy>Copy</button>
+        <button type="button" class="btn btn--ghost" data-csv>Download CSV</button>
+      </div>
+    </div>
+    <ol class="shots__list" data-shots></ol>
+  </section>
+</main>
+
+<!-- БОЛЬШОЙ СУФЛЁР -->
+<div class="prompter" data-prompter hidden role="dialog" aria-modal="true" aria-label="Teleprompter">
+  <div class="prompter__bar">
+    <span class="mini__rec"><i></i>REC</span>
+    <span class="prompter__clock" data-pr-clock>0:00.0 / 0:00</span>
+    <span class="prompter__keys"><kbd>Space</kbd> play · <kbd>↑</kbd><kbd>↓</kbd> pace · <kbd>←</kbd><kbd>→</kbd> 5 s · <kbd>Esc</kbd> close</span>
+    <span class="prompter__wpm" data-pr-wpm>160 wpm</span>
+    <button type="button" class="prompter__close" data-close aria-label="Close teleprompter">✕</button>
+  </div>
+  <div class="pr pr--big" data-big><div class="pr__track" data-pr-track></div></div>
+  <div class="prompter__guide" aria-hidden="true"></div>
+  <button type="button" class="prompter__play" data-pr-play>Play</button>
+</div>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>Hookline — a personal project by galaksss. Your script never leaves the browser.</span>
+    <a href="https://t.me/galaksss" target="_blank" rel="noopener">Telegram ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>

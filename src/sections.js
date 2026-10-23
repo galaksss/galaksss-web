@@ -5,7 +5,7 @@ import { createSeg, createFade } from './motion.js';
   · цифры кейса досчитываются;
   · карточки «More renders»: при наведении (на телефоне — по тапу)
     проявляется второй кадр проекта;
-  · лог процесса: строки идут по очереди — queued → rendering → done;
+  · лог процесса: строки идут по очереди — queued → in progress → done;
   · кривая скорости в услуге «Motion for the web»;
   · почта копируется по клику.
 */
@@ -70,7 +70,7 @@ function initLog(reduced) {
   if (reduced) { rows.forEach(r => r.classList.add('is-run', 'is-done')); return; }
   rows.forEach(r => { st(r).textContent = 'queued'; });
   once(log, () => rows.forEach((r, i) => {
-    setTimeout(() => { r.classList.add('is-run'); st(r).textContent = 'rendering'; }, i * 650);
+    setTimeout(() => { r.classList.add('is-run'); st(r).textContent = 'in progress'; }, i * 650);
     setTimeout(() => { r.classList.add('is-done'); st(r).textContent = 'done'; }, i * 650 + 900);
   }), { rootMargin: '0px 0px -25% 0px' });
 }

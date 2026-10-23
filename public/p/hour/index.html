@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/p/hour/favicon.svg" />
+  <title>Hour — every hour has a look</title>
+  <meta name="description" content="A concept landing page: one frame lives through a day while you scroll, and the color grade follows the light. Designed and built by galaksss.">
+  <meta property="og:title" content="Hour — every hour has a look">
+  <meta property="og:description" content="A concept page by galaksss: one shader, one frame, twenty-four hours of light.">
+  <meta name="theme-color" content="#05060F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Martian+Mono:wght@400&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/p/hour/assets/index-CTT3RR80.js"></script>
+  <link rel="stylesheet" crossorigin href="/p/hour/assets/index-DN8Ltx6s.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#">Hour</a>
+  <nav class="top__nav" aria-label="Sections">
+    <a href="#looks">Looks</a>
+    <a href="#how">How it works</a>
+  </nav>
+  <span class="top__concept">Designed &amp; built by galaksss</span>
+</header>
+
+<main>
+  <!-- ИСТОРИЯ: сцена прилипает на весь экран, скролл ведёт время суток.
+       Тексты глав — поверх, каждый виден в своём окне прогресса (src/main.js). -->
+  <section class="story" id="looks" data-story>
+    <div class="stage">
+      <canvas class="stage__gl" data-gl aria-hidden="true"></canvas>
+
+      <div class="intro" data-ch="intro">
+        <p class="kicker">A color grade that follows the light</p>
+        <h1 class="intro__title">Every hour<br>has a look.</h1>
+        <p class="intro__lead">Scroll to watch one frame live through a day.<br>The grade changes with the light — the way a colorist would.</p>
+        <span class="intro__cue" aria-hidden="true">Scroll</span>
+      </div>
+
+      <article class="ch ch--left" data-ch="0" data-at=".167">
+        <p class="ch__k">Look 01 · Morning</p>
+        <h2 class="ch__t">Lift the shadows.<br>Keep the cold.</h2>
+        <p class="ch__p">Shadows +12 · Temp 4800 K · Saturation 92%</p>
+      </article>
+      <article class="ch ch--right" data-ch="1" data-at=".417">
+        <p class="ch__k">Look 02 · Noon</p>
+        <h2 class="ch__t">Honest light.<br>Contrast where the eye goes.</h2>
+        <p class="ch__p">Contrast +6 · Temp 5600 K · Saturation 102%</p>
+      </article>
+      <article class="ch ch--left" data-ch="2" data-at=".688">
+        <p class="ch__k">Look 03 · Golden hour</p>
+        <h2 class="ch__t">Teal in the shadows.<br>Gold on everything else.</h2>
+        <p class="ch__p">Split tone 190° / 38° · Saturation 112%</p>
+      </article>
+      <article class="ch ch--right" data-ch="3" data-at=".854">
+        <p class="ch__k">Look 04 · Blue hour</p>
+        <h2 class="ch__t">Cool highlights.<br>Quiet blacks.</h2>
+        <p class="ch__p">Highlights 220° · Temp 7400 K · Saturation 82%</p>
+      </article>
+      <article class="ch ch--center" data-ch="4" data-at=".969">
+        <p class="ch__k">Look 05 · Night</p>
+        <h2 class="ch__t">Crush the dark.<br>Keep the stars.</h2>
+        <p class="ch__p">Blacks −8 · Contrast +16 · Saturation 70%</p>
+      </article>
+
+      <!-- Часы и шкала дня: внизу, поверх сцены -->
+      <div class="hud" aria-hidden="true">
+        <span class="hud__clock" data-clock>04:40</span>
+        <div class="hud__day">
+          <div class="hud__bar"><i data-day-bar></i></div>
+          <div class="hud__marks"><span>Morning</span><span>Noon</span><span>Golden</span><span>Blue</span><span>Night</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК ЭТО РАБОТАЕТ — честно: продукта нет, есть страница -->
+  <section class="how" id="how">
+    <div class="how__in">
+      <p class="kicker">How it works</p>
+      <h2 class="how__title">One frame.<br><span>Every light.</span></h2>
+      <div class="how__grid">
+        <article>
+          <span class="how__n">01</span>
+          <h3>A day in a shader</h3>
+          <p>The landscape isn't a photo or a video. Sky, sun, stars, three mountain ridges and the lake are drawn by one fragment shader, sixty times a second.</p>
+        </article>
+        <article>
+          <span class="how__n">02</span>
+          <h3>Looks that follow the light</h3>
+          <p>Every hour has its own grade — split toning, contrast, saturation — and the page blends between them as you scroll, like keyframes on a timeline.</p>
+        </article>
+        <article>
+          <span class="how__n">03</span>
+          <h3>Nothing to download</h3>
+          <p>No images, no video files. The whole page weighs less than a single photo; the shader draws at three-quarter resolution and stops when you scroll past it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="outro">
+    <p class="kicker">About this page</p>
+    <h2 class="outro__title">Hour isn't a real app.<br><span>The scroll is.</span></h2>
+    <p class="outro__lead">Designed and built by galaksss — a study in scroll storytelling for product launches. Hour isn’t a real app; the page and the shader are. Want one for yours?</p>
+    <a class="btn" href="mailto:galaksss@proton.me?subject=A%20landing%20like%20Hour">Talk about your launch <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Hour is a fictional product. Design and code by galaksss.</span>
+  <a href="https://t.me/galaksss" target="_blank" rel="noopener">galaksss on Telegram ↗</a>
+</footer>
+
+</body>
+</html>

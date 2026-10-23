@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/p/beatgrid/favicon.svg" />
+  <title>Beatgrid — cut on the beat</title>
+  <meta name="description" content="Turn a tempo into frame-exact markers for your edit. Set the BPM and frame rate, drop your track, see where every beat lands.">
+  <meta property="og:title" content="Beatgrid — cut on the beat">
+  <meta property="og:description" content="Frame-exact beat markers for editors. Runs in the browser.">
+  <meta name="theme-color" content="#09090C">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/p/beatgrid/assets/index-BrW14l01.js"></script>
+  <link rel="stylesheet" crossorigin href="/p/beatgrid/assets/index-BwhxcVRx.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="logo" href="#"><span class="logo__mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Beatgrid</a>
+    <nav class="top__nav" aria-label="Sections">
+      <a href="#grid">Grid</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <span class="top__note">Free · runs in your browser</span>
+  </div>
+</header>
+
+<main>
+  <!-- ЛЕНДИНГ ======================================================= -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">For editors who cut on the beat</p>
+      <h1 class="hero__title">Cut on<br><span>the beat.</span></h1>
+      <div class="hero__row">
+        <p class="hero__lead">Beatgrid turns a tempo into frame-exact markers. Set the BPM and frame rate, drop your track, and see where every beat lands — down to the frame.</p>
+        <div class="hero__cta">
+          <a class="btn btn--hot" href="#grid">Open the grid <span aria-hidden="true">↓</span></a>
+          <p class="hero__fine">No sign-up. Your audio never leaves the browser.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Бегущая линейка: та же сетка, что в приложении, 128 BPM на 24 fps.
+         Доли вспыхивают в такт; рисует src/hero.js -->
+    <div class="ruler" aria-hidden="true">
+      <canvas data-ruler></canvas>
+      <div class="ruler__meta"><span>128 BPM</span><span>24 fps</span><span>11.25 frames per beat</span><span class="ruler__pat" data-pat><b>11</b> · <b>11</b> · <b>11</b> · <b>12</b></span></div>
+    </div>
+  </section>
+
+  <!-- ПРИЛОЖЕНИЕ ===================================================== -->
+  <section class="app" id="grid">
+    <div class="wrap app__in">
+
+      <form class="panel ctl" data-controls onsubmit="return false">
+        <h2 class="panel__h">Tempo</h2>
+        <div class="field">
+          <label for="bpm">BPM</label>
+          <div class="bpm">
+            <button type="button" class="nudge" data-nudge="-1" aria-label="Slower">−</button>
+            <input id="bpm" name="bpm" type="number" inputmode="decimal" min="40" max="300" step="0.1" value="128">
+            <button type="button" class="nudge" data-nudge="1" aria-label="Faster">+</button>
+          </div>
+          <button type="button" class="tap" data-tap>Tap <kbd>T</kbd></button>
+          <p class="hint" data-tap-hint>Tap along to the music to find the tempo.</p>
+        </div>
+
+        <div class="field">
+          <label for="fps">Frame rate</label>
+          <select id="fps" name="fps" data-fps></select>
+        </div>
+
+        <fieldset class="field">
+          <legend>Grid</legend>
+          <div class="seg">
+            <input type="radio" name="step" id="s-half" value="half"><label for="s-half">½ beats</label>
+            <input type="radio" name="step" id="s-beat" value="beat" checked><label for="s-beat">Beats</label>
+            <input type="radio" name="step" id="s-bar" value="bar"><label for="s-bar">Bars</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Beats per bar</legend>
+          <div class="seg">
+            <input type="radio" name="bpb" id="b-3" value="3"><label for="b-3">3</label>
+            <input type="radio" name="bpb" id="b-4" value="4" checked><label for="b-4">4</label>
+            <input type="radio" name="bpb" id="b-6" value="6"><label for="b-6">6</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="offset">First beat at frame</label>
+          <div class="row">
+            <input id="offset" name="offset" type="number" step="0.01" min="0" value="0">
+            <button type="button" class="ghost" data-use-head>Use playhead</button>
+          </div>
+        </div>
+
+        <h2 class="panel__h panel__h--gap">Track</h2>
+        <label class="drop" data-drop>
+          <input type="file" accept="audio/*" data-file hidden>
+          <span class="drop__t" data-drop-t>Drop a track or <u>choose a file</u></span>
+          <span class="drop__s" data-drop-s>mp3, wav, m4a — decoded locally</span>
+        </label>
+        <div class="track" data-track hidden>
+          <button type="button" class="ghost" data-estimate>Estimate BPM</button>
+          <button type="button" class="ghost" data-remove>Remove</button>
+          <p class="hint" data-estimate-hint>An estimate — check it by ear.</p>
+        </div>
+      </form>
+
+      <div class="panel out">
+        <dl class="facts" data-facts>
+          <div><dt>Frames per beat</dt><dd data-f="beat">11.25</dd></div>
+          <div><dt>Frames per bar</dt><dd data-f="bar">45</dd></div>
+          <div><dt>Back on the frame</dt><dd data-f="period">every 4 beats</dd></div>
+          <div><dt>Cut pattern</dt><dd data-f="pattern">11 · 11 · 11 · 12</dd></div>
+        </dl>
+
+        <div class="transport">
+          <button type="button" class="play" data-play aria-label="Play"><span class="play__i"></span></button>
+          <output class="tc" data-tc>00:00:00:00</output>
+          <span class="transport__src" data-src>Metronome</span>
+          <label class="zoom">Zoom <input type="range" min="1" max="16" step="0.5" value="6" data-zoom></label>
+        </div>
+
+        <div class="tl">
+          <canvas class="tl__canvas" data-timeline></canvas>
+          <input class="tl__scroll" type="range" min="0" max="1000" value="0" step="1" data-scroll aria-label="Scroll the timeline">
+        </div>
+        <p class="legend"><span><i class="lg lg--down"></i>Bar</span><span><i class="lg lg--beat"></i>Beat</span><span><i class="lg lg--dot"></i>Exact position</span><span class="legend__tip">Click to move the playhead · drag to scroll</span></p>
+
+        <div class="list">
+          <div class="list__head">
+            <h2 class="panel__h">Markers</h2>
+            <div class="list__btns">
+              <button type="button" class="ghost" data-copy>Copy timecodes</button>
+              <button type="button" class="ghost" data-csv>Download CSV</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Bar.Beat</th><th>Frame</th><th>Timecode</th><th>Off by</th></tr></thead>
+              <tbody data-rows></tbody>
+            </table>
+          </div>
+          <button type="button" class="more" data-more hidden>Show all markers</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК ЭТО РАБОТАЕТ ================================================ -->
+  <section class="how" id="how">
+    <div class="wrap">
+      <h2 class="how__title">Why frames,<br>not seconds</h2>
+      <div class="how__grid">
+        <article>
+          <span class="how__n">01</span>
+          <h3>Frame-exact</h3>
+          <p>At 128 BPM and 24 fps a beat lasts 11.25 frames. Round every beat the same way and the cuts drift off the music. Beatgrid shows the 11 · 11 · 11 · 12 pattern that keeps them on it.</p>
+        </article>
+        <article>
+          <span class="how__n">02</span>
+          <h3>Your track under the grid</h3>
+          <p>Drop a song to see its waveform. Beatgrid estimates the tempo and the first beat; nudge the offset until the lines sit on the hits.</p>
+        </article>
+        <article>
+          <span class="how__n">03</span>
+          <h3>Markers out</h3>
+          <p>Copy the timecodes or download a CSV with frames, bars and timecodes, and place markers in any editor.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>Beatgrid — a personal project by galaksss</span>
+    <a href="https://t.me/galaksss" target="_blank" rel="noopener">Telegram ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>

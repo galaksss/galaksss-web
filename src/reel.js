@@ -18,6 +18,7 @@ export function initReel() {
   const url = reel.querySelector('[data-reel-url]');
   const kind = reel.querySelector('[data-reel-kind]');
   const name = reel.querySelector('[data-reel-name]');
+  const link = reel.querySelector('[data-reel-link]');
   url.classList.add('xtext'); kind.classList.add('xtext');
 
   let elapsed = 0;
@@ -25,6 +26,8 @@ export function initReel() {
     fade.show(i);
     seg.set(i);
     const im = fade.img(i);
+    link.href = im.dataset.href;
+    link.setAttribute('aria-label', `Open ${im.alt.split(',')[0]}`);
     swapText(url, im.dataset.url);
     swapText(kind, im.dataset.kind);
     swapText(name, im.dataset.name);
