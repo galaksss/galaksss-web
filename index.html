@@ -4,378 +4,424 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>galaksss — websites &amp; web apps</title>
-  <meta name="description" content="Landing pages and web apps for founders and studios. Designed and built by one person, from the first screen to production.">
-  <meta property="og:title" content="galaksss — websites that move, products that ship">
+  <title>galaksss — websites &amp; web apps, rendered frame by frame</title>
+  <meta name="description" content="Landing pages and web apps for founders and studios, designed and built by one person — with the eye of a motion designer.">
+  <meta property="og:title" content="galaksss — websites, rendered frame by frame">
   <meta property="og:description" content="Landing pages and web apps for founders and studios. Designed and built by one person.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#07061A">
+  <meta name="theme-color" content="#000000">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <a class="skip" href="#work">Skip to work</a>
 
-<!-- ШАПКА: прозрачная над героем, стеклянная после первого скролла -->
-<header class="nav" data-nav>
-  <div class="nav__in wrap">
-    <a class="logo" href="#top" aria-label="galaksss, back to top"><span class="logo__mark" aria-hidden="true"></span>galaksss</a>
-    <nav class="nav__links" aria-label="Sections">
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#about">About</a>
-    </nav>
-    <a class="pill" href="mailto:galaksss@proton.me"><span class="pulse" aria-hidden="true"></span><span class="pill__long">Available for new projects</span><span class="pill__short">Available</span></a>
+<!-- ШАПКА: строка меню DCC-программы. Справа — статус рендера героя -->
+<header class="top" data-top>
+  <a class="logo" href="#top" aria-label="galaksss, back to top"><i class="logo__mark" aria-hidden="true"></i>galaksss</a>
+  <nav class="menu" aria-label="Sections">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="status" data-status aria-hidden="true">
+    <i class="status__dot"></i>
+    <span class="status__text" data-status-text>Rendering</span>
+    <span class="status__bar"><i data-status-bar></i></span>
+    <span class="status__pct" data-status-pct>0%</span>
   </div>
+  <a class="top__cta" href="#contact">Start a project</a>
 </header>
 
 <main>
 
-  <!-- ГЕРОЙ ============================================================ -->
-  <section class="hero" id="top" data-hero>
-    <div class="hero__bg" aria-hidden="true">
-      <div class="hero__grid"></div>
-      <div class="hero__orb hero__orb--a"></div>
-      <div class="hero__orb hero__orb--b"></div>
-    </div>
-
-    <div class="hero__in wrap">
-      <!-- Заголовок на всю ширину, по фразе на строку; ниже — текст слева и окно справа -->
-      <div class="hero__head">
-        <p class="tag" data-intro><span class="tag__dot"></span>Landing pages · Web apps · MVPs</p>
-        <h1 class="hero__title"><span class="hero__line" data-split>Websites that <em>move</em>.</span> <span class="hero__line" data-split>Products that <em>ship</em>.</span></h1>
-      </div>
-      <div class="hero__copy">
-        <p class="hero__lead" data-intro>I design and build landing pages and web apps for founders and studios — from the first screen to production, in weeks, not months.</p>
-        <div class="hero__cta" data-intro>
-          <a class="btn btn--primary" href="mailto:galaksss@proton.me" data-magnet>Start a project <span aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost" href="#work">See the work</a>
-        </div>
-        <a class="hero__proof" href="#work" data-intro>
-          <span class="hero__proof-k">Latest</span>
-          <span>OneDay — a production web app, built solo in three weeks</span>
-          <span aria-hidden="true">↓</span>
-        </a>
-      </div>
-
-      <!-- Окно «промпт → продукт». Сценарий крутит src/prompt.js:
-           печатается задача, бежит код, окно «собирается» в живой интерфейс.
-           Без JS и при reduced motion видно готовое состояние первой сцены. -->
-      <div class="win" data-prompt aria-label="A prompt turning into a working interface" role="img">
-        <div class="win__bar">
-          <span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="win__title">~/oneday</span>
-          <span class="win__state" data-state>ready</span>
-        </div>
-        <div class="win__body">
-          <div class="win__code" data-code>
-            <p class="win__prompt"><span class="win__caret">›</span> <span data-typed></span><span class="win__cursor" aria-hidden="true"></span></p>
-            <pre data-lines></pre>
-          </div>
-
-          <!-- Сцена 1: фокус-режим -->
-          <div class="win__ui ui-focus is-shown" data-scene="0">
-            <div class="ui-focus__top"><span><i class="dot dot--blue"></i>Coding</span><span>Day 61</span></div>
-            <div class="ui-focus__time" data-clock>00:42:17</div>
-            <div class="ui-focus__bot"><span>12 m in focus</span><span><i class="ring"></i>Daily goal met · 1 h 30 m</span></div>
-          </div>
-
-          <!-- Сцена 2: карточка дня -->
-          <div class="win__ui ui-card" data-scene="1">
-            <div class="ui-card__head"><span>Day 61 · October 14</span><span class="ui-card__badge">New record</span></div>
-            <div class="ui-card__total">7<small>h</small> 15<small>m</small></div>
-            <p class="ui-card__sub">+2 h 57 m over average · 9 days in a row</p>
-            <div class="ui-card__bar"><i style="--w:55%;--c:var(--g-blue)"></i><i style="--w:28%;--c:var(--g-violet)"></i><i style="--w:17%;--c:var(--g-teal)"></i></div>
-            <ul class="ui-card__rows">
-              <li><span><i class="dot dot--blue"></i>Coding</span><span>3 h 59 m</span></li>
-              <li><span><i class="dot dot--violet"></i>Spanish</span><span>2 h 2 m</span></li>
-              <li><span><i class="dot dot--teal"></i>Training</span><span>1 h 14 m</span></li>
-            </ul>
-          </div>
-        </div>
+  <!-- ГЕРОЙ: заголовок и окно рендера с настоящей сценой (WebGL) ======== -->
+  <section class="hero" id="top">
+    <div class="hero__copy">
+      <p class="kicker" data-in><i></i>Landing pages · Web apps · MVPs</p>
+      <h1 class="hero__title">
+        <span class="ln"><span>Websites,</span></span>
+        <span class="ln"><span>rendered</span></span>
+        <span class="ln ln--dim"><span>frame by frame.</span></span>
+      </h1>
+      <p class="hero__lead" data-in>I design and build landing pages and web apps for founders and studios the way a VFX shot is made: in passes, with every frame checked before it ships.</p>
+      <div class="hero__cta" data-in>
+        <a class="btn" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="#work">See the work</a>
       </div>
     </div>
+
+    <!-- Окно рендера: сцена считается в четырёх проходах, при загрузке
+         и смене прохода кадр «дорендеривается» бакетами от центра -->
+    <figure class="view view--hero" data-viewport aria-label="A live render of an abstract sculpture">
+      <div class="view__bar">
+        <span class="view__title"><i></i>Viewport · galaksss.blend</span>
+        <div class="passes" role="tablist" aria-label="Render pass">
+          <button class="is-on" data-pass="0" role="tab" aria-selected="true">Beauty<kbd>1</kbd></button>
+          <button data-pass="1" role="tab" aria-selected="false">Normals<kbd>2</kbd></button>
+          <button data-pass="2" role="tab" aria-selected="false">Depth<kbd>3</kbd></button>
+          <button data-pass="3" role="tab" aria-selected="false">Wire<kbd>4</kbd></button>
+        </div>
+      </div>
+      <div class="view__frame" data-frame>
+        <canvas data-gl></canvas>
+        <canvas class="buckets" data-tiles></canvas>
+        <span class="corner corner--tl"></span><span class="corner corner--tr"></span><span class="corner corner--bl"></span><span class="corner corner--br"></span>
+        <span class="view__xy" data-xy aria-hidden="true">x 0.00 · y 0.00</span>
+        <p class="view__nogl">This browser can't run WebGL, so the live render is off. Everything else works.</p>
+      </div>
+      <figcaption class="view__hud">
+        <span>Samples <b data-samples>0</b>/128</span>
+        <span>Time <b data-time>0.00</b> s</span>
+        <span data-res>— × —</span>
+        <span>Pass <b data-pass-name>Beauty</b></span>
+        <span class="view__hint">Move the cursor to orbit</span>
+      </figcaption>
+    </figure>
+
+    <a class="hero__latest" href="#work" data-in>
+      <span class="mono">Latest render</span>
+      <span>OneDay — a production web app, built solo in three weeks</span>
+      <span aria-hidden="true">↓</span>
+    </a>
   </section>
 
-  <!-- БЕГУЩАЯ СТРОКА: что делаю, крупным курсивом -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Landing pages</span><b>✦</b><span>Web apps</span><b>✦</b><span>MVPs</span><b>✦</b><span>Motion for the web</span><b>✦</b><span>Design to code</span><b>✦</b>
-      <span>Landing pages</span><b>✦</b><span>Web apps</span><b>✦</b><span>MVPs</span><b>✦</b><span>Motion for the web</span><b>✦</b><span>Design to code</span><b>✦</b>
-    </div>
-  </div>
-
-  <!-- КЕЙС ============================================================= -->
+  <!-- РАБОТА: главный кейс OneDay ======================================= -->
   <section class="sec" id="work">
-    <div class="wrap">
-      <header class="sec__head reveal">
-        <p class="label"><span class="label__dot"></span>Case study</p>
-        <h2 class="sec__title">OneDay</h2>
-        <p class="sec__lead">A web app that shows how much you really worked on your goals. Product, design, code and the landing page — one person, three weeks.</p>
-        <div class="sec__links">
+    <header class="sec__head">
+      <p class="label">Work · 01</p>
+      <div>
+        <h2 class="sec__title" data-up>OneDay</h2>
+        <p class="sec__lead" data-up>A web app that shows how much you really worked on your goals. Product, design, code and the landing page — one person, three weeks.</p>
+        <p class="sec__links" data-up>
           <a class="link" href="https://myoneday.vercel.app/en" target="_blank" rel="noopener">Open the app <span aria-hidden="true">↗</span></a>
           <a class="link" href="https://myoneday.vercel.app/en/about" target="_blank" rel="noopener">See the landing <span aria-hidden="true">↗</span></a>
-        </div>
-      </header>
+        </p>
+      </div>
+    </header>
 
-      <!-- История в стиле Apple: слева шаги, справа липкое окно браузера,
-           экран в нём меняется, когда шаг доходит до середины экрана.
-           На телефоне окна нет — у каждого шага своя картинка. -->
-      <div class="story" data-story>
-        <div class="story__steps">
-          <article class="step" data-step="0">
-            <span class="step__n">01</span>
-            <h3 class="step__t">Every goal counts its days</h3>
-            <p class="step__p">By time, by amount, with check-ins or as days without a slip. Each goal counts from day one, and the week fits on one screen.</p>
-            <figure class="step__img"><img src="/work/oneday-app.webp" alt="OneDay goals screen" width="1600" height="900" loading="lazy" decoding="async"></figure>
-          </article>
-          <article class="step" data-step="1">
-            <span class="step__n">02</span>
-            <h3 class="step__t">A focus mode made to be filmed</h3>
-            <p class="step__p">A full-screen stopwatch with a chime at the daily goal. It pauses on space, dims when you look away and protects OLED screens.</p>
-            <figure class="step__img"><img src="/work/oneday-focus.webp" alt="OneDay focus mode" width="1600" height="900" loading="lazy" decoding="async"></figure>
-          </article>
-          <article class="step" data-step="2">
-            <span class="step__n">03</span>
-            <h3 class="step__t">A day you want to share</h3>
-            <p class="step__p">The evening wrap-up becomes a card for stories or the feed. Every shared card is an ad for the product, built into the product.</p>
-            <figure class="step__img"><img src="/work/oneday-cards.webp" alt="OneDay day-in-review cards" width="1440" height="810" loading="lazy" decoding="async"></figure>
-          </article>
-          <article class="step" data-step="3">
-            <span class="step__n">04</span>
-            <h3 class="step__t">A landing that shows instead of tells</h3>
-            <p class="step__p">Live previews of the real app instead of screenshots: the timer and the day card on the page are working components. English and Russian.</p>
-            <figure class="step__img"><img src="/work/oneday-landing.webp" alt="OneDay landing page" width="1440" height="810" loading="lazy" decoding="async"></figure>
-          </article>
-        </div>
+    <!-- История со скроллом: слева шаги, справа липкое окно. Каждый шаг —
+         «проход» одного проекта; новый экран дорендеривается бакетами.
+         На телефоне окна нет — у каждого шага своя картинка. -->
+    <div class="case" data-case>
+      <div class="case__steps">
+        <article class="step" data-step="0">
+          <p class="step__n">Pass 01 · Goals</p>
+          <h3 class="step__t">Every goal counts its days</h3>
+          <p class="step__p">Four kinds of goals: by time, by amount, check-ins and days without a slip. Each one counts from day one, the week fits on one screen, and a planned day off never breaks a streak.</p>
+          <figure class="step__img"><img src="/work/oneday-goals.webp" alt="OneDay goals screen" width="1800" height="1125" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="step" data-step="1">
+          <p class="step__n">Pass 02 · Focus</p>
+          <h3 class="step__t">A focus mode made to be filmed</h3>
+          <p class="step__p">A full-screen stopwatch for timelapses. The glow behind the digits grows with the hours you put in; Space or a click pauses it, and the screen dims when you look away.</p>
+          <figure class="step__img"><img src="/work/oneday-focus.webp" alt="OneDay focus mode" width="1800" height="1125" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="step" data-step="2">
+          <p class="step__n">Pass 03 · History</p>
+          <h3 class="step__t">Progress you read at a glance</h3>
+          <p class="step__p">A week or 30 days in one card: bars in your goals' colors, Day N, streak and best day. Hover a day for the breakdown, click it to open that day's review.</p>
+          <figure class="step__img"><img src="/work/oneday-history.webp" alt="OneDay history screen" width="1800" height="1125" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="step" data-step="3">
+          <p class="step__n">Pass 04 · Day card</p>
+          <h3 class="step__t">A day you want to share</h3>
+          <p class="step__p">The evening wrap-up becomes a card for stories or the feed. Every shared card is an ad for the product, built into the product.</p>
+          <figure class="step__img"><img src="/work/oneday-card.webp" alt="OneDay day in review card" width="1800" height="1125" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="step" data-step="4">
+          <p class="step__n">Pass 05 · Landing</p>
+          <h3 class="step__t">A landing that shows instead of tells</h3>
+          <p class="step__p">Built from live copies of the app's screens, not screenshots: a running stopwatch, goal cards that play by themselves, an encryption demo. English and Russian.</p>
+          <figure class="step__img"><img src="/work/oneday-landing.jpg" alt="OneDay landing page" width="1440" height="900" loading="lazy" decoding="async"></figure>
+        </article>
+      </div>
 
-        <div class="story__stage" aria-hidden="true">
-          <div class="frame">
-            <div class="frame__bar"><span class="win__dots"><i></i><i></i><i></i></span><span class="frame__url">myoneday.vercel.app</span></div>
-            <div class="frame__screen">
-              <img class="is-on" src="/work/oneday-app.webp" alt="" width="1600" height="900" decoding="async">
-              <img src="/work/oneday-focus.webp" alt="" width="1600" height="900" loading="lazy" decoding="async">
-              <img src="/work/oneday-cards.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-              <img src="/work/oneday-landing.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+      <div class="case__stage">
+        <div class="view view--case" data-case-view>
+          <div class="view__bar">
+            <span class="view__title"><i></i>myoneday.vercel.app</span>
+            <div class="passes passes--case" aria-hidden="true">
+              <button class="is-on" data-go="0" tabindex="-1">Goals</button>
+              <button data-go="1" tabindex="-1">Focus</button>
+              <button data-go="2" tabindex="-1">History</button>
+              <button data-go="3" tabindex="-1">Card</button>
+              <button data-go="4" tabindex="-1">Landing</button>
             </div>
-            <div class="frame__progress"><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="view__frame view__frame--case" data-frame>
+            <img class="is-on" src="/work/oneday-goals.webp" alt="" width="1800" height="1125" decoding="async">
+            <img src="/work/oneday-focus.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
+            <img src="/work/oneday-history.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
+            <img src="/work/oneday-card.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
+            <img src="/work/oneday-landing.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async">
+            <canvas class="buckets" data-tiles></canvas>
+            <span class="corner corner--tl"></span><span class="corner corner--tr"></span><span class="corner corner--bl"></span><span class="corner corner--br"></span>
+          </div>
+          <div class="view__hud">
+            <span>Pass <b data-case-pass>01 / 05</b></span>
+            <span>Next.js 16 · React 19 · Supabase</span>
+            <span class="view__live"><i></i>Live</span>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Цифры проверены: строки — src/**/*.ts(x) OneDay, тесты — vitest run -->
-      <dl class="stats">
-        <div class="stat reveal"><dt>weeks, solo</dt><dd><span data-count="3">3</span></dd></div>
-        <div class="stat reveal"><dt>lines of TypeScript</dt><dd><span data-count="24">24</span>k</dd></div>
-        <div class="stat reveal"><dt>tests passing</dt><dd><span data-count="496">496</span></dd></div>
-        <div class="stat reveal"><dt>languages, English &amp; Russian</dt><dd><span data-count="2">2</span></dd></div>
-      </dl>
+    <!-- Статистика «рендера». Цифры проверены 23.10.2026:
+         строки — oneday/src/**/*.ts(x), тесты — npx vitest run, коммиты — git -->
+    <dl class="specs">
+      <div class="spec" data-up><dt>Render time</dt><dd>3<small>weeks, solo</small></dd></div>
+      <div class="spec" data-up><dt>TypeScript</dt><dd><span data-count="27.7" data-dec="1">27.7</span>k<small>lines</small></dd></div>
+      <div class="spec" data-up><dt>Tests</dt><dd><span data-count="509">509</span><small>passing</small></dd></div>
+      <div class="spec" data-up><dt>Commits</dt><dd><span data-count="86">86</span><small>to production</small></dd></div>
+      <div class="spec" data-up><dt>Languages</dt><dd>2<small>English &amp; Russian</small></dd></div>
+    </dl>
 
-      <!-- Личные проекты. Честно подписаны как личные: это инструменты для
-           того, чем владелец занимается сам, — монтажа и видеоконтента.
-           При наведении кадр сменяется вторым экраном того же проекта. -->
-      <div class="more" id="more">
-        <header class="more__head reveal">
-          <p class="label"><span class="label__dot"></span>More work</p>
-          <p class="more__note">Personal projects and concepts — tools for the things I do besides client work, editing and video, and pages for products and studios that don't exist.</p>
-        </header>
-        <div class="projects">
-          <!-- Hour — первым и во всю ширину: это ровно то, что владелец продаёт,
-               лендинг со скролл-историей. Подписан как концепт. -->
-          <article class="proj proj--wide reveal" data-glow>
-            <div class="proj__media">
-              <img src="/work/hour-golden.webp" alt="Hour concept page at golden hour" width="960" height="540" loading="eager" decoding="async">
-              <img class="proj__alt" src="/work/hour-night.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
-            </div>
-            <div class="proj__body">
-              <p class="proj__tags"><span>Concept</span><span>Landing page</span></p>
-              <h3 class="proj__t">Hour</h3>
-              <p class="proj__p">A scroll story for an imaginary color-grading app. One shader draws a lake from dawn to night, and the grade follows the light as you scroll — no photos, no video.</p>
-              <p class="proj__stack">WebGL · GLSL · scroll-driven</p>
-            </div>
-          </article>
-          <article class="proj reveal" data-glow>
-            <div class="proj__media">
-              <img src="/work/orrin-hero.webp" alt="Orrin concept product page" width="960" height="540" loading="eager" decoding="async">
-              <img class="proj__alt" src="/work/orrin-inside.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
-            </div>
-            <div class="proj__body">
-              <p class="proj__tags"><span>Concept</span><span>Product page</span></p>
-              <h3 class="proj__t">Orrin</h3>
-              <p class="proj__p">An Apple-style page for an imaginary speaker. No 3D model — the speaker is ray-marched in a shader: it turns, opens up into its parts and changes finish as you scroll.</p>
-              <p class="proj__stack">WebGL · ray marching · SDF</p>
-            </div>
-          </article>
-          <article class="proj reveal" data-glow>
-            <div class="proj__media">
-              <img src="/work/noctiv-hero.webp" alt="Noctiv concept studio site" width="960" height="540" loading="eager" decoding="async">
-              <img class="proj__alt" src="/work/noctiv-knot.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
-            </div>
-            <div class="proj__body">
-              <p class="proj__tags"><span>Concept</span><span>Studio site</span></p>
-              <h3 class="proj__t">Noctiv</h3>
-              <p class="proj__p">A site for an imaginary VFX studio. Sixty thousand particles become a sphere, a wave, the studio's name, a knot and a galaxy as you scroll.</p>
-              <p class="proj__stack">WebGL · 60k particles · GLSL</p>
-            </div>
-          </article>
-          <article class="proj reveal" data-glow>
-            <div class="proj__media">
-              <img src="/work/beatgrid-hero.webp" alt="Beatgrid landing page" width="1440" height="810" loading="eager" decoding="async">
-              <img class="proj__alt" src="/work/beatgrid-app.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-            </div>
-            <div class="proj__body">
-              <p class="proj__tags"><span>Personal project</span><span>Web app</span></p>
-              <h3 class="proj__t">Beatgrid</h3>
-              <p class="proj__p">Frame-exact beat markers for editors. Tap the tempo or drop a track: it estimates the BPM, draws the waveform and shows on which frame every beat lands.</p>
-              <p class="proj__stack">Web Audio · Canvas · Vite</p>
-            </div>
-          </article>
-          <article class="proj reveal" data-glow>
-            <div class="proj__media proj__media--light">
-              <img src="/work/feedcheck-hero.webp" alt="Feedcheck app" width="1440" height="810" loading="eager" decoding="async">
-              <img class="proj__alt" src="/work/feedcheck-phone.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-            </div>
-            <div class="proj__body">
-              <p class="proj__tags"><span>Personal project</span><span>Web app</span></p>
-              <h3 class="proj__t">Feedcheck</h3>
-              <p class="proj__p">See a video in the feed before you post it. Two thumbnails and titles, three layouts, and the exact word where each title gets cut.</p>
-              <p class="proj__stack">Canvas · Vite · no backend</p>
-            </div>
-          </article>
-          <article class="proj proj--wide reveal" data-glow>
-            <div class="proj__media">
-              <img src="/work/hookline-hero.webp" alt="Hookline landing page" width="1440" height="810" loading="eager" decoding="async">
-              <img class="proj__alt" src="/work/hookline-prompter.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-            </div>
-            <div class="proj__body">
-              <p class="proj__tags"><span>Personal project</span><span>Web app</span></p>
-              <h3 class="proj__t">Hookline</h3>
-              <p class="proj__p">Script timing for voice-over and faceless channels. How long it reads, where the hook ends, how many visuals you need and when each one starts — then a teleprompter that scrolls at your pace.</p>
-              <p class="proj__stack">Vanilla JS · rAF · no backend</p>
-            </div>
-          </article>
+    <!-- ЕЩЁ РАБОТЫ: концепты и личные проекты. Каждая карточка — маленький
+         вьюпорт; при наведении второй кадр дорендеривается бакетами.
+         Ритм: широкая (Hour) — пара концептов — пара инструментов — широкая. -->
+    <div class="more" id="more">
+      <header class="more__head">
+        <p class="label">Work · 02–07</p>
+        <div>
+          <h3 class="more__title" data-up>More renders</h3>
+          <p class="more__note" data-up>Concepts and personal projects — tools for the things I do besides client work, editing and video, and pages for products and studios that don't exist. Each one is labelled for what it is.</p>
         </div>
+      </header>
+
+      <div class="renders">
+        <article class="render render--wide" data-up>
+          <div class="render__frame" data-alt-frame data-a="Golden hour" data-b="Night">
+            <img src="/work/hour-golden.webp" alt="Hour concept page at golden hour" width="960" height="540" loading="lazy" decoding="async">
+            <img class="render__alt" src="/work/hour-night.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
+            <canvas class="buckets" data-tiles></canvas>
+          </div>
+          <div class="render__body">
+            <p class="render__meta"><span>02</span><span>Concept</span><span>Landing page</span></p>
+            <h4 class="render__t">Hour</h4>
+            <p class="render__p">A scroll story for an imaginary color-grading app. One shader draws a lake from dawn to night, and the grade follows the light as you scroll — no photos, no video.</p>
+            <p class="render__stack">WebGL · GLSL · scroll-driven</p>
+          </div>
+        </article>
+
+        <article class="render" data-up>
+          <div class="render__frame" data-alt-frame data-a="Beauty" data-b="Exploded">
+            <img src="/work/orrin-hero.webp" alt="Orrin concept product page" width="960" height="540" loading="lazy" decoding="async">
+            <img class="render__alt" src="/work/orrin-inside.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
+            <canvas class="buckets" data-tiles></canvas>
+          </div>
+          <div class="render__body">
+            <p class="render__meta"><span>03</span><span>Concept</span><span>Product page</span></p>
+            <h4 class="render__t">Orrin</h4>
+            <p class="render__p">An Apple-style page for an imaginary speaker. No 3D model — the speaker is ray-marched in a shader: it turns, opens up into its parts and changes finish as you scroll.</p>
+            <p class="render__stack">WebGL · ray marching · SDF</p>
+          </div>
+        </article>
+
+        <article class="render" data-up>
+          <div class="render__frame" data-alt-frame data-a="Sphere" data-b="Knot">
+            <img src="/work/noctiv-hero.webp" alt="Noctiv concept studio site" width="960" height="540" loading="lazy" decoding="async">
+            <img class="render__alt" src="/work/noctiv-knot.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
+            <canvas class="buckets" data-tiles></canvas>
+          </div>
+          <div class="render__body">
+            <p class="render__meta"><span>04</span><span>Concept</span><span>Studio site</span></p>
+            <h4 class="render__t">Noctiv</h4>
+            <p class="render__p">A site for an imaginary VFX studio. Sixty thousand particles become a sphere, a wave, the studio's name, a knot and a galaxy as you scroll.</p>
+            <p class="render__stack">WebGL · 60k particles · GLSL</p>
+          </div>
+        </article>
+
+        <article class="render" data-up>
+          <div class="render__frame" data-alt-frame data-a="Landing" data-b="App">
+            <img src="/work/beatgrid-hero.webp" alt="Beatgrid landing page" width="1440" height="810" loading="lazy" decoding="async">
+            <img class="render__alt" src="/work/beatgrid-app.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+            <canvas class="buckets" data-tiles></canvas>
+          </div>
+          <div class="render__body">
+            <p class="render__meta"><span>05</span><span>Personal project</span><span>Web app</span></p>
+            <h4 class="render__t">Beatgrid</h4>
+            <p class="render__p">Frame-exact beat markers for editors. Tap the tempo or drop a track: it estimates the BPM, draws the waveform and shows on which frame every beat lands.</p>
+            <p class="render__stack">Web Audio · Canvas · Vite</p>
+          </div>
+        </article>
+
+        <article class="render" data-up>
+          <div class="render__frame" data-alt-frame data-a="Desktop" data-b="Phone">
+            <img src="/work/feedcheck-hero.webp" alt="Feedcheck app" width="1440" height="810" loading="lazy" decoding="async">
+            <img class="render__alt" src="/work/feedcheck-phone.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+            <canvas class="buckets" data-tiles></canvas>
+          </div>
+          <div class="render__body">
+            <p class="render__meta"><span>06</span><span>Personal project</span><span>Web app</span></p>
+            <h4 class="render__t">Feedcheck</h4>
+            <p class="render__p">See a video in the feed before you post it. Two thumbnails and titles, three layouts, and the exact word where each title gets cut.</p>
+            <p class="render__stack">Canvas · Vite · no backend</p>
+          </div>
+        </article>
+
+        <article class="render render--wide" data-up>
+          <div class="render__frame" data-alt-frame data-a="Landing" data-b="Prompter">
+            <img src="/work/hookline-hero.webp" alt="Hookline landing page" width="1440" height="810" loading="lazy" decoding="async">
+            <img class="render__alt" src="/work/hookline-prompter.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+            <canvas class="buckets" data-tiles></canvas>
+          </div>
+          <div class="render__body">
+            <p class="render__meta"><span>07</span><span>Personal project</span><span>Web app</span></p>
+            <h4 class="render__t">Hookline</h4>
+            <p class="render__p">Script timing for voice-over and faceless channels. How long it reads, where the hook ends, how many visuals you need and when each one starts — then a teleprompter that scrolls at your pace.</p>
+            <p class="render__stack">Vanilla JS · rAF · no backend</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- УСЛУГИ =========================================================== -->
+  <!-- УСЛУГИ: четыре панели, у каждой — маленькая схема в стиле Wire ====== -->
   <section class="sec" id="services">
-    <div class="wrap">
-      <header class="sec__head reveal">
-        <p class="label"><span class="label__dot"></span>Services</p>
-        <h2 class="sec__title">What I build</h2>
-      </header>
+    <header class="sec__head">
+      <p class="label">Services</p>
+      <div><h2 class="sec__title" data-up>What I build</h2></div>
+    </header>
 
-      <div class="bento">
-        <article class="card reveal" data-glow>
-          <div class="card__viz viz-page" aria-hidden="true">
-            <div class="viz-page__bar"></div>
-            <div class="viz-page__h"></div><div class="viz-page__h viz-page__h--short"></div>
-            <div class="viz-page__btn"></div>
-            <div class="viz-page__img"></div>
-          </div>
-          <h3 class="card__t">Landing pages</h3>
-          <p class="card__p">For launches, products and founders. Copy, design and code in one pair of hands, live in one to two weeks.</p>
-        </article>
+    <div class="svc">
+      <article class="svc__item" data-up>
+        <div class="svc__viz viz-page" aria-hidden="true">
+          <i class="viz-page__nav"></i><i class="viz-page__h"></i><i class="viz-page__h viz-page__h--s"></i><i class="viz-page__btn"></i><i class="viz-page__img"></i>
+        </div>
+        <p class="svc__n">01</p>
+        <h3 class="svc__t">Landing pages</h3>
+        <p class="svc__p">For launches, products and founders. Copy, design and code in one pair of hands, live in one to two weeks.</p>
+      </article>
 
-        <article class="card reveal" data-glow>
-          <div class="card__viz viz-term" aria-hidden="true">
-            <p><span class="viz-term__p">$</span> npm test</p>
-            <p class="ok">✓ 23 files</p>
-            <p class="ok">✓ 496 tests passed</p>
-            <p><span class="viz-term__p">$</span> npm run build</p>
-            <p class="ok">✓ built in 0.3s</p>
-          </div>
-          <h3 class="card__t">Web apps &amp; MVPs</h3>
-          <p class="card__p">From an idea to a working product: accounts, database, sync, tests. Code you can hand to a team later.</p>
-        </article>
+      <article class="svc__item" data-up>
+        <div class="svc__viz viz-term" aria-hidden="true">
+          <p><b>$</b> npm test</p>
+          <p class="ok">✓ 24 files</p>
+          <p class="ok">✓ 509 tests passed</p>
+          <p><b>$</b> npm run build</p>
+          <p class="ok">✓ ready for production</p>
+        </div>
+        <p class="svc__n">02</p>
+        <h3 class="svc__t">Web apps &amp; MVPs</h3>
+        <p class="svc__p">From an idea to a working product: accounts, database, sync, tests. Code you can hand to a team later.</p>
+      </article>
 
-        <article class="card reveal" data-glow>
-          <!-- Кивок моушен-дизайнерам: график скорости, как в After Effects,
-               только это обычная CSS-кривая. Анимирует src/curve.js -->
-          <div class="card__viz viz-curve" aria-hidden="true" data-curve>
-            <svg viewBox="0 0 220 120" preserveAspectRatio="none">
-              <path class="viz-curve__grid" d="M0 30H220M0 60H220M0 90H220M55 0V120M110 0V120M165 0V120"/>
-              <path class="viz-curve__path" d="M0 120 C35.2 0 66 0 220 0"/>
-              <line class="viz-curve__head" x1="0" y1="0" x2="0" y2="120"/>
-              <circle class="viz-curve__dot" r="4" cx="0" cy="120"/>
-            </svg>
-            <div class="viz-curve__track"><i></i></div>
-            <code>cubic-bezier(.16, 1, .3, 1)</code>
-          </div>
-          <h3 class="card__t">Motion for the web</h3>
-          <p class="card__p">Scroll stories, transitions and micro-interactions with the right easing. Smooth on a phone, not only on a MacBook.</p>
-        </article>
+      <article class="svc__item" data-up>
+        <!-- Кивок моушен-дизайнерам: график скорости, как в After Effects,
+             только это обычная CSS-кривая. Анимирует src/sections.js -->
+        <div class="svc__viz viz-curve" aria-hidden="true" data-curve>
+          <svg viewBox="0 0 220 110" preserveAspectRatio="none">
+            <path class="viz-curve__grid" d="M0 27.5H220M0 55H220M0 82.5H220M55 0V110M110 0V110M165 0V110"/>
+            <path class="viz-curve__path" d="M0 110 C35.2 0 66 0 220 0"/>
+            <line class="viz-curve__head" x1="0" y1="0" x2="0" y2="110"/>
+            <circle class="viz-curve__dot" r="3.5" cx="0" cy="110"/>
+          </svg>
+          <div class="viz-curve__track"><i></i></div>
+          <code>cubic-bezier(.16, 1, .3, 1)</code>
+        </div>
+        <p class="svc__n">03</p>
+        <h3 class="svc__t">Motion for the web</h3>
+        <p class="svc__p">Scroll stories, WebGL, transitions and micro-interactions with the right easing. Smooth on a phone, not only on a MacBook.</p>
+      </article>
 
-        <article class="card card--wide reveal" data-glow>
-          <div>
-            <h3 class="card__t">Studios &amp; agencies</h3>
-            <p class="card__p">Your design, built to move — under your name. I join for one page or for the whole build.</p>
-          </div>
-          <a class="link" href="mailto:galaksss@proton.me?subject=White-label">Talk about white-label <span aria-hidden="true">→</span></a>
-        </article>
-      </div>
+      <article class="svc__item" data-up>
+        <div class="svc__viz viz-label" aria-hidden="true">
+          <span class="viz-label__a">your-studio.com</span>
+          <span class="viz-label__b">built by galaksss</span>
+        </div>
+        <p class="svc__n">04</p>
+        <h3 class="svc__t">Studios &amp; agencies</h3>
+        <p class="svc__p">Your design, built to move — under your name. I join for one page or for the whole build.</p>
+        <a class="link" href="mailto:galaksss@proton.me?subject=White-label">Talk about white-label <span aria-hidden="true">→</span></a>
+      </article>
     </div>
   </section>
 
-  <!-- ПРОЦЕСС ========================================================== -->
+  <!-- ПРОЦЕСС: «лог рендера» — строки считаются по очереди ============== -->
   <section class="sec" id="process">
-    <div class="wrap">
-      <header class="sec__head reveal">
-        <p class="label"><span class="label__dot"></span>Process</p>
-        <h2 class="sec__title">How it goes</h2>
-      </header>
-      <ol class="steps" data-steps>
-        <li class="reveal"><span class="steps__n">01</span><h3>Message</h3><p>Tell me what you are launching. A link and a few lines are enough to start.</p></li>
-        <li class="reveal"><span class="steps__n">02</span><h3>First screen</h3><p>I build the first screen early, so you see the direction before you commit to the rest.</p></li>
-        <li class="reveal"><span class="steps__n">03</span><h3>Build</h3><p>Work in progress lives on a live link. You watch it grow instead of waiting for a big reveal.</p></li>
-        <li class="reveal"><span class="steps__n">04</span><h3>Launch</h3><p>Domain, analytics, handover. The code and the accounts are yours.</p></li>
-      </ol>
-    </div>
+    <header class="sec__head">
+      <p class="label">Process</p>
+      <div><h2 class="sec__title" data-up>How it goes</h2></div>
+    </header>
+
+    <ol class="log" data-log>
+      <li class="log__row">
+        <span class="log__n">01</span>
+        <div class="log__main">
+          <h3 class="log__t">Message</h3>
+          <p class="log__p">Tell me what you are launching. A link and a few lines are enough to start.</p>
+          <span class="log__bar"><i></i></span><span class="log__st">done</span>
+        </div>
+      </li>
+      <li class="log__row">
+        <span class="log__n">02</span>
+        <div class="log__main">
+          <h3 class="log__t">First screen</h3>
+          <p class="log__p">I build the first screen early, so you see the direction before you commit to the rest.</p>
+          <span class="log__bar"><i></i></span><span class="log__st">done</span>
+        </div>
+      </li>
+      <li class="log__row">
+        <span class="log__n">03</span>
+        <div class="log__main">
+          <h3 class="log__t">Build</h3>
+          <p class="log__p">Work in progress lives on a live link. You watch it grow instead of waiting for a big reveal.</p>
+          <span class="log__bar"><i></i></span><span class="log__st">done</span>
+        </div>
+      </li>
+      <li class="log__row">
+        <span class="log__n">04</span>
+        <div class="log__main">
+          <h3 class="log__t">Launch</h3>
+          <p class="log__p">Domain, analytics, handover. The code and the accounts are yours.</p>
+          <span class="log__bar"><i></i></span><span class="log__st">done</span>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <!-- О СЕБЕ ============================================================ -->
   <section class="sec" id="about">
-    <div class="wrap about">
-      <div class="reveal">
-        <p class="label"><span class="label__dot"></span>About</p>
-        <p class="about__quote">Before code, I made motion. Before motion — VFX edits, where every frame is <em>fought over</em>.</p>
+    <header class="sec__head">
+      <p class="label">About</p>
+      <div class="about">
+        <p class="about__quote" data-up>Before code, I made motion. Before motion — VFX edits, where every frame is <span>fought over.</span></p>
+        <div class="about__side" data-up>
+          <p>That is where the rhythm in my sites comes from: few elements, exact timing, motion that explains instead of decorating.</p>
+          <p>I build with AI tools. That is how one person ships a production app in three weeks. The taste and the decisions are mine.</p>
+          <ul class="tools" aria-label="Tools">
+            <li>Next.js</li><li>React</li><li>TypeScript</li><li>Supabase</li><li>Tailwind</li><li>WebGL / GLSL</li><li>Vite</li><li>After Effects</li>
+          </ul>
+          <p class="mono about__meta">Remote · English &amp; Russian</p>
+        </div>
       </div>
-      <div class="about__side reveal">
-        <p>That is where the rhythm in my sites comes from: few elements, exact timing, motion that explains instead of decorating.</p>
-        <p>I build with AI tools. That is how one person ships a production app in three weeks. The taste and the decisions are mine.</p>
-        <ul class="chips" aria-label="Tools">
-          <li>Next.js</li><li>React</li><li>TypeScript</li><li>Supabase</li><li>Tailwind</li><li>Vite</li><li>After Effects</li>
-        </ul>
-        <p class="about__meta">Remote · English &amp; Russian</p>
-      </div>
-    </div>
+    </header>
   </section>
 
   <!-- КОНТАКТ ============================================================ -->
   <section class="contact" id="contact">
-    <div class="contact__glow" aria-hidden="true"></div>
-    <div class="wrap contact__in reveal">
-      <h2 class="contact__title">Have something to <em>ship</em>?</h2>
+    <p class="label">Contact</p>
+    <h2 class="contact__title" data-up>Have something<br>to ship?</h2>
+    <div class="contact__row" data-up>
       <p class="contact__lead">A landing page, a web app or an idea on a napkin. A few lines are enough.</p>
       <div class="contact__cta">
-        <a class="btn btn--primary btn--lg" href="mailto:galaksss@proton.me" data-magnet data-copy="galaksss@proton.me"><span data-copy-label>galaksss@proton.me</span></a>
+        <a class="btn btn--lg" href="mailto:galaksss@proton.me" data-copy="galaksss@proton.me"><span data-copy-label>galaksss@proton.me</span></a>
         <a class="btn btn--ghost btn--lg" href="https://t.me/galaksss" target="_blank" rel="noopener">Telegram <span aria-hidden="true">↗</span></a>
       </div>
     </div>
+    <p class="contact__queue mono"><i></i>Render queue open — taking new projects</p>
   </section>
 </main>
 
 <footer class="foot">
-  <div class="wrap foot__in">
-    <span>© 2026 galaksss</span>
-    <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
-  </div>
+  <span>© 2026 galaksss</span>
+  <span class="foot__mid">The viewport up top is rendered live in your browser — no video.</span>
+  <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
 </footer>
 
 <script type="module" src="/src/main.js"></script>

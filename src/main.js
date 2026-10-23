@@ -1,18 +1,14 @@
 import './style.css';
-import { initHero } from './hero.js';
-import { initPrompt } from './prompt.js';
-import { initStory } from './story.js';
-import { initReveal } from './reveal.js';
-import { initCurve } from './curve.js';
+import { initViewport } from './viewport.js';
+import { initCase } from './case.js';
+import { initSections } from './sections.js';
 
-/* Класс .js включает начальные «спрятанные» состояния в CSS. Ставим его
-   первым делом: если скрипт не загрузится, всё на странице просто видно. */
+// Начальные состояния анимаций живут под .js — без скрипта контент виден
 document.documentElement.classList.add('js');
-
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-initHero(reduced);
-initPrompt(reduced);
-initStory();
-initReveal(reduced);
-initCurve(reduced);
+initViewport(reduced);
+initCase(reduced);
+initSections(reduced);
+
+requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('is-ready')));
