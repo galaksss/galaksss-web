@@ -1,14 +1,14 @@
 import './style.css';
-import { initViewport } from './viewport.js';
+import { initMotion, REDUCED } from './motion.js';
+import { initReel } from './reel.js';
 import { initCase } from './case.js';
-import { initSections } from './sections.js';
+import { buildSections, initSections } from './sections.js';
 
 // Начальные состояния анимаций живут под .js — без скрипта контент виден
 document.documentElement.classList.add('js');
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-initViewport(reduced);
-initCase(reduced);
-initSections(reduced);
-
-requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('is-ready')));
+const built = buildSections();   // сначала разметка (окна карточек), потом движение
+initMotion();
+initReel();
+initCase();
+initSections(REDUCED, built);

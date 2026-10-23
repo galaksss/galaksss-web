@@ -19,72 +19,80 @@
 
 <a class="skip" href="#work">Skip to work</a>
 
-<!-- ШАПКА: строка меню DCC-программы. Справа — статус рендера героя -->
+<!-- ШАПКА: прозрачная над первым экраном, темнеет после прокрутки.
+     Раздел на экране подсвечен плашкой, она переезжает; снизу — линия
+     прочитанного -->
 <header class="top" data-top>
   <a class="logo" href="#top" aria-label="galaksss, back to top"><i class="logo__mark" aria-hidden="true"></i>galaksss</a>
-  <nav class="menu" aria-label="Sections">
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a href="#process">Process</a>
-    <a href="#about">About</a>
+  <nav class="menu" aria-label="Sections" data-menu>
+    <i class="menu__pill" aria-hidden="true"></i>
+    <a href="#work" data-sec="work">Work</a>
+    <a href="#services" data-sec="services">Services</a>
+    <a href="#process" data-sec="process">Process</a>
+    <a href="#about" data-sec="about">About</a>
   </nav>
-  <div class="status" data-status aria-hidden="true">
-    <i class="status__dot"></i>
-    <span class="status__text" data-status-text>Rendering</span>
-    <span class="status__bar"><i data-status-bar></i></span>
-    <span class="status__pct" data-status-pct>0%</span>
-  </div>
-  <a class="top__cta" href="#contact">Start a project</a>
+  <p class="avail"><i class="live-dot" aria-hidden="true"></i>Taking new projects</p>
+  <a class="top__cta" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+  <i class="top__read" aria-hidden="true" data-read></i>
 </header>
 
 <main>
 
-  <!-- ГЕРОЙ: заголовок и окно рендера с настоящей сценой (WebGL) ======== -->
+  <!-- ГЕРОЙ: заголовок и витрина работ ================================= -->
   <section class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
     <div class="hero__copy">
-      <p class="kicker" data-in><i></i>Landing pages · Web apps · MVPs</p>
-      <h1 class="hero__title">
-        <span class="ln"><span>Websites,</span></span>
-        <span class="ln"><span>rendered</span></span>
-        <span class="ln ln--dim"><span>frame by frame.</span></span>
+      <p class="kicker" data-in style="--d:0ms"><i></i>Landing pages · Web apps · MVPs</p>
+      <h1 class="hero__title" data-words>
+        <span class="ln">Websites,</span>
+        <span class="ln">rendered</span>
+        <span class="ln ln--dim">frame by frame.</span>
       </h1>
-      <p class="hero__lead" data-in>I design and build landing pages and web apps for founders and studios the way a VFX shot is made: in passes, with every frame checked before it ships.</p>
-      <div class="hero__cta" data-in>
+      <p class="hero__lead" data-in style="--d:520ms">I design and build landing pages and web apps for founders and studios the way a VFX shot is made: in passes, with every frame checked before it ships.</p>
+      <div class="hero__cta" data-in style="--d:620ms">
         <a class="btn" href="#contact">Start a project <span aria-hidden="true">→</span></a>
         <a class="btn btn--ghost" href="#work">See the work</a>
       </div>
     </div>
 
-    <!-- Окно рендера: сцена считается в четырёх проходах, при загрузке
-         и смене прохода кадр «дорендеривается» бакетами от центра -->
-    <figure class="view view--hero" data-viewport aria-label="A live render of an abstract sculpture">
-      <div class="view__bar">
-        <span class="view__title"><i></i>Viewport · galaksss.blend</span>
-        <div class="passes" role="tablist" aria-label="Render pass">
-          <button class="is-on" data-pass="0" role="tab" aria-selected="true">Beauty<kbd>1</kbd></button>
-          <button data-pass="1" role="tab" aria-selected="false">Normals<kbd>2</kbd></button>
-          <button data-pass="2" role="tab" aria-selected="false">Depth<kbd>3</kbd></button>
-          <button data-pass="3" role="tab" aria-selected="false">Wire<kbd>4</kbd></button>
+    <!-- Витрина: настоящие работы в окне браузера. Сменяются сами (кроссфейд
+         из дымки, как экраны в OneDay), вкладки переключают, под курсором
+         пауза; окно слегка наклоняется за курсором -->
+    <figure class="reel" data-reel data-in style="--d:260ms" aria-label="Recent work">
+      <div class="reel__tilt" data-tilt>
+        <div class="reel__win spot">
+          <div class="reel__bar">
+            <span class="reel__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <div class="seg" role="tablist" aria-label="Project" data-seg>
+              <i class="seg__pill" aria-hidden="true"></i>
+              <button class="is-on" role="tab" aria-selected="true">OneDay</button>
+              <button role="tab" aria-selected="false">Hour</button>
+              <button role="tab" aria-selected="false">Orrin</button>
+              <button role="tab" aria-selected="false">Noctiv</button>
+            </div>
+            <span class="reel__url" data-reel-url>myoneday.vercel.app</span>
+          </div>
+          <div class="reel__screen xfade">
+            <img class="is-on" src="/work/oneday-goals.webp" alt="OneDay, the goals screen" width="1800" height="1125" decoding="async" style="object-position:left top"
+                 data-url="myoneday.vercel.app" data-kind="Web app · live" data-name="OneDay — hours, streaks and a focus mode for your goals">
+            <img src="/work/hour-golden.webp" alt="Hour, a concept landing page" width="960" height="540" decoding="async"
+                 data-url="hour · concept" data-kind="Concept · landing page" data-name="Hour — a lake that lives through a day as you scroll">
+            <img src="/work/orrin-hero.webp" alt="Orrin, a concept product page" width="960" height="540" decoding="async"
+                 data-url="orrin · concept" data-kind="Concept · product page" data-name="Orrin — a speaker drawn in a shader, taken apart by scroll">
+            <img src="/work/noctiv-hero.webp" alt="Noctiv, a concept studio site" width="960" height="540" decoding="async"
+                 data-url="noctiv · concept" data-kind="Concept · studio site" data-name="Noctiv — sixty thousand particles for a VFX studio">
+          </div>
+          <i class="reel__time" aria-hidden="true"><i data-reel-bar></i></i>
         </div>
       </div>
-      <div class="view__frame" data-frame>
-        <canvas data-gl></canvas>
-        <canvas class="buckets" data-tiles></canvas>
-        <span class="corner corner--tl"></span><span class="corner corner--tr"></span><span class="corner corner--bl"></span><span class="corner corner--br"></span>
-        <span class="view__xy" data-xy aria-hidden="true">x 0.00 · y 0.00</span>
-        <p class="view__nogl">This browser can't run WebGL, so the live render is off. Everything else works.</p>
-      </div>
-      <figcaption class="view__hud">
-        <span>Samples <b data-samples>0</b>/128</span>
-        <span>Time <b data-time>0.00</b> s</span>
-        <span data-res>— × —</span>
-        <span>Pass <b data-pass-name>Beauty</b></span>
-        <span class="view__hint">Move the cursor to orbit</span>
+      <figcaption class="reel__cap">
+        <span class="reel__kind" data-reel-kind>Web app · live</span>
+        <span class="reel__name xtext" data-reel-name>OneDay — hours, streaks and a focus mode for your goals</span>
       </figcaption>
     </figure>
 
-    <a class="hero__latest" href="#work" data-in>
-      <span class="mono">Latest render</span>
+    <a class="hero__latest" href="#work" data-in style="--d:760ms">
+      <span class="mono"><i class="live-dot" aria-hidden="true"></i>Latest</span>
       <span>OneDay — a production web app, built solo in three weeks</span>
       <span aria-hidden="true">↓</span>
     </a>
@@ -95,7 +103,7 @@
     <header class="sec__head">
       <p class="label">Work · 01</p>
       <div>
-        <h2 class="sec__title" data-up>OneDay</h2>
+        <h2 class="sec__title" data-words>OneDay</h2>
         <p class="sec__lead" data-up>A web app that shows how much you really worked on your goals. Product, design, code and the landing page — one person, three weeks.</p>
         <p class="sec__links" data-up>
           <a class="link" href="https://myoneday.vercel.app/en" target="_blank" rel="noopener">Open the app <span aria-hidden="true">↗</span></a>
@@ -105,7 +113,7 @@
     </header>
 
     <!-- История со скроллом: слева шаги, справа липкое окно. Каждый шаг —
-         «проход» одного проекта; новый экран дорендеривается бакетами.
+         «проход» одного проекта; экраны сменяются кроссфейдом из дымки.
          На телефоне окна нет — у каждого шага своя картинка. -->
     <div class="case" data-case>
       <div class="case__steps">
@@ -142,25 +150,24 @@
       </div>
 
       <div class="case__stage">
-        <div class="view view--case" data-case-view>
+        <div class="view view--case spot" data-case-view>
           <div class="view__bar">
             <span class="view__title"><i></i>myoneday.vercel.app</span>
-            <div class="passes passes--case" aria-hidden="true">
-              <button class="is-on" data-go="0" tabindex="-1">Goals</button>
-              <button data-go="1" tabindex="-1">Focus</button>
-              <button data-go="2" tabindex="-1">History</button>
-              <button data-go="3" tabindex="-1">Card</button>
-              <button data-go="4" tabindex="-1">Landing</button>
+            <div class="seg" aria-hidden="true" data-seg>
+              <i class="seg__pill"></i>
+              <button class="is-on" tabindex="-1">Goals</button>
+              <button tabindex="-1">Focus</button>
+              <button tabindex="-1">History</button>
+              <button tabindex="-1">Card</button>
+              <button tabindex="-1">Landing</button>
             </div>
           </div>
-          <div class="view__frame view__frame--case" data-frame>
+          <div class="view__frame xfade" data-frame>
             <img class="is-on" src="/work/oneday-goals.webp" alt="" width="1800" height="1125" decoding="async">
             <img src="/work/oneday-focus.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
             <img src="/work/oneday-history.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
             <img src="/work/oneday-card.webp" alt="" width="1800" height="1125" loading="lazy" decoding="async">
             <img src="/work/oneday-landing.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async">
-            <canvas class="buckets" data-tiles></canvas>
-            <span class="corner corner--tl"></span><span class="corner corner--tr"></span><span class="corner corner--bl"></span><span class="corner corner--br"></span>
           </div>
           <div class="view__hud">
             <span>Pass <b data-case-pass>01 / 05</b></span>
@@ -181,24 +188,23 @@
       <div class="spec" data-up><dt>Languages</dt><dd>2<small>English &amp; Russian</small></dd></div>
     </dl>
 
-    <!-- ЕЩЁ РАБОТЫ: концепты и личные проекты. Каждая карточка — маленький
-         вьюпорт; при наведении второй кадр дорендеривается бакетами.
+    <!-- ЕЩЁ РАБОТЫ: концепты и личные проекты. Каждая карточка — маленькое
+         окно; при наведении второй кадр проявляется из дымки.
          Ритм: широкая (Hour) — пара концептов — пара инструментов — широкая. -->
     <div class="more" id="more">
       <header class="more__head">
         <p class="label">Work · 02–07</p>
         <div>
-          <h3 class="more__title" data-up>More renders</h3>
+          <h3 class="more__title" data-words>More renders</h3>
           <p class="more__note" data-up>Concepts and personal projects — tools for the things I do besides client work, editing and video, and pages for products and studios that don't exist. Each one is labelled for what it is.</p>
         </div>
       </header>
 
       <div class="renders">
         <article class="render render--wide" data-up>
-          <div class="render__frame" data-alt-frame data-a="Golden hour" data-b="Night">
-            <img src="/work/hour-golden.webp" alt="Hour concept page at golden hour" width="960" height="540" loading="lazy" decoding="async">
-            <img class="render__alt" src="/work/hour-night.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
-            <canvas class="buckets" data-tiles></canvas>
+          <div class="render__frame xfade" data-alt-frame data-a="Golden hour" data-b="Night">
+            <img class="is-on" src="/work/hour-golden.webp" alt="Hour concept page at golden hour" width="960" height="540" loading="lazy" decoding="async">
+            <img src="/work/hour-night.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
           </div>
           <div class="render__body">
             <p class="render__meta"><span>02</span><span>Concept</span><span>Landing page</span></p>
@@ -209,10 +215,9 @@
         </article>
 
         <article class="render" data-up>
-          <div class="render__frame" data-alt-frame data-a="Beauty" data-b="Exploded">
-            <img src="/work/orrin-hero.webp" alt="Orrin concept product page" width="960" height="540" loading="lazy" decoding="async">
-            <img class="render__alt" src="/work/orrin-inside.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
-            <canvas class="buckets" data-tiles></canvas>
+          <div class="render__frame xfade" data-alt-frame data-a="Beauty" data-b="Exploded">
+            <img class="is-on" src="/work/orrin-hero.webp" alt="Orrin concept product page" width="960" height="540" loading="lazy" decoding="async">
+            <img src="/work/orrin-inside.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
           </div>
           <div class="render__body">
             <p class="render__meta"><span>03</span><span>Concept</span><span>Product page</span></p>
@@ -223,10 +228,9 @@
         </article>
 
         <article class="render" data-up>
-          <div class="render__frame" data-alt-frame data-a="Sphere" data-b="Knot">
-            <img src="/work/noctiv-hero.webp" alt="Noctiv concept studio site" width="960" height="540" loading="lazy" decoding="async">
-            <img class="render__alt" src="/work/noctiv-knot.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
-            <canvas class="buckets" data-tiles></canvas>
+          <div class="render__frame xfade" data-alt-frame data-a="Sphere" data-b="Knot">
+            <img class="is-on" src="/work/noctiv-hero.webp" alt="Noctiv concept studio site" width="960" height="540" loading="lazy" decoding="async">
+            <img src="/work/noctiv-knot.webp" alt="" width="960" height="540" loading="lazy" decoding="async">
           </div>
           <div class="render__body">
             <p class="render__meta"><span>04</span><span>Concept</span><span>Studio site</span></p>
@@ -237,10 +241,9 @@
         </article>
 
         <article class="render" data-up>
-          <div class="render__frame" data-alt-frame data-a="Landing" data-b="App">
-            <img src="/work/beatgrid-hero.webp" alt="Beatgrid landing page" width="1440" height="810" loading="lazy" decoding="async">
-            <img class="render__alt" src="/work/beatgrid-app.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-            <canvas class="buckets" data-tiles></canvas>
+          <div class="render__frame xfade" data-alt-frame data-a="Landing" data-b="App">
+            <img class="is-on" src="/work/beatgrid-hero.webp" alt="Beatgrid landing page" width="1440" height="810" loading="lazy" decoding="async">
+            <img src="/work/beatgrid-app.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
           </div>
           <div class="render__body">
             <p class="render__meta"><span>05</span><span>Personal project</span><span>Web app</span></p>
@@ -251,10 +254,9 @@
         </article>
 
         <article class="render" data-up>
-          <div class="render__frame" data-alt-frame data-a="Desktop" data-b="Phone">
-            <img src="/work/feedcheck-hero.webp" alt="Feedcheck app" width="1440" height="810" loading="lazy" decoding="async">
-            <img class="render__alt" src="/work/feedcheck-phone.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-            <canvas class="buckets" data-tiles></canvas>
+          <div class="render__frame xfade" data-alt-frame data-a="Desktop" data-b="Phone">
+            <img class="is-on" src="/work/feedcheck-hero.webp" alt="Feedcheck app" width="1440" height="810" loading="lazy" decoding="async">
+            <img src="/work/feedcheck-phone.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
           </div>
           <div class="render__body">
             <p class="render__meta"><span>06</span><span>Personal project</span><span>Web app</span></p>
@@ -265,10 +267,9 @@
         </article>
 
         <article class="render render--wide" data-up>
-          <div class="render__frame" data-alt-frame data-a="Landing" data-b="Prompter">
-            <img src="/work/hookline-hero.webp" alt="Hookline landing page" width="1440" height="810" loading="lazy" decoding="async">
-            <img class="render__alt" src="/work/hookline-prompter.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-            <canvas class="buckets" data-tiles></canvas>
+          <div class="render__frame xfade" data-alt-frame data-a="Landing" data-b="Prompter">
+            <img class="is-on" src="/work/hookline-hero.webp" alt="Hookline landing page" width="1440" height="810" loading="lazy" decoding="async">
+            <img src="/work/hookline-prompter.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
           </div>
           <div class="render__body">
             <p class="render__meta"><span>07</span><span>Personal project</span><span>Web app</span></p>
@@ -285,11 +286,11 @@
   <section class="sec" id="services">
     <header class="sec__head">
       <p class="label">Services</p>
-      <div><h2 class="sec__title" data-up>What I build</h2></div>
+      <div><h2 class="sec__title" data-words>What I build</h2></div>
     </header>
 
     <div class="svc">
-      <article class="svc__item" data-up>
+      <article class="svc__item spot" data-up>
         <div class="svc__viz viz-page" aria-hidden="true">
           <i class="viz-page__nav"></i><i class="viz-page__h"></i><i class="viz-page__h viz-page__h--s"></i><i class="viz-page__btn"></i><i class="viz-page__img"></i>
         </div>
@@ -298,7 +299,7 @@
         <p class="svc__p">For launches, products and founders. Copy, design and code in one pair of hands, live in one to two weeks.</p>
       </article>
 
-      <article class="svc__item" data-up>
+      <article class="svc__item spot" data-up>
         <div class="svc__viz viz-term" aria-hidden="true">
           <p><b>$</b> npm test</p>
           <p class="ok">✓ 24 files</p>
@@ -311,7 +312,7 @@
         <p class="svc__p">From an idea to a working product: accounts, database, sync, tests. Code you can hand to a team later.</p>
       </article>
 
-      <article class="svc__item" data-up>
+      <article class="svc__item spot" data-up>
         <!-- Кивок моушен-дизайнерам: график скорости, как в After Effects,
              только это обычная CSS-кривая. Анимирует src/sections.js -->
         <div class="svc__viz viz-curve" aria-hidden="true" data-curve>
@@ -329,7 +330,7 @@
         <p class="svc__p">Scroll stories, WebGL, transitions and micro-interactions with the right easing. Smooth on a phone, not only on a MacBook.</p>
       </article>
 
-      <article class="svc__item" data-up>
+      <article class="svc__item spot" data-up>
         <div class="svc__viz viz-label" aria-hidden="true">
           <span class="viz-label__a">your-studio.com</span>
           <span class="viz-label__b">built by galaksss</span>
@@ -346,7 +347,7 @@
   <section class="sec" id="process">
     <header class="sec__head">
       <p class="label">Process</p>
-      <div><h2 class="sec__title" data-up>How it goes</h2></div>
+      <div><h2 class="sec__title" data-words>How it goes</h2></div>
     </header>
 
     <ol class="log" data-log>
@@ -404,9 +405,10 @@
   </section>
 
   <!-- КОНТАКТ ============================================================ -->
-  <section class="contact" id="contact">
+  <section class="contact" id="contact" data-contact>
+    <div class="contact__glow" aria-hidden="true"></div>
     <p class="label">Contact</p>
-    <h2 class="contact__title" data-up>Have something<br>to ship?</h2>
+    <h2 class="contact__title" data-words>Have something<br>to ship?</h2>
     <div class="contact__row" data-up>
       <p class="contact__lead">A landing page, a web app or an idea on a napkin. A few lines are enough.</p>
       <div class="contact__cta">
@@ -420,7 +422,7 @@
 
 <footer class="foot">
   <span>© 2026 galaksss</span>
-  <span class="foot__mid">The viewport up top is rendered live in your browser — no video.</span>
+  <span class="foot__mid">Designed and built by one person, frame by frame.</span>
   <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
 </footer>
 

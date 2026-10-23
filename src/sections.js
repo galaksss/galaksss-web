@@ -1,12 +1,11 @@
-import { createBuckets } from './buckets.js';
+import { createSeg, createFade } from './motion.js';
 
 /*
   ОСТАЛЬНЫЕ СЕКЦИИ
-  · [data-up] проявляются по скроллу (один раз);
   · цифры кейса досчитываются;
-  · карточки «More renders»: кадр дорендеривается бакетами, когда показался,
-    а при наведении (на телефоне — по тапу) рендерится второй кадр проекта;
-  · лог процесса: строки считаются по очереди — queued → rendering → done;
+  · карточки «More renders»: при наведении (на телефоне — по тапу)
+    проявляется второй кадр проекта;
+  · лог процесса: строки идут по очереди — queued → rendering → done;
   · кривая скорости в услуге «Motion for the web»;
   · почта копируется по клику.
 */
@@ -14,15 +13,6 @@ const once = (el, fn, opts = { rootMargin: '0px 0px -12% 0px' }) => {
   const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); fn(); } }, opts);
   io.observe(el);
 };
-
-function initReveal(reduced) {
-  const els = document.querySelectorAll('[data-up]');
-  if (reduced) { els.forEach(el => el.classList.add('is-in')); return; }
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-  }), { rootMargin: '0px 0px -10% 0px' });
-  els.forEach(el => io.observe(el));
-}
 
 function initCounts(reduced) {
   document.querySelectorAll('[data-count]').forEach(el => {
@@ -41,41 +31,35 @@ function initCounts(reduced) {
   });
 }
 
-function initRenders(reduced) {
-  const all = [];
-  document.querySelectorAll('[data-alt-frame]').forEach(f => {
+/* Карточки работ: мини-окно с именем и двумя кадрами проекта. Наведение
+   (на телефоне — тап) или вкладка — второй кадр проявляется из дымки,
+   плашка вкладки переезжает. Полоску окна строим здесь, до initMotion,
+   чтобы свет под курсором увидел и эти окна. */
+function buildRenders() {
+  return [...document.querySelectorAll('[data-alt-frame]')].map(f => {
     const card = f.closest('.render');
     const a = f.dataset.a || 'Beauty', b = f.dataset.b || 'Pass 2';
-    // мини-окно: полоска с именем и двумя проходами над кадром
-    const view = document.createElement('div');
-    view.className = 'render__view';
     const num = card.querySelector('.render__meta span')?.textContent || '';
     const name = card.querySelector('.render__t')?.textContent || '';
+    const view = document.createElement('div');
+    view.className = 'render__view spot';
     view.innerHTML = `<div class="render__bar"><span class="render__name">${num} · ${name.toLowerCase()}</span>
-      <div class="passes passes--sm" role="tablist" aria-label="${name} frames"><button class="is-on" role="tab" aria-selected="true">${a}</button><button role="tab" aria-selected="false">${b}</button></div></div>`;
+      <div class="seg" role="tablist" aria-label="${name} frames" data-seg><i class="seg__pill" aria-hidden="true"></i><button class="is-on" role="tab" aria-selected="true">${a}</button><button role="tab" aria-selected="false">${b}</button></div></div>`;
     f.before(view);
     view.append(f);
-    const btns = [...view.querySelectorAll('button')];
-
-    const tiles = createBuckets(f.querySelector('[data-tiles]'), { size: 36 });
-    const item = { tiles, seen: reduced };
-    all.push(item);
-    if (!reduced) {
-      tiles.cover();
-      once(f, () => { item.seen = true; tiles.run(1100); });
-    }
-    const set = alt => {
-      if (f.classList.contains('is-alt') === alt) return;
-      f.classList.toggle('is-alt', alt);
-      btns.forEach((x, k) => { x.classList.toggle('is-on', k === +alt); x.setAttribute('aria-selected', k === +alt); });
-      if (!reduced && item.seen) tiles.run(480);
-    };
-    btns.forEach((x, k) => x.addEventListener('click', () => set(k === 1)));
-    card.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') set(true); });
-    card.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(false); });
-    f.addEventListener('click', e => { if (e.pointerType !== 'mouse') set(!f.classList.contains('is-alt')); });
+    return { card, f, segEl: view.querySelector('[data-seg]') };
   });
-  addEventListener('resize', () => all.forEach(i => (i.seen ? i.tiles.finish() : i.tiles.cover())));
+}
+
+function initRenders(list) {
+  list.forEach(({ card, f, segEl }) => {
+    const fade = createFade(f);
+    const set = i => { fade.show(i); seg.set(i); };
+    const seg = createSeg(segEl, set);
+    card.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') set(1); });
+    card.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(0); });
+    f.addEventListener('click', e => { if (e.pointerType !== 'mouse') set(fade.index ? 0 : 1); });
+  });
 }
 
 function initLog(reduced) {
@@ -140,10 +124,14 @@ function initCopy() {
   });
 }
 
-export function initSections(reduced) {
-  initReveal(reduced);
+// строит разметку, которую должны увидеть общие модули движения
+export function buildSections() {
+  return { renders: buildRenders() };
+}
+
+export function initSections(reduced, built) {
   initCounts(reduced);
-  initRenders(reduced);
+  initRenders(built.renders);
   initLog(reduced);
   initCurve(reduced);
   initCopy();

@@ -1,50 +1,34 @@
-import { createBuckets } from './buckets.js';
+import { REDUCED, createSeg, createFade } from './motion.js';
 
 /*
   КЕЙС ONEDAY: история со скроллом
   Слева шаги, справа липкое окно. Шаг, дошедший до середины экрана,
-  становится активным, и его экран в окне «дорендеривается» бакетами —
-  как смена прохода в герое. Вкладки над окном прокручивают к шагу.
-  Первый рендер — когда окно впервые показалось.
+  становится активным; экран в окне сменяется кроссфейдом из дымки,
+  плашка вкладки переезжает к нему. Вкладки прокручивают к своему шагу.
 */
 const pad = n => String(n).padStart(2, '0');
 
-export function initCase(reduced) {
+export function initCase() {
   const box = document.querySelector('[data-case]');
   if (!box) return;
   const view = box.querySelector('[data-case-view]');
-  const imgs = [...view.querySelectorAll('[data-frame] > img')];
-  const tabs = [...view.querySelectorAll('[data-go]')];
+  const fade = createFade(view.querySelector('[data-frame]'));
   const steps = [...box.querySelectorAll('[data-step]')];
   const label = view.querySelector('[data-case-pass]');
-  const tiles = createBuckets(view.querySelector('[data-tiles]'), { size: 40 });
-  let cur = -1, seen = reduced;
+  const seg = createSeg(view.querySelector('[data-seg]'), k => {
+    steps[k].scrollIntoView({ block: 'center', behavior: REDUCED ? 'auto' : 'smooth' });
+  });
 
-  function show(i) {
-    if (i === cur) return;
-    cur = i;
-    imgs.forEach((im, k) => im.classList.toggle('is-on', k === i));
-    tabs.forEach((t, k) => t.classList.toggle('is-on', k === i));
+  const show = i => {
+    fade.show(i);
+    seg.set(i);
     steps.forEach((s, k) => s.classList.toggle('is-active', k === i));
-    label.textContent = `${pad(i + 1)} / ${pad(imgs.length)}`;
-    if (seen && !reduced) tiles.run(620);
-  }
+    label.textContent = `${pad(i + 1)} / ${pad(steps.length)}`;
+  };
   show(0);
-  if (!reduced) tiles.cover();
 
-  new IntersectionObserver(([e], io) => {
-    if (!e.isIntersecting) return;
-    seen = true; io.disconnect();
-    if (!reduced) tiles.run(1000);
-  }, { threshold: 0.35 }).observe(view);
-
-  const stepIO = new IntersectionObserver(es => es.forEach(e => {
+  const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) show(steps.indexOf(e.target));
   }), { rootMargin: '-50% 0px -50% 0px' });
-  steps.forEach(s => stepIO.observe(s));
-
-  tabs.forEach((t, k) => t.addEventListener('click', () => {
-    steps[k].scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
-  }));
-  addEventListener('resize', () => { if (seen) tiles.finish(); });
+  steps.forEach(s => io.observe(s));
 }
