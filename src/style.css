@@ -11,7 +11,7 @@
   --panel-2:#121216;
   --ink:#F2F2F5;
   --ink-2:#A6A6B0;
-  --mute:#62626D;
+  --mute:#83838F;          /* ≥ 4.5:1 на чёрном и на панелях */
   --line:rgba(255,255,255,.085);
   --line-2:rgba(255,255,255,.16);
   --uv:#8C74FF;
@@ -126,7 +126,7 @@ ul,ol{list-style:none}
 .view__live{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--ink-2)}
 
 /* ---------- герой ---------- */
-.hero{position:relative;isolation:isolate;min-height:100svh;display:grid;grid-template-columns:minmax(0,5.4fr) minmax(0,6.6fr);grid-template-rows:1fr auto;gap:0 clamp(32px,4vw,64px);align-items:center;padding:calc(var(--top) + clamp(28px,5vh,64px)) var(--pad) 0}
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;display:grid;grid-template-columns:minmax(0,5.4fr) minmax(0,6.6fr);grid-template-rows:1fr auto;gap:0 clamp(32px,4vw,64px);align-items:center;padding:calc(var(--top) + clamp(28px,5vh,64px)) var(--pad) 0}
 /* мягкое свечение за витриной: многоступенчатый градиент плюс шум */
 .hero__glow{position:absolute;z-index:-1;right:calc(var(--pad) - 14vw);top:50%;width:min(1200px,95vw);aspect-ratio:1;translate:0 -52%;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle closest-side,rgba(140,116,255,.13),rgba(140,116,255,.10) 14%,rgba(130,120,255,.075) 26%,rgba(110,130,255,.05) 38%,rgba(100,140,255,.03) 50%,rgba(94,160,255,.012) 62%,transparent 72%)}
@@ -343,6 +343,12 @@ ul,ol{list-style:none}
   .view__title{display:none}
   .view__bar{justify-content:center}
   .contact__cta .btn{width:100%;justify-content:center}
+}
+
+/* на сенсорных экранах вкладки — под палец */
+@media (pointer:coarse){
+  .seg button{min-height:36px;padding-inline:12px}
+  .seg__pill{top:3px;bottom:3px}
 }
 
 /* при reduced motion — только затухание, без сдвигов, размытия и переездов */
