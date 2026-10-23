@@ -267,10 +267,11 @@ ul,ol{list-style:none}
 .od-col__best{margin-bottom:8px;text-align:center;font-size:12px;color:var(--od-muted)}
 .od-col__stack{display:flex;flex-direction:column;gap:3px;transform-origin:bottom;transform:scaleY(0);opacity:0;transition:transform 900ms var(--ease) var(--d,0ms),opacity 600ms var(--ease) var(--d,0ms)}
 .od-hist__chart.is-in .od-col__stack{transform:none;opacity:1}
-/* столбики приглушены, день под курсором — в полном цвете (как в «Истории» OneDay) */
-.od-col__stack i{display:block;border-radius:2px;background:color-mix(in oklab,var(--c) 42%,#000);transition:background-color 200ms var(--ease)}
+/* столбики в полном цвете; пока курсор на дне и открыта подсказка, остальные дни
+   приглушаются, а день под курсором остаётся ярким (как в «Истории» OneDay) */
+.od-col__stack i{display:block;border-radius:2px;background:var(--c);transition:background-color 220ms var(--ease)}
 .od-col__stack i:first-child{border-radius:7px 7px 2px 2px}
-.od-col.is-hover .od-col__stack i{background:var(--c)}
+.od-hist__chart.has-hover .od-col:not(.is-hover) .od-col__stack i{background:color-mix(in oklab,var(--c) 42%,#000)}
 .od-col__day{position:absolute;left:0;right:0;bottom:-30px;text-align:center;font-size:13px;color:var(--od-muted)}
 .od-col.is-hover .od-col__day,.od-col.is-best .od-col__day{color:var(--od-text);font-weight:500}
 .od-col__mark{position:absolute;left:50%;bottom:-44px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%}

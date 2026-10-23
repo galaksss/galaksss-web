@@ -283,9 +283,10 @@ export function createDemo(root, frame, reduced) {
       const left = col.offsetLeft - 240 - 14;
       tip.style.left = (left >= 0 ? left : col.offsetLeft + col.offsetWidth + 14) + 'px';
       tip.classList.add('is-on');
+      chart.classList.add('has-hover');
       cols.forEach((c, k) => c.classList.toggle('is-hover', k === i));
     };
-    const hideTip = () => { tip.classList.remove('is-on'); cols.forEach(c => c.classList.remove('is-hover')); };
+    const hideTip = () => { tip.classList.remove('is-on'); chart.classList.remove('has-hover'); cols.forEach(c => c.classList.remove('is-hover')); };
     hideTip();
     chart.classList.remove('is-in');
     if (reduced) { chart.classList.add('is-in'); hours.textContent = '30.1'; return; }
