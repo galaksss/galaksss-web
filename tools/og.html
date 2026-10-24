@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- Исходник public/og.png (превью ссылки, 1200×630). Снять headless-Edge:
+     msedge --headless=new --hide-scrollbars --allow-file-access-from-files --window-size=1200,630
+            --virtual-time-budget=5000 --screenshot=og.png file:///…/site/tools/og.html
+     В картинке нет адреса сайта — при смене домена переснимать не нужно. -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#F2F2F5;--ink-2:#A6A6B0;--mute:#83838F;--line:rgba(255,255,255,.085);--line-2:rgba(255,255,255,.16);--uv:#8C74FF;--ok:#6CF2B0;--panel:#0A0A0C;
+  --mono:'JetBrains Mono',monospace;--noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+*{margin:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#000;color:var(--ink);font-family:'Schibsted Grotesk',sans-serif;-webkit-font-smoothing:antialiased}
+.og{position:relative;width:1200px;height:630px;overflow:hidden}
+.glow{position:absolute;left:470px;top:-260px;width:1100px;height:1100px;border-radius:50%;
+  background:radial-gradient(circle closest-side,rgba(140,116,255,.16),rgba(140,116,255,.11) 14%,rgba(130,120,255,.08) 26%,rgba(110,130,255,.05) 38%,rgba(100,140,255,.03) 50%,rgba(94,160,255,.012) 62%,transparent 72%)}
+.glow::after{content:'';position:absolute;inset:0;border-radius:inherit;background-image:var(--noise);opacity:.08;-webkit-mask:radial-gradient(circle closest-side,#000 30%,transparent 72%)}
+
+.top{position:absolute;left:64px;right:64px;top:54px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:25px;letter-spacing:-.035em}
+.mark{width:18px;height:18px;border:2px solid var(--ink);position:relative}
+.mark::after{content:'';position:absolute;inset:3px;background:var(--uv)}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--uv)}
+.kicker i{width:7px;height:7px;background:var(--uv)}
+
+h1{position:absolute;left:62px;top:176px;font-weight:700;font-size:70px;line-height:.98;letter-spacing:-.05em}
+h1 span{display:block}
+.dim{color:var(--mute)}
+.lead{position:absolute;left:64px;top:356px;width:430px;font-size:20px;line-height:1.45;color:var(--ink-2);letter-spacing:-.01em}
+.avail{position:absolute;left:64px;bottom:56px;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.avail i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px rgba(108,242,176,.7)}
+
+/* окна с настоящими работами: сзади Noctiv, спереди OneDay */
+.win{position:absolute;border:1px solid var(--line-2);border-radius:12px;background:var(--panel);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 0 1px rgba(0,0,0,.4)}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:34px;padding:0 14px;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}
+.dots i{width:9px;height:9px;border-radius:50%;background:#1E1E24}
+.url{font-family:var(--mono);font-size:11.5px;color:var(--mute);letter-spacing:.02em}
+.shot{position:relative;overflow:hidden}
+.shot img{display:block;position:absolute;left:0;top:0}
+
+.w-back{left:690px;top:92px;width:560px}
+.w-back .shot{height:315px}
+.w-back .shot img{width:620px;left:-20px}   /* сфера и «behave.» попадают в видимую полосу */
+.w-back::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.16)}
+
+.w-front{left:590px;top:318px;width:560px}
+.w-front .shot{height:332px}
+.w-front .shot img{width:760px}   /* приближение: видно меню, день и карточки целей */
+</style></head>
+<body><div class="og">
+  <div class="glow"></div>
+
+  <div class="top">
+    <div class="logo"><i class="mark"></i>galaksss</div>
+    <div class="kicker"><i></i>Landing pages · Web apps · MVPs</div>
+  </div>
+
+  <h1><span>Websites, built</span><span class="dim">frame by frame.</span></h1>
+  <p class="lead">Landing pages and web apps for founders and studios — designed and built with a motion designer’s eye.</p>
+  <div class="avail"><i></i>Taking new projects</div>
+
+  <div class="win w-back">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">noctiv · fictional brand</span><span></span></div>
+    <div class="shot"><img src="../public/work/noctiv-hero.jpg"></div>
+  </div>
+  <div class="win w-front">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">myoneday.vercel.app</span><span></span></div>
+    <div class="shot"><img src="../public/work/oneday-goals.webp"></div>
+  </div>
+</div></body></html>
