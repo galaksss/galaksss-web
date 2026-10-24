@@ -5,13 +5,14 @@ import { REDUCED, createSeg, createFade, swapText } from './motion.js';
   Окно браузера с настоящими работами: OneDay, Hour, Orrin, Noctiv.
   Кадры сменяются сами раз в 4,5 с — кроссфейд из дымки, как экраны
   в OneDay; тонкая линия под кадром показывает, сколько до следующего.
-  Вкладки переключают. Отсчёт стоит, пока мышью водят по окну, и идёт
-  дальше через 3 с покоя: курсор, который просто лежит на витрине
-  (страницу открыли, а мышь уже там), смену не держит. Окно чуть
-  наклоняется за курсором (до 3–4°). При reduced motion — без автосмены и наклона.
+  Вкладки переключают. Под курсором смена не встаёт, а идёт втрое
+  медленнее (раз в 15 с): успеть прочитать и открыть сайт можно, а курсор,
+  который просто лежит на витрине с загрузки, её не останавливает. Окно
+  чуть наклоняется за курсором (до 3–4°). При reduced motion — без
+  автосмены и наклона.
 */
 const STEP = 4500;
-const IDLE = 3000;
+const SLOW = 0.3;   // скорость отсчёта под курсором
 
 export function initReel() {
   const reel = document.querySelector('[data-reel]');
@@ -53,26 +54,19 @@ export function initReel() {
   }
 
   if (REDUCED) return;
-  // автосмена: отсчёт идёт, пока витрину видно и по ней не водят мышью
-  let raf = 0, last = 0, visible = false, paused = false, idle = 0;
+  // автосмена: отсчёт идёт, пока витрину видно; под курсором — медленнее, но не стоит
+  let raf = 0, last = 0, visible = false, rate = 1;
   const frame = t => {
     raf = requestAnimationFrame(frame);
     const dt = last ? Math.min(t - last, 100) : 0; last = t;
-    if (paused) return;
-    elapsed += dt;
+    elapsed += dt * rate;
     bar.parentElement.style.setProperty('--p', Math.min(1, elapsed / STEP).toFixed(4));
     if (elapsed >= STEP) show((fade.index + 1) % fade.length);
   };
   const run = () => { if (!raf && visible && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } };
   const stop = () => { cancelAnimationFrame(raf); raf = 0; };
-  const resume = () => { clearTimeout(idle); paused = false; };
-  reel.addEventListener('pointermove', e => {
-    if (e.pointerType !== 'mouse') return;
-    paused = true;
-    clearTimeout(idle);
-    idle = setTimeout(resume, IDLE);
-  });
-  reel.addEventListener('pointerleave', resume);
+  reel.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') rate = SLOW; });
+  reel.addEventListener('pointerleave', () => { rate = 1; });
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : stop(); }).observe(reel);
   document.addEventListener('visibilitychange', () => (document.hidden ? stop() : run()));
 }

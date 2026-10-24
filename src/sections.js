@@ -1,4 +1,4 @@
-import { createSeg, createFade, ease } from './motion.js';
+import { createSeg, createFade, swapText, ease } from './motion.js';
 
 /*
   ОСТАЛЬНЫЕ СЕКЦИИ
@@ -65,6 +65,9 @@ function initRenders(list) {
   });
 }
 
+/* Лог процесса: каждая строка запускается, когда сама доехала до экрана
+   (на телефоне список длинный — раньше нижние строки успевали стать done,
+   пока до них листали). Несколько строк на экране сразу — по очереди, шаг 650 мс. */
 function initLog(reduced) {
   const log = document.querySelector('[data-log]');
   if (!log) return;
@@ -72,10 +75,17 @@ function initLog(reduced) {
   const st = r => r.querySelector('.log__st');
   if (reduced) { rows.forEach(r => r.classList.add('is-run', 'is-done')); return; }
   rows.forEach(r => { st(r).textContent = 'queued'; });
-  once(log, () => rows.forEach((r, i) => {
-    setTimeout(() => { r.classList.add('is-run'); st(r).textContent = 'in progress'; }, i * 650);
-    setTimeout(() => { r.classList.add('is-done'); st(r).textContent = 'done'; }, i * 650 + 900);
-  }), { rootMargin: '0px 0px -25% 0px' });
+  let next = 0;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    const r = e.target, now = performance.now();
+    const wait = Math.max(0, next - now);
+    next = Math.max(now, next) + 650;
+    setTimeout(() => { r.classList.add('is-run'); swapText(st(r), 'in progress'); }, wait);
+    setTimeout(() => { r.classList.add('is-done'); swapText(st(r), 'done'); }, wait + 900);
+  }), { rootMargin: '0px 0px -20% 0px' });
+  rows.forEach(r => io.observe(r));
 }
 
 /* Кривая скорости: вертикальная линия-время идёт равномерно, точка на кривой

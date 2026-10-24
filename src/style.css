@@ -411,13 +411,15 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .log{margin-top:clamp(48px,6vw,80px)}
 .log__row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:12px var(--g);align-items:center;padding:24px 0;border-top:1px solid var(--line)}
 .log__row:last-child{border-bottom:1px solid var(--line)}
-.log__main{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr) minmax(0,1.3fr) minmax(0,.7fr);gap:12px var(--g);align-items:center}
+.log__main{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr) minmax(0,1.3fr) 96px;gap:12px var(--g);align-items:center}
 .log__n{font-family:var(--mono);font-size:12px;color:var(--mute)}
 .log__t{font-weight:700;font-size:clamp(20px,1.7vw,24px);letter-spacing:-.03em;line-height:1.1}
 .log__p{font-size:15px;line-height:1.6;color:var(--ink-2)}
 .log__bar{height:2px;background:var(--line-2);overflow:hidden;border-radius:2px}
 .log__bar i{display:block;height:100%;background:var(--ink-2);transform-origin:left;transition:transform 1100ms var(--ease),background-color 400ms var(--ease)}
-.log__st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);text-align:right;transition:color 400ms var(--ease)}
+/* статус в одну строку и в колонке под самое длинное «in progress» — иначе смена слова переносит его и строка прыгает */
+.log__st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;color:var(--ok);text-align:right;transition:color 400ms var(--ease),opacity 200ms var(--ease)}
+.log__st.is-swap{opacity:0}
 .js .log__bar i{transform:scaleX(0)}
 .js .log__row.is-run .log__bar i{transform:scaleX(1)}
 .js .log__row .log__st{color:var(--mute)}
@@ -456,7 +458,7 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
   .menu{display:none}
   .svc{grid-template-columns:repeat(2,minmax(0,1fr))}
   .specs{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .log__main{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 90px 60px}
+  .log__main{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 90px 96px}
 }
 @media (max-width:900px){
   :root{--top:56px}
@@ -480,10 +482,12 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
   .render--wide{grid-template-columns:1fr}
   .render--wide .render__body{margin-top:22px}
   .about__side{grid-template-columns:1fr}
-  .log__row{grid-template-columns:40px minmax(0,1fr);gap:8px 16px}
-  .log__main{grid-template-columns:minmax(0,1fr) 70px;gap:8px 16px}
+  /* телефон: номер у заголовка, справа статус, ниже текст и полоска во всю ширину */
+  .log__row{grid-template-columns:40px minmax(0,1fr);gap:8px 16px;align-items:start}
+  .log__n{padding-top:6px}
+  .log__main{grid-template-columns:minmax(0,1fr) 96px;gap:10px 16px}
   .log__p{grid-column:1 / -1}
-  .log__bar{display:none}
+  .log__bar{grid-column:1 / -1;margin-top:6px}
   .log__st{grid-row:1;grid-column:2}
 }
 @media (max-width:560px){
