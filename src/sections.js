@@ -1,4 +1,4 @@
-import { createSeg, createFade } from './motion.js';
+import { createSeg, createFade, ease } from './motion.js';
 
 /*
   ОСТАЛЬНЫЕ СЕКЦИИ
@@ -81,13 +81,6 @@ function initLog(reduced) {
 /* Кривая скорости: вертикальная линия-время идёт равномерно, точка на кривой
    показывает долю пути, квадрат под графиком едет с тем же easing.
    Кривая та же, что у всего сайта: cubic-bezier(.16, 1, .3, 1). */
-const P1 = [0.16, 1], P2 = [0.3, 1];
-const bez = (u, a, b) => 3 * (1 - u) ** 2 * u * a + 3 * (1 - u) * u ** 2 * b + u ** 3;
-function ease(x) {
-  let lo = 0, hi = 1;
-  for (let k = 0; k < 24; k++) { const mid = (lo + hi) / 2; if (bez(mid, P1[0], P2[0]) < x) lo = mid; else hi = mid; }
-  return bez((lo + hi) / 2, P1[1], P2[1]);
-}
 function initCurve(reduced) {
   const box = document.querySelector('[data-curve]');
   if (!box) return;

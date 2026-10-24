@@ -10,6 +10,15 @@
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const REDUCED = reduced;
 
+/* ---------- кривая сайта для JS: доля времени → доля пути, cubic-bezier(.16, 1, .3, 1) ---------- */
+const P1 = [0.16, 1], P2 = [0.3, 1];
+const bez = (u, a, b) => 3 * (1 - u) ** 2 * u * a + 3 * (1 - u) * u ** 2 * b + u ** 3;
+export function ease(x) {
+  let lo = 0, hi = 1;
+  for (let k = 0; k < 24; k++) { const mid = (lo + hi) / 2; if (bez(mid, P1[0], P2[0]) < x) lo = mid; else hi = mid; }
+  return bez((lo + hi) / 2, P1[1], P2[1]);
+}
+
 /* ---------- заголовки по словам ---------- */
 function splitWords(root) {
   let i = 0;
@@ -137,13 +146,71 @@ function initHeader() {
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   update();
 
-  // какой раздел пересекает середину экрана, тот и горит; между разделами — ничего
+  // какой раздел пересекает середину экрана, тот и горит; между разделами — ничего.
+  // Пока страница едет по клику на якорь, плашка уже стоит на цели
+  // и пролетающие мимо разделы не ловит
   const centered = new Set();
+  let going = false;
+  const spy = () => menu.set(links.findIndex(a => centered.has(a.dataset.sec)));
   const io = new IntersectionObserver(es => {
     es.forEach(e => (e.isIntersecting ? centered.add(e.target.id) : centered.delete(e.target.id)));
-    menu.set(links.findIndex(a => centered.has(a.dataset.sec)));
+    if (!going) spy();
   }, { rootMargin: '-45% 0px -50% 0px' });
   links.forEach(a => { const s = document.getElementById(a.dataset.sec); if (s) io.observe(s); });
+
+  initAnchors(
+    id => { going = true; menu.set(links.findIndex(a => a.dataset.sec === id)); },
+    () => { going = false; spy(); },
+  );
+}
+
+/* ---------- переходы по якорям: своя прокрутка на кривой сайта ----------
+   У родного плавного скролла своя скорость, и не узнать, когда он доехал.
+   Здесь — резкий старт и долгий мягкий доезд, длительность растёт
+   с расстоянием (0,7–1,4 с). Колесо, касание или клавиша сразу отдают
+   прокрутку человеку. При reduced motion — родной мгновенный переход. */
+function initAnchors(onStart, onEnd) {
+  if (reduced) return;
+  let raf = 0;
+  const stop = () => { if (!raf) return; cancelAnimationFrame(raf); raf = 0; onEnd(); };
+  ['wheel', 'touchstart', 'keydown'].forEach(t => addEventListener(t, stop, { passive: true }));
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const id = a.getAttribute('href').slice(1);
+    const el = id && document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    stop();
+    history.replaceState(null, '', '#' + id);
+
+    const root = document.documentElement;
+    const pad = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+    // цель пересчитываем каждый кадр: вдруг раскладка сдвинулась по дороге
+    const target = () => Math.max(0, Math.min(root.scrollHeight - innerHeight, el.getBoundingClientRect().top + scrollY - pad));
+    const from = scrollY, dist = Math.abs(target() - from);
+    const dur = Math.min(1400, 700 + Math.sqrt(dist) * 7);
+    // с клавиатуры фокус переезжает в раздел, как при родном переходе
+    const arrive = () => {
+      onEnd();
+      if (e.detail !== 0) return;
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    };
+
+    onStart(id);
+    if (dist < 2) { arrive(); return; }
+    let t0 = 0;
+    const step = t => {
+      if (!t0) t0 = t;
+      const p = Math.min(1, (t - t0) / dur);
+      scrollTo({ top: from + (target() - from) * ease(p), behavior: 'instant' });
+      if (p < 1) raf = requestAnimationFrame(step);
+      else { raf = 0; arrive(); }
+    };
+    raf = requestAnimationFrame(step);
+  });
 }
 
 /* ---------- свет под курсором: координаты получают все карточки рядом ---------- */

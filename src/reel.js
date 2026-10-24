@@ -5,10 +5,13 @@ import { REDUCED, createSeg, createFade, swapText } from './motion.js';
   Окно браузера с настоящими работами: OneDay, Hour, Orrin, Noctiv.
   Кадры сменяются сами раз в 4,5 с — кроссфейд из дымки, как экраны
   в OneDay; тонкая линия под кадром показывает, сколько до следующего.
-  Вкладки переключают, под курсором отсчёт стоит. Окно чуть наклоняется
-  за курсором (до 3–4°). При reduced motion — без автосмены и наклона.
+  Вкладки переключают. Отсчёт стоит, пока мышью водят по окну, и идёт
+  дальше через 3 с покоя: курсор, который просто лежит на витрине
+  (страницу открыли, а мышь уже там), смену не держит. Окно чуть
+  наклоняется за курсором (до 3–4°). При reduced motion — без автосмены и наклона.
 */
 const STEP = 4500;
+const IDLE = 3000;
 
 export function initReel() {
   const reel = document.querySelector('[data-reel]');
@@ -50,8 +53,8 @@ export function initReel() {
   }
 
   if (REDUCED) return;
-  // автосмена: отсчёт идёт, только пока витрину видно и курсор не на ней
-  let raf = 0, last = 0, visible = false, paused = false;
+  // автосмена: отсчёт идёт, пока витрину видно и по ней не водят мышью
+  let raf = 0, last = 0, visible = false, paused = false, idle = 0;
   const frame = t => {
     raf = requestAnimationFrame(frame);
     const dt = last ? Math.min(t - last, 100) : 0; last = t;
@@ -62,8 +65,14 @@ export function initReel() {
   };
   const run = () => { if (!raf && visible && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } };
   const stop = () => { cancelAnimationFrame(raf); raf = 0; };
-  reel.addEventListener('pointerenter', () => { paused = true; });
-  reel.addEventListener('pointerleave', () => { paused = false; });
+  const resume = () => { clearTimeout(idle); paused = false; };
+  reel.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    paused = true;
+    clearTimeout(idle);
+    idle = setTimeout(resume, IDLE);
+  });
+  reel.addEventListener('pointerleave', resume);
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : stop(); }).observe(reel);
   document.addEventListener('visibilitychange', () => (document.hidden ? stop() : run()));
 }
