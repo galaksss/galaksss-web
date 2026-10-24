@@ -503,6 +503,8 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 @media (pointer:coarse){
   .seg button{min-height:36px;padding-inline:12px}
   .seg__pill{top:3px;bottom:3px}
+  /* ссылки подвала: область нажатия 44 px, а подвал не выше — отрицательные поля съедают прибавку */
+  .foot a{display:inline-flex;align-items:center;min-height:44px;margin-block:-13px}
 }
 
 /* при reduced motion — только затухание, без сдвигов, размытия и переездов */
