@@ -27,7 +27,7 @@
   --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:var(--top)}
+html{scroll-behavior:smooth;scroll-padding-top:var(--top);overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -59,7 +59,7 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 
 /* переключатель с переезжающей плашкой */
 .seg{position:relative;display:flex;gap:2px;padding:3px;border-radius:7px;background:#000;border:1px solid var(--line)}
-.seg button{position:relative;z-index:1;padding:5px 11px;border-radius:4px;font-family:var(--mono);font-size:11px;color:var(--ink-2);white-space:nowrap;transition:color 150ms var(--ease)}
+.seg button{position:relative;z-index:1;padding:5px 11px;border-radius:4px;font-size:12.5px;font-weight:500;color:var(--ink-2);white-space:nowrap;transition:color 150ms var(--ease)}
 .seg button:hover{color:var(--ink)}
 .seg button.is-on{color:#000}
 .seg:not(.is-live) button.is-on{background:var(--ink)}
@@ -76,9 +76,6 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 }
 
 /* точка «идёт сейчас» */
-.live-dot{position:relative;display:inline-block;flex:none;width:6px;height:6px;border-radius:50%;background:var(--ok)}
-.live-dot::after{content:'';position:absolute;inset:0;border-radius:inherit;background:inherit;animation:ping 2s var(--ease) infinite}
-@keyframes ping{from{opacity:.7;scale:1}to{opacity:0;scale:3}}
 
 /* ---------- кнопки, ссылки, подписи ---------- */
 .btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;border-radius:5px;background:var(--ink);color:#000;font-weight:600;font-size:15px;letter-spacing:-.01em;white-space:nowrap;transition:background 150ms var(--ease),border-color 150ms var(--ease)}
@@ -92,14 +89,10 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .link span{transition:transform 200ms var(--ease)}
 .link:hover{border-color:var(--ink)}
 .link:hover span{transform:translate(1px,-1px)}
-.label{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
-.label::before{content:'';width:7px;height:7px;background:var(--uv)}
-.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--uv)}
-.kicker i{width:7px;height:7px;background:var(--uv)}
 
 /* ---------- шапка ---------- */
 .top{position:fixed;inset:0 0 auto;z-index:50;height:var(--top);display:flex;align-items:center;gap:28px;padding:0 var(--pad);border-bottom:1px solid transparent;transition:background-color 300ms var(--ease),border-color 300ms var(--ease)}
-.top.is-scrolled{background:rgba(0,0,0,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.top.is-scrolled{background:var(--bg);border-color:var(--line)}
 .top__read{position:absolute;left:0;right:0;bottom:-1px;height:1px;background:rgba(255,255,255,.5);transform-origin:left;transform:scaleX(var(--read,0));pointer-events:none}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.035em}
 .logo__mark{width:14px;height:14px;border:1.5px solid var(--ink);position:relative}
@@ -109,14 +102,13 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .menu a:hover,.menu a.is-on{color:var(--ink)}
 .menu__pill{position:absolute;z-index:0;left:0;top:0;bottom:0;width:var(--w,0px);border-radius:6px;background:var(--panel-2);border:1px solid var(--line);transform:translateX(var(--x,0px));opacity:0;transition:transform 450ms var(--ease),width 450ms var(--ease),opacity 300ms var(--ease)}
 .menu.has-on .menu__pill{opacity:1}
-.avail{margin-left:auto;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
-.top__cta{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 15px;border-radius:5px;background:var(--ink);color:#000;font-size:13.5px;font-weight:600;transition:background 150ms var(--ease)}
+.top__cta{margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 15px;border-radius:5px;background:var(--ink);color:#000;font-size:13.5px;font-weight:600;transition:background 150ms var(--ease)}
 .top__cta span{transition:transform 200ms var(--ease)}
 .top__cta:hover{background:#fff}
 .top__cta:hover span{transform:translateX(2px)}
 
 /* ---------- герой ---------- */
-.hero{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;display:grid;grid-template-columns:minmax(0,5.4fr) minmax(0,6.6fr);grid-template-rows:1fr auto;gap:0 clamp(32px,4vw,64px);align-items:center;padding:calc(var(--top) + clamp(28px,5vh,64px)) var(--pad) 0}
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;display:grid;grid-template-columns:minmax(0,5.4fr) minmax(0,6.6fr);grid-template-rows:auto;align-content:center;gap:0 clamp(32px,4vw,64px);align-items:center;padding:calc(var(--top) + clamp(28px,5vh,64px)) var(--pad) 0}
 /* мягкое свечение за витриной: многоступенчатый градиент плюс шум */
 .hero__glow{position:absolute;z-index:-1;right:calc(var(--pad) - 14vw);top:50%;width:min(1200px,95vw);aspect-ratio:1;translate:0 -52%;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle closest-side,rgba(140,116,255,.13),rgba(140,116,255,.10) 14%,rgba(130,120,255,.075) 26%,rgba(110,130,255,.05) 38%,rgba(100,140,255,.03) 50%,rgba(94,160,255,.012) 62%,transparent 72%)}
@@ -126,33 +118,27 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .ln--dim{color:var(--mute)}
 .hero__lead{margin-top:24px;max-width:30em;font-size:clamp(16px,1.15vw,17.5px);line-height:1.6;color:var(--ink-2)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-.hero__latest{grid-column:1 / -1;display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-top:clamp(36px,6vh,64px);padding:20px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2);transition:color 150ms var(--ease)}
-.hero__latest .mono{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
-.hero__latest:hover{color:var(--ink)}
 
 /* витрина работ */
 .reel{min-width:0}
 .reel__tilt{transform:perspective(1600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform 900ms var(--ease)}
 .reel__win{border:1px solid var(--line-2);border-radius:12px;background:var(--panel);overflow:hidden}
-.reel__bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;height:48px;padding:0 10px 0 16px;border-bottom:1px solid var(--line)}
-.reel__dots{display:flex;gap:6px}
-.reel__dots i{width:9px;height:9px;border-radius:50%;background:#1E1E24}
+.reel__bar{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;height:48px;padding:0 10px 0 16px;border-bottom:1px solid var(--line)}
 .reel__url{justify-self:end;padding-right:6px;font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap}
 .reel__screen{aspect-ratio:16/9}
 .reel__time{position:relative;display:block;height:2px;background:var(--line)}
 /* кадр витрины — ссылка на сам сайт; подпись проступает под курсором */
 .reel__open{position:absolute;z-index:3;left:0;right:0;top:48px;bottom:2px;display:flex;align-items:flex-end;justify-content:flex-end;padding:14px}
-.reel__open > span{display:inline-flex;gap:8px;padding:8px 12px;border-radius:6px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line-2);font-size:13px;font-weight:500;opacity:0;translate:0 4px;transition:opacity 300ms var(--ease),translate 300ms var(--ease)}
+.reel__open > span{display:inline-flex;gap:8px;padding:8px 12px;border-radius:6px;background:var(--panel);border:1px solid var(--line-2);font-size:13px;font-weight:500;opacity:0;translate:0 4px;transition:opacity 300ms var(--ease),translate 300ms var(--ease)}
 .reel__open:hover > span,.reel__open:focus-visible > span{opacity:1;translate:none}
 .reel__time i{position:absolute;inset:0;background:var(--ink-2);transform-origin:left;transform:scaleX(var(--p,0))}
 .reel__cap{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-top:18px;padding:0 4px}
-.reel__kind{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--uv)}
+.reel__kind{font-size:14px;color:var(--mute)}
 .reel__name{font-size:15px;color:var(--ink-2)}
 
 /* ---------- секции ---------- */
 .sec{padding:clamp(80px,10vw,140px) var(--pad) 0}
-.sec__head{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:24px var(--g);align-items:start;padding-top:clamp(40px,4.5vw,64px);border-top:1px solid var(--line)}
-.sec__head .label{margin-top:10px}
+.sec__head{display:grid;grid-template-columns:minmax(0,1fr);gap:24px var(--g);align-items:start;padding-top:clamp(40px,4.5vw,64px);border-top:1px solid var(--line)}
 .sec__title{font-weight:700;font-size:clamp(40px,4.8vw,72px);line-height:.95;letter-spacing:-.05em}
 .sec__lead{margin-top:22px;max-width:34em;font-size:clamp(16px,1.25vw,18.5px);line-height:1.55;color:var(--ink-2)}
 .sec__links{display:flex;flex-wrap:wrap;gap:28px;margin-top:28px}
@@ -171,8 +157,6 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .appwin:hover{border-color:var(--line-2)}
 .appwin:hover .render__go,.appwin:focus-visible .render__go{opacity:1;translate:none}
 .appwin__bar{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;height:36px;padding:0 16px;border-bottom:1px solid var(--line)}
-.appwin__dots{display:flex;gap:6px}
-.appwin__dots i{width:10px;height:10px;border-radius:50%;background:#26262B}
 .appwin__url{text-align:center;font-family:'Geist',var(--sans);font-size:11px;color:var(--mute)}
 .appwin__frame{position:relative;aspect-ratio:16/10;overflow:hidden}
 .case__dashes{display:flex;gap:8px;margin-top:20px}
@@ -220,7 +204,7 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .od-card__foot{display:flex;align-items:center;justify-content:space-between;height:40px;margin-top:auto}
 .od-card__actions{display:flex;gap:8px}
 .od-bar{width:96px;height:3px;border-radius:3px;background:var(--od-line);overflow:hidden}
-.od-bar i{display:block;height:100%;border-radius:3px;background:var(--c);transition:width 500ms var(--ease)}
+.od-bar i{display:block;width:100%;height:100%;border-radius:3px;background:var(--c);transform-origin:left;transform:scaleX(var(--p,0));transition:transform 500ms var(--ease)}
 .od-week{display:flex;gap:4px}
 .od-week i{width:10px;height:10px;border-radius:3px;background:#1D1D21}
 .od-week .is-done{background:var(--c)}
@@ -237,7 +221,7 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 @keyframes od-pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:none}}
 
 /* курсор: остриё в точке, нажатие — расходящееся кольцо */
-.od-cursor{position:absolute;z-index:20;left:520px;top:560px;transition:left 1000ms var(--ease),top 1000ms var(--ease);pointer-events:none}
+.od-cursor{position:absolute;z-index:20;left:0;top:0;transform:translate(520px,560px);transition:transform 1000ms var(--ease);pointer-events:none}
 .od-cursor svg{position:relative;transform:translate(-3px,-2px)}
 .od-ripple{position:absolute;left:-20px;top:-20px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,245,246,.7);animation:od-ripple 650ms var(--ease) forwards}
 @keyframes od-ripple{from{transform:scale(.3);opacity:1}to{transform:scale(1.3);opacity:0}}
@@ -283,7 +267,7 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .od-col.is-hover .od-col__day,.od-col.is-best .od-col__day{color:var(--od-text);font-weight:500}
 .od-col__mark{position:absolute;left:50%;bottom:-44px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%}
 .od-col__mark.is-on{background:#4ADE80}
-.od-tip{position:absolute;z-index:5;top:0;left:0;width:240px;padding:16px;border-radius:12px;border:1px solid var(--od-line-2);background:#0B0B0D;opacity:0;translate:0 4px;pointer-events:none;transition:opacity 180ms var(--ease),translate 180ms var(--ease),left 220ms var(--ease)}
+.od-tip{position:absolute;z-index:5;top:0;left:0;width:240px;padding:16px;border-radius:12px;border:1px solid var(--od-line-2);background:#0B0B0D;opacity:0;translate:0 4px;pointer-events:none;transition:opacity 180ms var(--ease),translate 180ms var(--ease),transform 220ms var(--ease)}
 .od-tip.is-on{opacity:1;translate:none}
 .od-tip .od-num{margin-top:4px;font-size:28px;line-height:32px}
 .od-tip ul{margin-top:8px;list-style:none}
@@ -328,14 +312,13 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 /* статистика */
 .specs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .spec{padding:22px 20px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.spec dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.spec dt{font-size:14px;color:var(--mute)}
 .spec dd{margin-top:16px;font-weight:700;font-size:clamp(32px,3vw,46px);line-height:1;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
-.spec dd small{display:block;margin-top:12px;font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:0;color:var(--ink-2)}
+.spec dd small{display:block;margin-top:12px;font-size:14px;font-weight:400;letter-spacing:0;color:var(--ink-2)}
 
 /* ---------- ещё работы ---------- */
 .more{margin-top:clamp(80px,10vw,140px)}
-.more__head{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:24px var(--g);align-items:start;padding-top:clamp(40px,4.5vw,64px);border-top:1px solid var(--line)}
-.more__head .label{margin-top:10px}
+.more__head{display:grid;grid-template-columns:minmax(0,1fr);gap:24px var(--g);align-items:start;padding-top:clamp(40px,4.5vw,64px);border-top:1px solid var(--line)}
 .more__title{font-weight:700;font-size:clamp(32px,3.4vw,52px);line-height:.98;letter-spacing:-.045em}
 .more__note{margin-top:18px;max-width:36em;font-size:16px;line-height:1.6;color:var(--ink-2)}
 .renders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(40px,5vw,72px) var(--g);margin-top:clamp(48px,6vw,80px)}
@@ -343,21 +326,19 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .render__view{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel);transition:translate 320ms var(--ease),border-color 320ms var(--ease)}
 .render__view:hover{translate:0 -2px;border-color:var(--line-2)}
 .render__bar{display:flex;align-items:center;justify-content:space-between;gap:10px;height:42px;padding:0 5px 0 14px;border-bottom:1px solid var(--line)}
-.render__name{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.render__name{font-size:13px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .render__frame{aspect-ratio:16/9}
 .render__link{display:block}
 /* подпись «Open the site» проступает под курсором, как в витрине первого экрана */
-.render__go{position:absolute;z-index:3;right:14px;bottom:14px;display:inline-flex;gap:8px;padding:8px 12px;border-radius:6px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line-2);font-size:13px;font-weight:500;opacity:0;translate:0 4px;transition:opacity 300ms var(--ease),translate 300ms var(--ease)}
+.render__go{position:absolute;z-index:3;right:14px;bottom:14px;display:inline-flex;gap:8px;padding:8px 12px;border-radius:6px;background:var(--panel);border:1px solid var(--line-2);font-size:13px;font-weight:500;opacity:0;translate:0 4px;transition:opacity 300ms var(--ease),translate 300ms var(--ease)}
 .render__link:hover .render__go,.render__link:focus-visible .render__go{opacity:1;translate:none}
 .render__t a{transition:color 150ms var(--ease)}
 .render__t a:hover{color:#fff;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 .render__body{margin-top:22px}
 .render--wide .render__body{margin-top:0}
-.render__meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
-.render__meta span:first-child{color:var(--uv)}
+.render__meta{margin-top:4px;font-size:14px;color:var(--mute)}
 .render__t{margin-top:10px;font-weight:700;font-size:clamp(22px,1.9vw,28px);line-height:1.05;letter-spacing:-.03em}
 .render__p{margin-top:12px;max-width:34em;font-size:15px;line-height:1.6;color:var(--ink-2)}
-.render__stack{margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--mute)}
 .render__open{margin-top:18px;font-size:14px}
 
 /* ---------- услуги ---------- */
@@ -365,7 +346,6 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .svc__item{display:flex;flex-direction:column;padding:12px 12px 26px;border:1px solid var(--line);border-radius:12px;background:var(--panel);transition:translate 320ms var(--ease),border-color 320ms var(--ease)}
 .svc__item:hover{translate:0 -2px;border-color:var(--line-2)}
 .svc__viz{position:relative;height:160px;border:1px solid var(--line);border-radius:8px;background:#000;overflow:hidden}
-.svc__n{margin:26px 10px 0;font-family:var(--mono);font-size:11.5px;color:var(--uv)}
 .svc__t{margin:10px 10px 0;font-weight:700;font-size:clamp(20px,1.6vw,23px);line-height:1.05;letter-spacing:-.03em}
 .svc__p{margin:10px 10px 0;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
 .svc__item .link{margin:22px 10px 0;align-self:flex-start;font-size:14px}
@@ -402,23 +382,22 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .viz-curve code{position:absolute;left:16px;bottom:10px;font-family:var(--mono);font-size:10.5px;color:var(--mute)}
 .viz-label{display:grid;place-content:center;gap:8px;text-align:center}
 .viz-label__a{font-weight:700;font-size:22px;letter-spacing:-.03em}
-.viz-label__b{position:relative;justify-self:center;font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+.viz-label__b{position:relative;justify-self:center;font-size:13px;color:var(--mute)}
 .viz-label__b::after{content:'';position:absolute;left:-4px;right:-4px;top:50%;height:1px;background:var(--uv);transform-origin:left;transition:transform 900ms var(--ease) .5s}
 .js .viz-label__b::after{transform:scaleX(0)}
 .js .is-in .viz-label__b::after{transform:scaleX(1)}
 
 /* ---------- процесс: лог ---------- */
 .log{margin-top:clamp(48px,6vw,80px)}
-.log__row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:12px var(--g);align-items:center;padding:24px 0;border-top:1px solid var(--line)}
+.log__row{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;padding:24px 0;border-top:1px solid var(--line)}
 .log__row:last-child{border-bottom:1px solid var(--line)}
 .log__main{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr) minmax(0,1.3fr) 96px;gap:12px var(--g);align-items:center}
-.log__n{font-family:var(--mono);font-size:12px;color:var(--mute)}
 .log__t{font-weight:700;font-size:clamp(20px,1.7vw,24px);letter-spacing:-.03em;line-height:1.1}
 .log__p{font-size:15px;line-height:1.6;color:var(--ink-2)}
 .log__bar{height:2px;background:var(--line-2);overflow:hidden;border-radius:2px}
 .log__bar i{display:block;height:100%;background:var(--ink-2);transform-origin:left;transition:transform 1100ms var(--ease),background-color 400ms var(--ease)}
 /* статус в одну строку и в колонке под самое длинное «in progress» — иначе смена слова переносит его и строка прыгает */
-.log__st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;color:var(--ok);text-align:right;transition:color 400ms var(--ease),opacity 200ms var(--ease)}
+.log__st{font-size:14px;white-space:nowrap;color:var(--ok);text-align:right;transition:color 400ms var(--ease),opacity 200ms var(--ease)}
 .log__st.is-swap{opacity:0}
 .js .log__bar i{transform:scaleX(0)}
 .js .log__row.is-run .log__bar i{transform:scaleX(1)}
@@ -434,8 +413,8 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .about__side p{font-size:16px;line-height:1.65;color:var(--ink-2)}
 .about__side .tools,.about__side .about__meta{grid-column:1 / -1}
 .tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.tools li{padding:5px 10px;border:1px solid var(--line-2);border-radius:5px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
-.about__side .about__meta{margin-top:6px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.tools li{padding:5px 10px;border:1px solid var(--line-2);border-radius:5px;font-size:13px;color:var(--ink-2)}
+.about__side .about__meta{margin-top:6px;font-size:14px;color:var(--mute)}
 
 /* ---------- контакт: свечение разгорается, пока секция въезжает ---------- */
 .contact{position:relative;isolation:isolate;margin-top:clamp(80px,10vw,140px);padding:clamp(40px,4.5vw,64px) var(--pad) clamp(72px,9vw,120px);border-top:1px solid var(--line);overflow:hidden}
@@ -447,10 +426,10 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 .contact__row{display:flex;flex-direction:column;align-items:flex-start;margin-top:clamp(28px,3.5vw,44px)}
 .contact__lead{max-width:26em;font-size:clamp(16px,1.25vw,18.5px);line-height:1.55;color:var(--ink-2)}
 .contact__cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.contact__queue{display:flex;align-items:center;gap:10px;margin-top:20px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.contact__queue{margin-top:20px;font-size:14px;color:var(--ink-2)}
 
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding:22px var(--pad);border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--mute)}
-.foot a{color:var(--ink-2);transition:color 150ms var(--ease)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding:22px var(--pad);border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
+.foot a{display:inline-block;padding:6px 0;margin:-6px 0;color:var(--ink-2);transition:color 150ms var(--ease)}
 .foot a:hover{color:var(--ink)}
 
 /* ---------- адаптив ---------- */
@@ -462,15 +441,13 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 }
 @media (max-width:900px){
   :root{--top:56px}
-  .avail{display:none}
   .top__cta{margin-left:auto}
-  .hero{grid-template-columns:1fr;grid-template-rows:auto;gap:44px;padding-top:calc(var(--top) + 36px)}
+  .hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:44px;padding-top:calc(var(--top) + 36px)}
   .hero__glow{right:-40vw;top:62%}
-  .hero__latest{margin-top:0}
   .reel__url{display:none}
-  .reel__bar{grid-template-columns:auto 1fr;padding-right:6px}
+  .reel__bar{padding-right:6px}
   .reel__bar .seg{justify-self:end}
-  .sec__head,.more__head{grid-template-columns:1fr}
+  .sec__head,.more__head{grid-template-columns:minmax(0,1fr)}
   .case{grid-template-columns:1fr}
   /* на телефоне, как в OneDay, у каждого шага своё окно со своей сценой */
   .case__stage{display:none}
@@ -478,13 +455,12 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
   .js .step{opacity:1}
   .step__win{margin-top:22px}
   .specs{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .renders{grid-template-columns:1fr}
-  .render--wide{grid-template-columns:1fr}
+  .renders{grid-template-columns:minmax(0,1fr)}
+  .render--wide{grid-template-columns:minmax(0,1fr)}
   .render--wide .render__body{margin-top:22px}
   .about__side{grid-template-columns:1fr}
-  /* телефон: номер у заголовка, справа статус, ниже текст и полоска во всю ширину */
-  .log__row{grid-template-columns:40px minmax(0,1fr);gap:8px 16px;align-items:start}
-  .log__n{padding-top:6px}
+  /* телефон: справа от заголовка статус, ниже текст и полоска во всю ширину */
+  .log__row{align-items:start}
   .log__main{grid-template-columns:minmax(0,1fr) 96px;gap:10px 16px}
   .log__p{grid-column:1 / -1}
   .log__bar{grid-column:1 / -1;margin-top:6px}
@@ -492,9 +468,8 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
 }
 @media (max-width:560px){
   .svc{grid-template-columns:1fr}
-  .seg button{padding:5px 8px;font-size:10.5px}
-  .reel__dots{display:none}
-  .reel__bar{grid-template-columns:1fr;padding:0 6px}
+  .seg button{padding:5px 8px;font-size:12px}
+  .reel__bar{grid-template-columns:minmax(0,1fr);padding:0 6px}
   .reel__bar .seg{justify-self:stretch;justify-content:space-between}
   .contact__cta .btn{width:100%;justify-content:center}
 }
@@ -514,7 +489,6 @@ section[tabindex="-1"]:focus{outline:none}   /* раздел получает ф
   .xfade > img,.xfade > img.is-out{transform:none;filter:none}
   .reel__tilt{transform:none}
   .seg__pill,.menu__pill,.top__read{transition:none}
-  .live-dot::after{animation:none}
   /* живая копия OneDay: сцены сменяются простым затуханием, курсора и дыхания нет */
   .od-scene,.od-scene.is-out{transform:none;filter:none}
   .od-cursor{display:none}

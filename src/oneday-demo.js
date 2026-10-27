@@ -48,7 +48,7 @@ const ICON = {
 
 /* ---------- кирпичи разметки ---------- */
 const week = states => `<span class="od-week">${states.map(s => `<i class="is-${s}"></i>`).join('')}</span>`;
-const bar = (color, p, key = '') => `<span class="od-bar"><i ${key} style="--c:${color};width:${Math.min(1, p) * 100}%"></i></span>`;
+const bar = (color, p, key = '') => `<span class="od-bar"><i ${key} style="--c:${color};--p:${Math.min(1, p)}"></i></span>`;
 function card({ key, left, top, color, name, day, value, quiet, cells, actions = '' }) {
   return `<div class="od-card" data-card="${key}" style="left:${left}px;top:${top}px;--c:${color}">
     <div class="od-card__head"><i class="od-dot"></i><span class="od-card__name">${name}</span><span class="od-card__day">${day}</span></div>
@@ -188,7 +188,7 @@ export function createDemo(root, frame, reduced) {
     for (let n = el; n && n !== scene; n = n.offsetParent) { x += n.offsetLeft; y += n.offsetTop; }
     return { x, y };
   };
-  const move = (s, p) => { const c = $(s, '.od-cursor'); c.style.left = p.x + 'px'; c.style.top = p.y + 'px'; };
+  const move = (s, p) => { const c = $(s, '.od-cursor'); c.style.transform = `translate(${p.x}px, ${p.y}px)`; };
   const place = (s, p) => { const c = $(s, '.od-cursor'); c.style.transition = 'none'; move(s, p); c.getBoundingClientRect(); c.style.transition = ''; };
   const aim = (s, sel) => move(s, center(s, typeof sel === 'string' ? $(s, sel) : sel));
   const click = s => {
@@ -217,7 +217,7 @@ export function createDemo(root, frame, reduced) {
     swim.querySelector('.od-week i:last-child').className = 'is-pending';
     videos.classList.remove('is-lit');
     $(videos, '[data-count]').textContent = '1';
-    $(videos, '[data-vbar]').style.width = `${100 / 3}%`;
+    $(videos, '[data-vbar]').style.setProperty('--p', 1 / 3);
     setTotal(CODING_MORNING);
 
     const startTimer = () => {
@@ -241,7 +241,7 @@ export function createDemo(root, frame, reduced) {
     };
     const addVideo = n => {
       if (reduced) $(videos, '[data-count]').textContent = String(n); else roll($(videos, '[data-count]'), String(n));
-      $(videos, '[data-vbar]').style.width = `${n / 3 * 100}%`;
+      $(videos, '[data-vbar]').style.setProperty('--p', n / 3);
       videos.classList.toggle('is-lit', n >= 3);
     };
 
@@ -281,7 +281,7 @@ export function createDemo(root, frame, reduced) {
       const col = cols[i];
       // слева от столбика, чтобы не закрывать сам день; у края — справа
       const left = col.offsetLeft - 240 - 14;
-      tip.style.left = (left >= 0 ? left : col.offsetLeft + col.offsetWidth + 14) + 'px';
+      tip.style.transform = `translateX(${left >= 0 ? left : col.offsetLeft + col.offsetWidth + 14}px)`;
       tip.classList.add('is-on');
       chart.classList.add('has-hover');
       cols.forEach((c, k) => c.classList.toggle('is-hover', k === i));

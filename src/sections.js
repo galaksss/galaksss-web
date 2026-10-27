@@ -40,11 +40,10 @@ function buildRenders() {
   return [...document.querySelectorAll('[data-alt-frame]')].map(f => {
     const card = f.closest('.render');
     const a = f.dataset.a || 'Beauty', b = f.dataset.b || 'Pass 2';
-    const num = card.querySelector('.render__meta span')?.textContent || '';
     const name = card.querySelector('.render__t')?.textContent || '';
     const view = document.createElement('div');
     view.className = 'render__view spot';
-    view.innerHTML = `<div class="render__bar"><span class="render__name">${num} · ${name.toLowerCase()}</span>
+    view.innerHTML = `<div class="render__bar"><span class="render__name">${name}</span>
       <div class="seg" role="tablist" aria-label="${name} frames" data-seg><i class="seg__pill" aria-hidden="true"></i><button class="is-on" role="tab" aria-selected="true">${a}</button><button role="tab" aria-selected="false">${b}</button></div></div>`;
     const link = f.closest('a') || f;      // кадр лежит в ссылке на сайт
     link.before(view);
